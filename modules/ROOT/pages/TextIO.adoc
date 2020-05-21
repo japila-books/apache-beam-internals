@@ -1,0 +1,11 @@
+= TextIO
+
+`TextIO.read` creates a root transformation, i.e. that has no input (`PBegin`) and returns a bounded `PCollection` of lines from the input files (`PTransform<PBegin, PCollection<String>>`).
+
+```
+import org.apache.beam.sdk.io.TextIO
+val lines = TextIO.read().from("*.txt")
+
+scala> :type lines
+org.apache.beam.sdk.io.TextIO.Read
+```

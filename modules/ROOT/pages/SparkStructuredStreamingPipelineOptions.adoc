@@ -1,0 +1,19 @@
+= SparkStructuredStreamingPipelineOptions
+
+`SparkStructuredStreamingPipelineOptions` is a xref:PipelineOptions.adoc[] of Spark configurations for xref:SparkStructuredStreamingRunner.adoc[] (e.g. `masterURL`).
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.options.PipelineOptionsFactory
+import org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingPipelineOptions
+val opts = PipelineOptionsFactory.as(classOf[SparkStructuredStreamingPipelineOptions])
+
+scala> PipelineOptionsFactory.printHelp(System.out, classOf[SparkStructuredStreamingPipelineOptions])
+org.apache.beam.runners.spark.SparkCommonPipelineOptions:
+
+  --checkpointDir=<String>
+    Default: TmpCheckpointDirFactory
+    A checkpoint directory for streaming resilience, ignored in batch. For
+    durability, a reliable filesystem such as HDFS/S3/GS is necessary.
+  ...
+----

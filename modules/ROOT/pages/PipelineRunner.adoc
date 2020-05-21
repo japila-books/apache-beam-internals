@@ -1,0 +1,37 @@
+= PipelineRunner
+
+`PipelineRunner[R]` runs a Pipeline (the PTransforms) to produce a PipelineResult.
+
+`PipelineRunner` is defined using xref::PipelineOptions.adoc[PipelineOptions].
+
+[source,scala]
+----
+val result = pipeline.run
+
+assert(result.isInstanceOf[org.apache.beam.sdk.PipelineResult])
+
+result.waitUntilFinish
+----
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.options.PipelineOptionsFactory
+val options = PipelineOptionsFactory.create()
+
+import org.apache.beam.sdk.PipelineRunner
+val runner = PipelineRunner.fromOptions(options)
+
+scala> :type runner
+org.apache.beam.sdk.PipelineRunner[_ <: org.apache.beam.sdk.PipelineResult]
+----
+
+Among the `PipelineRunners` are:
+
+* `DataflowRunner`
+* `DirectRunner`
+* `SparkRunner`
+* `SparkRunnerDebugger`
+* [SparkStructuredStreamingRunner](#SparkStructuredStreamingRunner)
+* `TestSparkRunner`
+
+NOTE: Find more runners in the https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/PipelineRunner.html[official documentation].

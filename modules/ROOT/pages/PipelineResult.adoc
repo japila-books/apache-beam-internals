@@ -1,0 +1,3 @@
+= PipelineResult
+
+`PipelineResult` is...FIXME

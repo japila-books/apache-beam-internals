@@ -1,0 +1,24 @@
+= Metrics
+
+`Metrics` is used for reporting properties of a pipeline being executed.
+
+Metrics are `Counters`, `Distributions`, `Gauges` and can be created using `Metrics.counter`, `Metrics.distribution` and `Metrics.gauge` static methods, respectively.
+
+A Metric is associated with a namespace and has a name.
+
+```plaintext
+import org.apache.beam.sdk.metrics.Metrics
+// using String to make the sample "doable" without creating a proper class
+val counter = Metrics.counter(classOf[String], "my-counter")
+
+scala> println(counter.getName)
+java.lang.String:my-counter
+
+scala> counter.inc
+[run-main-0] WARN org.apache.beam.sdk.metrics.MetricsEnvironment - Reporting metrics are not supported in the current execution environment.
+
+import org.apache.beam.sdk.metrics.MetricsEnvironment
+MetricsEnvironment.setMetricsSupported(true)
+```
+
+`MetricResults` (available using `PipelineResults.metrics`) allow for querying metrics.

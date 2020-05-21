@@ -1,0 +1,21 @@
+= Introduction
+
+https://beam.apache.org/[Apache Beam] describes itself as follows:
+
+> **Apache Beam** is an open source unified programming model to define and execute data processing pipelines, including ETL, batch and stream (continuous) processing. See https://beam.apache.org
+
+The aim of this book is to dissect the intro and shed more light on the internals.
+
+From the https://github.com/apache/beam#the-beam-model[official documentation]:
+
+[quote]
+____
+The key concepts in the Beam programming model are:
+
+* `PCollection`: represents a collection of data, which could be bounded or unbounded in size.
+* `PTransform`: represents a computation that transforms input PCollections into output PCollections.
+* `Pipeline`: manages a directed acyclic graph of PTransforms and PCollections that is ready for execution.
+* `PipelineRunner`: specifies where and how the pipeline should execute.
+____
+
+Let's start with xref::PCollection.adoc[].

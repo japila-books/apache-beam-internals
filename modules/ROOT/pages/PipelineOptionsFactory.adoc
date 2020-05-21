@@ -1,0 +1,55 @@
+= PipelineOptionsFactory
+
+`PipelineOptionsFactory` is used to create a xref::PipelineOptions.adoc[].
+
+[source,scala]
+----
+import org.apache.beam.sdk.options.PipelineOptionsFactory
+val options = PipelineOptionsFactory.create()
+
+assert(options.isInstanceOf[org.apache.beam.sdk.options.PipelineOptions])
+----
+
+== [[fromArgs]] fromArgs Method
+
+The most common way to construct a `PipelineOptions` is using `PipelineOptionsFactory.fromArgs` and command-line arguments.
+
+[source,scala]
+----
+import org.apache.beam.sdk.options.PipelineOptionsFactory
+val options = PipelineOptionsFactory.fromArgs(args).create()
+
+val p = Pipeline.create(options)
+// ...
+p.run()
+----
+
+== [[printHelp]] printHelp Method
+
+`PipelineOptionsFactory.printHelp` prints out all registered options.
+
+[source,scala]
+----
+import org.apache.beam.sdk.options.PipelineOptionsFactory
+scala> PipelineOptionsFactory.printHelp(System.out)
+The set of registered options are:
+  org.apache.beam.runners.direct.DirectOptions
+  org.apache.beam.runners.direct.DirectTestOptions
+  org.apache.beam.runners.spark.SparkPipelineOptions
+  org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingPipelineOptions
+  org.apache.beam.sdk.extensions.gcp.options.GcpOptions
+  org.apache.beam.sdk.extensions.gcp.options.GcsOptions
+  org.apache.beam.sdk.extensions.gcp.options.GoogleApiDebugOptions
+  org.apache.beam.sdk.options.ApplicationNameOptions
+  org.apache.beam.sdk.options.ExperimentalOptions
+  org.apache.beam.sdk.options.ManualDockerEnvironmentOptions
+  org.apache.beam.sdk.options.PipelineOptions
+  org.apache.beam.sdk.options.PortablePipelineOptions
+  org.apache.beam.sdk.options.RemoteEnvironmentOptions
+  org.apache.beam.sdk.options.SdkHarnessOptions
+  org.apache.beam.sdk.options.StreamingOptions
+
+Use --help=<OptionsName> for detailed help. For example:
+  --help=DataflowPipelineOptions <short names valid for registered options>
+  --help=org.apache.beam.sdk.options.DataflowPipelineOptions
+----

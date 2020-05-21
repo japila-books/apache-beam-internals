@@ -1,0 +1,3 @@
+= PipelineOptions
+
+`PipelineOptions` is used to configure a xref::Pipeline.adoc[].

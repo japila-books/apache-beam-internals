@@ -1,0 +1,25 @@
+= PipelineRunnerRegistrar
+
+`PipelineRunnerRegistrar` is a way for Beam extension developers to register a new [PipelineRunner](#PipelineRunner).
+
+PipelineRunnerRegistrar uses [java.util.ServiceLoader](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html) utility (with a corresponding `META-INF/services` directory).
+
+Apache Beam recommends using [@AutoService](https://github.com/google/auto/tree/master/service) annotation to generate the necessary META-INF files automatically at build time.
+
+## Cache.register
+
+`register` is used to register a new [PipelineOptions](#PipelineOptions) (using [Cache.initializeRegistry](#initializeRegistry) or [PipelineOptionsFactory.register](#PipelineOptionsFactory)).
+
+## Cache.initializeRegistry
+
+`initializeRegistry` is used when the internal `Cache` is created (and happens in a static initialization block of [PipelineOptionsFactory](#PipelineOptionsFactory) when requested to [resetCache](#resetCache)).
+
+## Cache.resetCache
+
+`resetCache` resets the factory to the default state. That triggers searching the application's classloader for [PipelineRunnerRegistrars](#PipelineRunnerRegistrar) (using [ReflectHelpers.loadServicesOrdered](#ReflectHelpers)). The PipelineRunnerRegistrars are requested for [PipelineRunners](#PipelineRunner). The PipelineRunners are requested for [PipelineOptions](#PipelineOptions).
+
+With that, [PipelineRunners](#PipelineRunner) and [PipelineOptions](#PipelineOptions) are all registered with the [PipelineOptionsFactory](#PipelineOptionsFactory).
+
+## ReflectHelpers.loadServicesOrdered
+
+loadServicesOrdered is used to discover [PipelineRunnerRegistrars](#PipelineRunnerRegistrar) and [PipelineOptionsRegistrars](#PipelineOptionsRegistrar).

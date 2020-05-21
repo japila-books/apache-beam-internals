@@ -1,0 +1,32 @@
+site:
+  title: The Internals of Apache Beam (Local Preview)
+  url: https://books.japila.pl/apache-beam-internals
+  start_page: apache-beam-internals::index.adoc
+  keys:
+    google_analytics: 'UA-151208281-2'
+  robots: allow
+content:
+  sources:
+    - url: .
+      branches: HEAD
+asciidoc:
+  attributes:
+    experimental: ''
+    idprefix: ''
+    idseparator: '-'
+    sectlinks: ''
+    linkattrs: ''
+    beam-version: '2.20.0'
+    java-javadoc-url: https://docs.oracle.com/javase/8/docs/api
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files:
+  - path: .nojekyll
+  - path: ui.yml
+    contents: "static_files: [ .nojekyll ]"
+output:
+  dir: .out/local
+runtime:
+  cache_dir: .out/cache
