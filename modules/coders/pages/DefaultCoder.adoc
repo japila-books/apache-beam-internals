@@ -1,0 +1,3 @@
+= DefaultCoder
+
+`@DefaultCoder` annotation specifies the xref:Coder.adoc[] for encoding and decoding instances of the annotated class.

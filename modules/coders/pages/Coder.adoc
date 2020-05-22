@@ -1,0 +1,39 @@
+= Coder
+
+`Coder<T>` is an abstraction to define how to encode and decode values of type `T` into byte streams (similar to `Encoder[T]` in Spark SQL).
+
+== [[extensions]] Coder Extensions
+
+[cols="30,70",options="header",width="100%"]
+|===
+| Coder
+| Description
+
+| CustomCoder
+| [[CustomCoder]]
+
+| StructuredCoder
+| [[StructuredCoder]]
+
+|===
+
+== [[encode]] encode Method
+
+[source,java]
+----
+void encode(
+  T value,
+  OutputStream outStream)
+----
+
+Encodes the given value to the given OutputStream
+
+== [[decode]] decode Method
+
+[source,java]
+----
+T decode(
+  InputStream inStream)
+----
+
+Decodes a value from the given InputStream

@@ -1,7 +1,9 @@
 = PCollection
 
-`PCollection[T]` is an immutable *collection* of values of type `T` (similar to `RDD[T]` in Apache Spark).
+`PCollection<T>` is an immutable *collection* of values of type `T` (similar to `RDD[T]` in Apache Spark).
 
 A `PCollection` can contain either a bounded or unbounded number of elements.
 
 A `PCollection` is produced as the output of xref::PTransform.adoc[].
+
+== [[setCoder]] setCoder Method

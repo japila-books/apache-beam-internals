@@ -1,0 +1,43 @@
+= CoderProvider
+
+`CoderProvider` is an <<contract, abstraction>> of <<extensions, Coder providers>> that can <<coderFor, provide a Coder for a type>>.
+
+== [[implementations]] Available CoderProviders
+
+[cols="30,70",options="header",width="100%"]
+|===
+| CoderProvider
+| Description
+
+| CoderProviderForCoder
+| [[CoderProviderForCoder]]
+
+| CoderProviderFromStaticMethods
+| [[CoderProviderFromStaticMethods]]
+
+| AvroCoderProvider
+| [[AvroCoderProvider]]
+
+| DefaultCoderProvider
+| [[DefaultCoderProvider]]
+
+| CommonTypes
+| [[CommonTypes]]
+
+| SerializableCoderProvider in SerializableCoder
+| [[SerializableCoderProvider]]
+
+|===
+
+== [[contract]] Contract
+
+=== [[coderFor]] coderFor Method
+
+[source,java]
+----
+<T> Coder<T> coderFor(
+  TypeDescriptor<T> typeDescriptor,
+  List<? extends Coder<?>> componentCoders)
+----
+
+Provides a xref:Coder.adoc[] for values of type `T`

@@ -1,0 +1,9 @@
+= Coders
+
+*Coders* is a serialization and deserialization framework to define how data (of type `T`) is encoded to and decoded from byte streams.
+
+The main abstraction is xref:Coder.adoc[].
+
+In many cases, the Coder can be inferred from the available Java type information and xref:CoderRegistry.adoc[].
+
+Coders can also be specified per xref:ROOT:PCollection.adoc#setCoder[PCollection] or per type using xref:DefaultCoder.adoc[@DefaultCoder] annotation.

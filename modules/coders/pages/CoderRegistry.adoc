@@ -1,0 +1,3 @@
+= CoderRegistry
+
+*CoderRegistry* is...FIXME
