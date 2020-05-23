@@ -1,19 +1,18 @@
 * xref:intro.adoc[]
+
 * xref:PCollection.adoc[]
 * xref:PTransform.adoc[]
 * xref:Pipeline.adoc[]
 * xref:PipelineResult.adoc[]
 
 * xref:PipelineOptions.adoc[]
-** xref:SparkStructuredStreamingPipelineOptions.adoc[]
-
-* xref:PipelineOptionsFactory.adoc[]
+** xref:PipelineOptionsFactory.adoc[]
+** xref:PipelineOptionsRegistrar.adoc[]
 
 * xref:PipelineRunner.adoc[]
-** xref:SparkStructuredStreamingRunner.adoc[]
+** xref:PipelineRunnerRegistrar.adoc[]
 
 * xref:DisplayData.adoc[]
-* xref:PipelineRunnerRegistrar.adoc[]
 
 * xref:TextIO.adoc[]
 * xref:Metrics.adoc[]

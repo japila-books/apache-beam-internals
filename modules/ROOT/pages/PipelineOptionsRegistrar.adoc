@@ -1,0 +1,12 @@
+= PipelineOptionsRegistrar
+
+`PipelineOptionsRegistrar` is...FIXME
+
+== [[getPipelineOptions]] getPipelineOptions Method
+
+[source,java]
+----
+Iterable<Class<? extends PipelineOptions>> getPipelineOptions()
+----
+
+`getPipelineOptions`...FIXME

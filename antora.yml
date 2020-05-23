@@ -5,4 +5,5 @@ display_version: '2.20.0'
 start_page: index.adoc
 nav:
 - modules/ROOT/nav.adoc
+- modules/spark/nav.adoc
 - modules/coders/nav.adoc

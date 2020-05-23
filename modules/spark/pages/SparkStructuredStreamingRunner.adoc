@@ -1,8 +1,8 @@
 = SparkStructuredStreamingRunner
 
-`SparkStructuredStreamingRunner` is a xref::PipelineRunner.adoc[] that produces `SparkStructuredStreamingPipelineResult`.
+`SparkStructuredStreamingRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces `SparkStructuredStreamingPipelineResult`.
 
-SparkStructuredStreamingRunner can be configured using [SparkStructuredStreamingPipelineOptions](#SparkStructuredStreamingPipelineOptions).
+SparkStructuredStreamingRunner can be configured using xref:SparkStructuredStreamingPipelineOptions.adoc[].
 
 ```scala
 import org.apache.beam.sdk.options.PipelineOptionsFactory
@@ -29,23 +29,22 @@ import org.apache.beam.sdk.PipelineResult
 assert(r.getState == PipelineResult.State.DONE)
 ```
 
-NOTE FIXME How to configure SparkStructuredStreamingRunner logger?
+TODO How to configure SparkStructuredStreamingRunner logger?
 
-SparkStructuredStreamingRunner uses [SparkStructuredStreamingPipelineOptions](#SparkStructuredStreamingPipelineOptions).
+SparkStructuredStreamingRunner uses xref:SparkStructuredStreamingPipelineOptions.adoc[].
 
 ```scala
 import org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingRunner
 val runner = SparkStructuredStreamingRunner.create
 ```
 
-{blurb, class: information}
-TODO Review SparkStructuredStreamingPipelineOptions options
-{/blurb}
+SparkStructuredStreamingRunner supports two modes of execution:
 
-Unbounded PCollections in a Pipeline will automatically switch execution from the default batch mode to streaming. You can turn it on using `streaming` option (part of `StreamingOptions` options).
+* *batch* (default)
+* *streaming*
+
+Unbounded xref:PCollection.adoc[PCollections] in a xref:ROOT:Pipeline.adoc[] will automatically switch execution from the default batch mode to streaming. You can turn it on using `streaming` option (part of `StreamingOptions` options).
 
 `PipelineTranslatorStreaming` is used for streaming mode while `PipelineTranslatorBatch` for batch mode.
 
-{blurb, class: information}
 TODO Review PipelineTranslator to understand how the translation of Beam concepts to Spark's works.
-{/blurb}

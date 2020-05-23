@@ -1,25 +1,45 @@
 = PipelineRunnerRegistrar
 
-`PipelineRunnerRegistrar` is a way for Beam extension developers to register a new [PipelineRunner](#PipelineRunner).
+`PipelineRunnerRegistrar` is a way for Beam developers to extend the Beam framework with a new xref:PipelineRunner.adoc[].
 
-PipelineRunnerRegistrar uses [java.util.ServiceLoader](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html) utility (with a corresponding `META-INF/services` directory).
+PipelineRunnerRegistrar uses {java-javadoc-url}/java.base/java/util/ServiceLoader.html[java.util.ServiceLoader] utility (with a corresponding `META-INF/services` directory).
 
-Apache Beam recommends using [@AutoService](https://github.com/google/auto/tree/master/service) annotation to generate the necessary META-INF files automatically at build time.
+Apache Beam recommends using https://github.com/google/auto/tree/master/service[@AutoService] annotation to generate the necessary META-INF files automatically at build time.
 
-## Cache.register
+== [[register]] Cache.register
 
-`register` is used to register a new [PipelineOptions](#PipelineOptions) (using [Cache.initializeRegistry](#initializeRegistry) or [PipelineOptionsFactory.register](#PipelineOptionsFactory)).
+[source,java]
+----
+void register(
+  Class<? extends PipelineOptions> iface)
+----
 
-## Cache.initializeRegistry
+`register` is used to register a new xref:PipelineOptions.adoc[].
 
-`initializeRegistry` is used when the internal `Cache` is created (and happens in a static initialization block of [PipelineOptionsFactory](#PipelineOptionsFactory) when requested to [resetCache](#resetCache)).
+`register` is used when:
 
-## Cache.resetCache
+* PipelineOptionsFactory is requested to xref:PipelineOptionsFactory.adoc#register[register]
+
+* Cache (of PipelineOptionsFactory) is requested to <<initializeRegistry, initializeRegistry>>
+
+== [[initializeRegistry]] Cache.initializeRegistry
+
+[source,java]
+----
+void initializeRegistry(
+  ClassLoader loader)
+----
+
+`initializeRegistry` finds all xref:PipelineOptionsRegistrar.adoc[PipelineOptionsRegistrars] (in the given ClassLoader) and requests them for xref:PipelineOptionsRegistrar.adoc#getPipelineOptions[PipelineOptions].
+
+`initializeRegistry` is used when the Cache is created (that happens in a static initialization block of xref:PipelineOptionsFactory.adoc[] when requested to <<resetCache, resetCache>>).
+
+== [[resetCache]] Cache.resetCache
 
 `resetCache` resets the factory to the default state. That triggers searching the application's classloader for [PipelineRunnerRegistrars](#PipelineRunnerRegistrar) (using [ReflectHelpers.loadServicesOrdered](#ReflectHelpers)). The PipelineRunnerRegistrars are requested for [PipelineRunners](#PipelineRunner). The PipelineRunners are requested for [PipelineOptions](#PipelineOptions).
 
 With that, [PipelineRunners](#PipelineRunner) and [PipelineOptions](#PipelineOptions) are all registered with the [PipelineOptionsFactory](#PipelineOptionsFactory).
 
-## ReflectHelpers.loadServicesOrdered
+== [[loadServicesOrdered]] ReflectHelpers.loadServicesOrdered
 
-loadServicesOrdered is used to discover [PipelineRunnerRegistrars](#PipelineRunnerRegistrar) and [PipelineOptionsRegistrars](#PipelineOptionsRegistrar).
+`loadServicesOrdered` is used to discover PipelineRunnerRegistrars and xref:PipelineOptionsRegistrar.adoc[PipelineOptionsRegistrars].

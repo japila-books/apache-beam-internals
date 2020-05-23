@@ -1,10 +1,10 @@
 = PipelineRunner
 
-`PipelineRunner[R]` runs a Pipeline (the PTransforms) to produce a PipelineResult.
+`PipelineRunner[R]` is an <<contract, abstraction>> to run a xref:Pipeline.adoc[] (and produce a xref:PipelineResult.adoc[]).
 
-`PipelineRunner` is defined using xref::PipelineOptions.adoc[PipelineOptions].
+PipelineRunner is defined using xref::PipelineOptions.adoc[].
 
-[source,scala]
+[source,plaintext]
 ----
 val result = pipeline.run
 
@@ -25,13 +25,34 @@ scala> :type runner
 org.apache.beam.sdk.PipelineRunner[_ <: org.apache.beam.sdk.PipelineResult]
 ----
 
-Among the `PipelineRunners` are:
+== [[implementations]] Available PipelineRunners
 
-* `DataflowRunner`
-* `DirectRunner`
-* `SparkRunner`
-* `SparkRunnerDebugger`
-* [SparkStructuredStreamingRunner](#SparkStructuredStreamingRunner)
-* `TestSparkRunner`
+[cols="30,70",options="header",width="100%"]
+|===
+| PipelineRunner
+| Description
 
-NOTE: Find more runners in the https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/PipelineRunner.html[official documentation].
+| DataflowRunner
+| [[DataflowRunner]]
+
+| DirectRunner
+| [[DirectRunner]]
+
+| FlinkRunner
+| [[FlinkRunner]]
+
+| PortableRunner
+| [[PortableRunner]]
+
+| SparkRunnerDebugger
+| [[SparkRunnerDebugger]]
+
+| xref:spark:SparkStructuredStreamingRunner.adoc[]
+| [[SparkStructuredStreamingRunner]]
+
+| TestSparkRunner
+| [[TestSparkRunner]]
+
+|===
+
+NOTE: You can find more runners in the https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/PipelineRunner.html[official documentation].
