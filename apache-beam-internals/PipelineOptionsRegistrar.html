@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>TextIO :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/TextIO.html">
+    <title>PipelineOptionsRegistrar :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/PipelineOptionsRegistrar.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -89,7 +89,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
   </li>
 </ul>
@@ -106,7 +106,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="TextIO.html">TextIO</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -190,24 +190,33 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="TextIO.html">TextIO</a></li>
+    <li><a href="PipelineOptions.html">PipelineOptions</a></li>
+    <li><a href="PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/TextIO.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/PipelineOptionsRegistrar.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">TextIO</h1>
+<h1 class="page">PipelineOptionsRegistrar</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><code>TextIO.read</code> creates a root transformation, i.e. that has no input (<code>PBegin</code>) and returns a bounded <code>PCollection</code> of lines from the input files (<code>PTransform&lt;PBegin, PCollection&lt;String&gt;&gt;</code>).</p>
+<p><code>PipelineOptionsRegistrar</code> is&#8230;&#8203;FIXME</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="getpipelineoptions-method"><a class="anchor" href="#getpipelineoptions-method"></a><a class="link" href="#getpipelineoptions-method"><a id="getPipelineOptions"></a> getPipelineOptions Method</a></h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>import org.apache.beam.sdk.io.TextIO
-val lines = TextIO.read().from("*.txt")
-
-scala&gt; :type lines
-org.apache.beam.sdk.io.TextIO.Read</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Iterable&lt;Class&lt;? extends PipelineOptions&gt;&gt; getPipelineOptions()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>getPipelineOptions</code>&#8230;&#8203;FIXME</p>
+</div>
 </div>
 </div>
 </article>

@@ -87,27 +87,24 @@
     <a class="nav-link" href="PipelineOptions.html">PipelineOptions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
+    <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
   </li>
 </ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="PipelineRunner.html">PipelineRunner</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
+    <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="TextIO.html">TextIO</a>
@@ -117,6 +114,22 @@
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="DoFn.html">DoFn</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Spark Runner</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="spark/SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="spark/SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -185,15 +198,17 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">PipelineRunner</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><code>PipelineRunner[R]</code> runs a Pipeline (the PTransforms) to produce a PipelineResult.</p>
+<p><code>PipelineRunner[R]</code> is an <a href="#contract">abstraction</a> to run a <a href="Pipeline.html" class="page">Pipeline</a> (and produce a <a href="PipelineResult.html" class="page">PipelineResult</a>).</p>
 </div>
 <div class="paragraph">
-<p><code>PipelineRunner</code> is defined using <a href="PipelineOptions.html" class="page">PipelineOptions</a>.</p>
+<p>PipelineRunner is defined using <a href="PipelineOptions.html" class="page">PipelineOptions</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">val result = pipeline.run
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">val result = pipeline.run
 
 assert(result.isInstanceOf[org.apache.beam.sdk.PipelineResult])
 
@@ -212,31 +227,53 @@ scala&gt; :type runner
 org.apache.beam.sdk.PipelineRunner[_ &lt;: org.apache.beam.sdk.PipelineResult]</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Among the <code>PipelineRunners</code> are:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>DataflowRunner</code></p>
-</li>
-<li>
-<p><code>DirectRunner</code></p>
-</li>
-<li>
-<p><code>SparkRunner</code></p>
-</li>
-<li>
-<p><code>SparkRunnerDebugger</code></p>
-</li>
-<li>
-<p>[SparkStructuredStreamingRunner](#SparkStructuredStreamingRunner)</p>
-</li>
-<li>
-<p><code>TestSparkRunner</code></p>
-</li>
-</ul>
 </div>
+<div class="sect1">
+<h2 id="available-pipelinerunners"><a class="anchor" href="#available-pipelinerunners"></a><a class="link" href="#available-pipelinerunners"><a id="implementations"></a> Available PipelineRunners</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">PipelineRunner</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DataflowRunner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="DataflowRunner"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DirectRunner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="DirectRunner"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FlinkRunner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="FlinkRunner"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PortableRunner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PortableRunner"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SparkRunnerDebugger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="SparkRunnerDebugger"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="spark/SparkStructuredStreamingRunner.html" class="page">SparkStructuredStreamingRunner</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="SparkStructuredStreamingRunner"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TestSparkRunner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="TestSparkRunner"></a></p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -244,10 +281,12 @@ org.apache.beam.sdk.PipelineRunner[_ &lt;: org.apache.beam.sdk.PipelineResult]</
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Find more runners in the <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/PipelineRunner.html">official documentation</a>.
+You can find more runners in the <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/PipelineRunner.html">official documentation</a>.
 </td>
 </tr>
 </table>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

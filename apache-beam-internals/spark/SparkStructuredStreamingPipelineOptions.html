@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>TextIO :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/TextIO.html">
+    <title>SparkStructuredStreamingPipelineOptions :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/spark/SparkStructuredStreamingPipelineOptions.html">
     <meta name="generator" content="Antora 2.3.1">
-    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
     <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','UA-151208281-2')</script>
   </head>
@@ -63,57 +63,57 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Apache Beam</a></h3>
+    <h3 class="title"><a href="../index.html">Apache Beam</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="intro.html">Introduction</a>
+    <a class="nav-link" href="../intro.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PCollection.html">PCollection</a>
+    <a class="nav-link" href="../PCollection.html">PCollection</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PTransform.html">PTransform</a>
+    <a class="nav-link" href="../PTransform.html">PTransform</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="Pipeline.html">Pipeline</a>
+    <a class="nav-link" href="../Pipeline.html">Pipeline</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PipelineResult.html">PipelineResult</a>
+    <a class="nav-link" href="../PipelineResult.html">PipelineResult</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PipelineOptions.html">PipelineOptions</a>
+    <a class="nav-link" href="../PipelineOptions.html">PipelineOptions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
+    <a class="nav-link" href="../PipelineOptionsFactory.html">PipelineOptionsFactory</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
+    <a class="nav-link" href="../PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PipelineRunner.html">PipelineRunner</a>
+    <a class="nav-link" href="../PipelineRunner.html">PipelineRunner</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
+    <a class="nav-link" href="../PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="DisplayData.html">DisplayData</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="TextIO.html">TextIO</a>
+    <a class="nav-link" href="../DisplayData.html">DisplayData</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="Metrics.html">Metrics</a>
+    <a class="nav-link" href="../TextIO.html">TextIO</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="DoFn.html">DoFn</a>
+    <a class="nav-link" href="../Metrics.html">Metrics</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../DoFn.html">DoFn</a>
   </li>
 </ul>
   </li>
@@ -124,10 +124,10 @@
     <span class="nav-text">Spark Runner</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="spark/SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
+    <a class="nav-link" href="SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="spark/SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
   </li>
 </ul>
   </li>
@@ -137,25 +137,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="coders/index.html">Coders</a>
+    <a class="nav-link" href="../coders/index.html">Coders</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/Coder.html">Coder</a>
+    <a class="nav-link" href="../coders/Coder.html">Coder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProvider.html">CoderProvider</a>
+    <a class="nav-link" href="../coders/CoderProvider.html">CoderProvider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProviders.html">CoderProviders</a>
+    <a class="nav-link" href="../coders/CoderProviders.html">CoderProviders</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/DefaultCoder.html">DefaultCoder</a>
+    <a class="nav-link" href="../coders/DefaultCoder.html">DefaultCoder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderRegistry.html">CoderRegistry</a>
+    <a class="nav-link" href="../coders/CoderRegistry.html">CoderRegistry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
+    <a class="nav-link" href="../coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
   </li>
 </ul>
   </li>
@@ -174,7 +174,7 @@
       <span class="title">Apache Beam</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">2.20.0</a>
+          <a href="../index.html">2.20.0</a>
         </li>
       </ul>
     </li>
@@ -186,28 +186,36 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="TextIO.html">TextIO</a></li>
+    <li><a href="../index.html">Apache Beam</a></li>
+    <li>Spark Runner</li>
+    <li><a href="SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/TextIO.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/spark/pages/SparkStructuredStreamingPipelineOptions.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">TextIO</h1>
+<h1 class="page">SparkStructuredStreamingPipelineOptions</h1>
 <div class="paragraph">
-<p><code>TextIO.read</code> creates a root transformation, i.e. that has no input (<code>PBegin</code>) and returns a bounded <code>PCollection</code> of lines from the input files (<code>PTransform&lt;PBegin, PCollection&lt;String&gt;&gt;</code>).</p>
+<p><code>SparkStructuredStreamingPipelineOptions</code> is a <a href="../PipelineOptions.html" class="page">PipelineOptions</a> of Spark configurations (e.g. <code>masterURL</code>) for <a href="SparkStructuredStreamingRunner.html" class="page">SparkStructuredStreamingRunner</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>import org.apache.beam.sdk.io.TextIO
-val lines = TextIO.read().from("*.txt")
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.options.PipelineOptionsFactory
+import org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingPipelineOptions
+val opts = PipelineOptionsFactory.as(classOf[SparkStructuredStreamingPipelineOptions])
 
-scala&gt; :type lines
-org.apache.beam.sdk.io.TextIO.Read</code></pre>
+scala&gt; PipelineOptionsFactory.printHelp(System.out, classOf[SparkStructuredStreamingPipelineOptions])
+org.apache.beam.runners.spark.SparkCommonPipelineOptions:
+
+  --checkpointDir=&lt;String&gt;
+    Default: TmpCheckpointDirFactory
+    A checkpoint directory for streaming resilience, ignored in batch. For
+    durability, a reliable filesystem such as HDFS/S3/GS is necessary.
+  ...</code></pre>
 </div>
 </div>
 </article>
@@ -221,7 +229,7 @@ org.apache.beam.sdk.io.TextIO.Read</code></pre>
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>

@@ -87,27 +87,24 @@
     <a class="nav-link" href="PipelineOptions.html">PipelineOptions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
+    <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
   </li>
 </ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="PipelineRunner.html">PipelineRunner</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="TextIO.html">TextIO</a>
@@ -117,6 +114,22 @@
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="DoFn.html">DoFn</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Spark Runner</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="spark/SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="spark/SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -177,6 +190,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
+    <li><a href="PipelineRunner.html">PipelineRunner</a></li>
     <li><a href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a></li>
   </ul>
 </nav>
@@ -188,34 +202,62 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>PipelineRunnerRegistrar</code> is a way for Beam extension developers to register a new [PipelineRunner](#PipelineRunner).</p>
+<p><code>PipelineRunnerRegistrar</code> is a way for Beam developers to extend the Beam framework with a new <a href="PipelineRunner.html" class="page">PipelineRunner</a>.</p>
 </div>
 <div class="paragraph">
-<p>PipelineRunnerRegistrar uses [java.util.ServiceLoader](<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html" class="bare">https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html</a>) utility (with a corresponding <code>META-INF/services</code> directory).</p>
+<p>PipelineRunnerRegistrar uses <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html">java.util.ServiceLoader</a> utility (with a corresponding <code>META-INF/services</code> directory).</p>
 </div>
 <div class="paragraph">
-<p>Apache Beam recommends using [@AutoService](<a href="https://github.com/google/auto/tree/master/service" class="bare">https://github.com/google/auto/tree/master/service</a>) annotation to generate the necessary META-INF files automatically at build time.</p>
+<p>Apache Beam recommends using <a href="https://github.com/google/auto/tree/master/service">@AutoService</a> annotation to generate the necessary META-INF files automatically at build time.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cache-register"><a class="anchor" href="#cache-register"></a><a class="link" href="#cache-register">Cache.register</a></h2>
+<h2 id="cache-register"><a class="anchor" href="#cache-register"></a><a class="link" href="#cache-register"><a id="register"></a> Cache.register</a></h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void register(
+  Class&lt;? extends PipelineOptions&gt; iface)</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p><code>register</code> is used to register a new [PipelineOptions](#PipelineOptions) (using [Cache.initializeRegistry](#initializeRegistry) or [PipelineOptionsFactory.register](#PipelineOptionsFactory)).</p>
+<p><code>register</code> is used to register a new <a href="PipelineOptions.html" class="page">PipelineOptions</a>.</p>
+</div>
+<div class="paragraph">
+<p><code>register</code> is used when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>PipelineOptionsFactory is requested to <a href="PipelineOptionsFactory.html#register" class="page">register</a></p>
+</li>
+<li>
+<p>Cache (of PipelineOptionsFactory) is requested to <a href="#initializeRegistry">initializeRegistry</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cache-initializeregistry"><a class="anchor" href="#cache-initializeregistry"></a><a class="link" href="#cache-initializeregistry">Cache.initializeRegistry</a></h2>
+<h2 id="cache-initializeregistry"><a class="anchor" href="#cache-initializeregistry"></a><a class="link" href="#cache-initializeregistry"><a id="initializeRegistry"></a> Cache.initializeRegistry</a></h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void initializeRegistry(
+  ClassLoader loader)</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p><code>initializeRegistry</code> is used when the internal <code>Cache</code> is created (and happens in a static initialization block of [PipelineOptionsFactory](#PipelineOptionsFactory) when requested to [resetCache](#resetCache)).</p>
+<p><code>initializeRegistry</code> finds all <a href="PipelineOptionsRegistrar.html" class="page">PipelineOptionsRegistrars</a> (in the given ClassLoader) and requests them for <a href="PipelineOptionsRegistrar.html#getPipelineOptions" class="page">PipelineOptions</a>.</p>
+</div>
+<div class="paragraph">
+<p><code>initializeRegistry</code> is used when the Cache is created (that happens in a static initialization block of <a href="PipelineOptionsFactory.html" class="page">PipelineOptionsFactory</a> when requested to <a href="#resetCache">resetCache</a>).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cache-resetcache"><a class="anchor" href="#cache-resetcache"></a><a class="link" href="#cache-resetcache">Cache.resetCache</a></h2>
+<h2 id="cache-resetcache"><a class="anchor" href="#cache-resetcache"></a><a class="link" href="#cache-resetcache"><a id="resetCache"></a> Cache.resetCache</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><code>resetCache</code> resets the factory to the default state. That triggers searching the application&#8217;s classloader for [PipelineRunnerRegistrars](#PipelineRunnerRegistrar) (using [ReflectHelpers.loadServicesOrdered](#ReflectHelpers)). The PipelineRunnerRegistrars are requested for [PipelineRunners](#PipelineRunner). The PipelineRunners are requested for [PipelineOptions](#PipelineOptions).</p>
@@ -226,10 +268,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="reflecthelpers-loadservicesordered"><a class="anchor" href="#reflecthelpers-loadservicesordered"></a><a class="link" href="#reflecthelpers-loadservicesordered">ReflectHelpers.loadServicesOrdered</a></h2>
+<h2 id="reflecthelpers-loadservicesordered"><a class="anchor" href="#reflecthelpers-loadservicesordered"></a><a class="link" href="#reflecthelpers-loadservicesordered"><a id="loadServicesOrdered"></a> ReflectHelpers.loadServicesOrdered</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>loadServicesOrdered is used to discover [PipelineRunnerRegistrars](#PipelineRunnerRegistrar) and [PipelineOptionsRegistrars](#PipelineOptionsRegistrar).</p>
+<p><code>loadServicesOrdered</code> is used to discover PipelineRunnerRegistrars and <a href="PipelineOptionsRegistrar.html" class="page">PipelineOptionsRegistrars</a>.</p>
 </div>
 </div>
 </div>

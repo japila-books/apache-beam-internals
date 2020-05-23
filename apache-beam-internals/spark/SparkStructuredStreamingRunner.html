@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>DisplayData :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/DisplayData.html">
+    <title>SparkStructuredStreamingRunner :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/spark/SparkStructuredStreamingRunner.html">
     <meta name="generator" content="Antora 2.3.1">
-    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
     <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','UA-151208281-2')</script>
   </head>
@@ -63,57 +63,57 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Apache Beam</a></h3>
+    <h3 class="title"><a href="../index.html">Apache Beam</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="intro.html">Introduction</a>
+    <a class="nav-link" href="../intro.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PCollection.html">PCollection</a>
+    <a class="nav-link" href="../PCollection.html">PCollection</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PTransform.html">PTransform</a>
+    <a class="nav-link" href="../PTransform.html">PTransform</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="Pipeline.html">Pipeline</a>
+    <a class="nav-link" href="../Pipeline.html">Pipeline</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PipelineResult.html">PipelineResult</a>
+    <a class="nav-link" href="../PipelineResult.html">PipelineResult</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PipelineOptions.html">PipelineOptions</a>
+    <a class="nav-link" href="../PipelineOptions.html">PipelineOptions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
+    <a class="nav-link" href="../PipelineOptionsFactory.html">PipelineOptionsFactory</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
+    <a class="nav-link" href="../PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PipelineRunner.html">PipelineRunner</a>
+    <a class="nav-link" href="../PipelineRunner.html">PipelineRunner</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
+    <a class="nav-link" href="../PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="DisplayData.html">DisplayData</a>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../DisplayData.html">DisplayData</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="TextIO.html">TextIO</a>
+    <a class="nav-link" href="../TextIO.html">TextIO</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="Metrics.html">Metrics</a>
+    <a class="nav-link" href="../Metrics.html">Metrics</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="DoFn.html">DoFn</a>
+    <a class="nav-link" href="../DoFn.html">DoFn</a>
   </li>
 </ul>
   </li>
@@ -123,11 +123,11 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Spark Runner</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="spark/SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="spark/SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
+    <a class="nav-link" href="SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
   </li>
 </ul>
   </li>
@@ -137,25 +137,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="coders/index.html">Coders</a>
+    <a class="nav-link" href="../coders/index.html">Coders</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/Coder.html">Coder</a>
+    <a class="nav-link" href="../coders/Coder.html">Coder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProvider.html">CoderProvider</a>
+    <a class="nav-link" href="../coders/CoderProvider.html">CoderProvider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProviders.html">CoderProviders</a>
+    <a class="nav-link" href="../coders/CoderProviders.html">CoderProviders</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/DefaultCoder.html">DefaultCoder</a>
+    <a class="nav-link" href="../coders/DefaultCoder.html">DefaultCoder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderRegistry.html">CoderRegistry</a>
+    <a class="nav-link" href="../coders/CoderRegistry.html">CoderRegistry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
+    <a class="nav-link" href="../coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
   </li>
 </ul>
   </li>
@@ -174,7 +174,7 @@
       <span class="title">Apache Beam</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">2.20.0</a>
+          <a href="../index.html">2.20.0</a>
         </li>
       </ul>
     </li>
@@ -186,74 +186,84 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="DisplayData.html">DisplayData</a></li>
+    <li><a href="../index.html">Apache Beam</a></li>
+    <li>Spark Runner</li>
+    <li><a href="SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/DisplayData.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/spark/pages/SparkStructuredStreamingRunner.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">DisplayData</h1>
-<div id="preamble">
-<div class="sectionbody">
+<h1 class="page">SparkStructuredStreamingRunner</h1>
 <div class="paragraph">
-<p>Display data is useful for pipeline runner UIs and diagnostic dashboards to display details about [PTransforms](#PTransforms) that make up a pipeline.</p>
+<p><code>SparkStructuredStreamingRunner</code> is a <a href="../PipelineRunner.html" class="page">PipelineRunner</a> that produces <code>SparkStructuredStreamingPipelineResult</code>.</p>
 </div>
 <div class="paragraph">
-<p>Display data is optional and used for informational purposes.</p>
-</div>
-<div class="paragraph">
-<p>Components specify display data by implementing the [HasDisplayData](#HasDisplayData) interface.</p>
-</div>
-<div class="paragraph">
-<p>UIs can collect DisplayData from a component using [DisplayData.from](#DisplayData.from).</p>
-</div>
-<div class="paragraph">
-<p>PipelineOptions is a [HasDisplayData](#HasDisplayData) and uses <code>@JsonSerialize(using = Serializer.class)</code> annotation for JSON serialization.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="hasdisplaydata"><a class="anchor" href="#hasdisplaydata"></a><a class="link" href="#hasdisplaydata">HasDisplayData</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>HasDisplayData</code> is a marker interface with just a single method <code>populateDisplayData</code>.</p>
+<p>SparkStructuredStreamingRunner can be configured using <a href="SparkStructuredStreamingPipelineOptions.html" class="page">SparkStructuredStreamingPipelineOptions</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void populateDisplayData(DisplayData.Builder builder)</code></pre>
+<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.options.PipelineOptionsFactory
+import org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingPipelineOptions
+val opts = PipelineOptionsFactory.as(classOf[SparkStructuredStreamingPipelineOptions])
+
+import org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingRunner
+opts.setRunner(classOf[SparkStructuredStreamingRunner])
+
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create(opts)
+
+import org.apache.beam.sdk.io.TextIO
+val linesIn = TextIO.read().from("*.txt")
+val lines = p.apply(linesIn)
+
+val countsOut = TextIO.write().to("counts.txt")
+lines.apply(countsOut)
+
+val r = p.run()
+r.waitUntilFinish
+
+import org.apache.beam.sdk.PipelineResult
+assert(r.getState == PipelineResult.State.DONE)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>HasDisplayData is used in [DoFn](#DoFn), [WindowFn](#WindowFn), [GlobalCombineFn](#GlobalCombineFn), [PTransform](#PTransform), [Source](#Source), and [PipelineOptions](#PipelineOptions) among others.</p>
+<p>TODO How to configure SparkStructuredStreamingRunner logger?</p>
 </div>
+<div class="paragraph">
+<p>SparkStructuredStreamingRunner uses <a href="SparkStructuredStreamingPipelineOptions.html" class="page">SparkStructuredStreamingPipelineOptions</a>.</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="displaydata-from"><a class="anchor" href="#displaydata-from"></a><a class="link" href="#displaydata-from">DisplayData.from</a></h2>
-<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static DisplayData from(HasDisplayData component)</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.transforms.display.DisplayData
-DisplayData.from(...)</code></pre>
+<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingRunner
+val runner = SparkStructuredStreamingRunner.create</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>DisplayData.from</code> is used when the <code>JsonSerializer</code> (of PipelineOptions as <code>ProxyInvocationHandler.Serializer</code>) is requested to serialize PipelineOptions.</p>
+<p>SparkStructuredStreamingRunner supports two modes of execution:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>batch</strong> (default)</p>
+</li>
+<li>
+<p><strong>streaming</strong></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>This JsonSerializer is only used to serialize a <code>PipelineOptions</code> (marked with <code>@JsonSerialize(using = Serializer.class)</code> annotation).</p>
+<p>Unbounded <a href="#PCollection.adoc" class="page unresolved">PCollections</a> in a <a href="../Pipeline.html" class="page">Pipeline</a> will automatically switch execution from the default batch mode to streaming. You can turn it on using <code>streaming</code> option (part of <code>StreamingOptions</code> options).</p>
 </div>
+<div class="paragraph">
+<p><code>PipelineTranslatorStreaming</code> is used for streaming mode while <code>PipelineTranslatorBatch</code> for batch mode.</p>
 </div>
+<div class="paragraph">
+<p>TODO Review PipelineTranslator to understand how the translation of Beam concepts to Spark&#8217;s works.</p>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -266,7 +276,7 @@ DisplayData.from(...)</code></pre>
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>
