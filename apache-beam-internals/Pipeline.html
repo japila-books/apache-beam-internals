@@ -77,7 +77,13 @@
     <a class="nav-link" href="PTransform.html">PTransform</a>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Pipeline.html">Pipeline</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="TransformHierarchy.html">TransformHierarchy</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="PipelineResult.html">PipelineResult</a>
@@ -114,6 +120,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="DoFn.html">DoFn</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="PipelineDotRenderer.html">PipelineDotRenderer</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Direct Runner</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="direct/DirectRunner.html">DirectRunner</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="direct/DirectPipelineResult.html">DirectPipelineResult</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="direct/PipelineExecutor.html">PipelineExecutor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="direct/EvaluationContext.html">EvaluationContext</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -161,6 +192,19 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Demo</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="demo/demo-Pipeline.html">Running Pipeline</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
 </ul>
   </nav>
 </div>
@@ -198,30 +242,82 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Pipeline</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>Pipeline</code> is a <strong>directed acyclic graph</strong> (<a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">DAG</a>) of <a href="PTransform.html" class="page">PTransforms</a> and <a href="PCollection.html" class="page">PCollections</a>.</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">// FIXME Enable DEBUG log level for more fun
-
-import org.apache.beam.sdk.Pipeline
-val pipeline = Pipeline.create()
-
-assert(pipeline.isInstanceOf[org.apache.beam.sdk.Pipeline])
-
-import org.apache.beam.sdk.io.TextIO
-val linesIn = TextIO.read().from("*.txt")
-
-// Add the source to the pipeline
-val lines = pipeline.apply(linesIn)
-
-val countsOut = TextIO.write().to("counts.txt")
-lines.apply(countsOut)</code></pre>
-</div>
-</div>
 <div class="paragraph">
 <p>Once constructed, a Pipeline can be run using a <a href="PipelineRunner.html" class="page">PipelineRunner</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a> Creating Instance</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pipeline takes the following to be created:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="transforms"></a> <a href="TransformHierarchy.html" class="page">TransformHierarchy</a></p>
+</li>
+<li>
+<p><a id="options"></a> <a href="PipelineOptions.html" class="page">PipelineOptions</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Pipeline cannot be created directly and can only be created using <a href="#create">Pipeline.create</a> utility.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-pipeline"><a class="anchor" href="#creating-pipeline"></a><a class="link" href="#creating-pipeline"><a id="create"></a> Creating Pipeline</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Pipeline create() <i class="conum" data-value="1"></i><b>(1)</b>
+Pipeline create(
+  PipelineOptions options)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Uses PipelineOptionsFactory to <a href="PipelineOptionsFactory.html#create" class="page">create a PipelineOptions</a></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>create&#8230;&#8203;FIXME</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="running"><a class="anchor" href="#running"></a><a class="link" href="#running"><a id="run"></a> Running</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PipelineResult run() <i class="conum" data-value="1"></i><b>(1)</b>
+PipelineResult run(
+  PipelineOptions options)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Uses the <a href="#defaultOptions">default options</a></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>run&#8230;&#8203;FIXME</p>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

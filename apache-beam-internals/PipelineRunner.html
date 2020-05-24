@@ -77,7 +77,13 @@
     <a class="nav-link" href="PTransform.html">PTransform</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Pipeline.html">Pipeline</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="TransformHierarchy.html">TransformHierarchy</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="PipelineResult.html">PipelineResult</a>
@@ -114,6 +120,31 @@
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="DoFn.html">DoFn</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="PipelineDotRenderer.html">PipelineDotRenderer</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Direct Runner</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="direct/DirectRunner.html">DirectRunner</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="direct/DirectPipelineResult.html">DirectPipelineResult</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="direct/PipelineExecutor.html">PipelineExecutor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="direct/EvaluationContext.html">EvaluationContext</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -161,6 +192,19 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Demo</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="demo/demo-Pipeline.html">Running Pipeline</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
 </ul>
   </nav>
 </div>
@@ -200,8 +244,8 @@
 <h1 class="page">PipelineRunner</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p><code>PipelineRunner[R]</code> is an <a href="#contract">abstraction</a> to run a <a href="Pipeline.html" class="page">Pipeline</a> (and produce a <a href="PipelineResult.html" class="page">PipelineResult</a>).</p>
+<div id="ResultT" class="paragraph">
+<p><code>PipelineRunner&lt;ResultT extends PipelineResult&gt;</code> is an <a href="#contract">abstraction</a> to <a href="#run">run a Pipeline</a> (and produce a <a href="PipelineResult.html" class="page">PipelineResult</a>).</p>
 </div>
 <div class="paragraph">
 <p>PipelineRunner is defined using <a href="PipelineOptions.html" class="page">PipelineOptions</a>.</p>
@@ -234,8 +278,8 @@ org.apache.beam.sdk.PipelineRunner[_ &lt;: org.apache.beam.sdk.PipelineResult]</
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 30%;">
-<col style="width: 70%;">
+<col style="width: 40%;">
+<col style="width: 60%;">
 </colgroup>
 <thead>
 <tr>
@@ -249,7 +293,7 @@ org.apache.beam.sdk.PipelineRunner[_ &lt;: org.apache.beam.sdk.PipelineResult]</
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="DataflowRunner"></a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DirectRunner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="direct/DirectRunner.html" class="page">DirectRunner</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a id="DirectRunner"></a></p></td>
 </tr>
 <tr>
@@ -285,6 +329,27 @@ You can find more runners in the <a href="https://beam.apache.org/releases/javad
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contract"><a class="anchor" href="#contract"></a><a class="link" href="#contract"><a id="contract"></a> Contract</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="run-method"><a class="anchor" href="#run-method"></a><a class="link" href="#run-method"><a id="run"></a> run Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// ResultT extends PipelineResult
+ResultT run(
+  Pipeline pipeline)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>run runs the given <a href="Pipeline.html" class="page">Pipeline</a> and produces a <a href="PipelineResult.html" class="page">PipelineResult</a> (as a <a href="#ResultT">ResultT</a>)</p>
+</div>
+<div class="paragraph">
+<p>Used when Pipeline is requested to <a href="Pipeline.html#run" class="page">run</a>.</p>
+</div>
 </div>
 </div>
 </div>

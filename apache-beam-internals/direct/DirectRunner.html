@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>CoderRegistry :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/coders/CoderRegistry.html">
+    <title>DirectRunner :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/direct/DirectRunner.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -132,17 +132,17 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Direct Runner</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../direct/DirectRunner.html">DirectRunner</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="DirectRunner.html">DirectRunner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../direct/DirectPipelineResult.html">DirectPipelineResult</a>
+    <a class="nav-link" href="DirectPipelineResult.html">DirectPipelineResult</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../direct/PipelineExecutor.html">PipelineExecutor</a>
+    <a class="nav-link" href="PipelineExecutor.html">PipelineExecutor</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../direct/EvaluationContext.html">EvaluationContext</a>
+    <a class="nav-link" href="EvaluationContext.html">EvaluationContext</a>
   </li>
 </ul>
   </li>
@@ -168,25 +168,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Coders</a>
+    <a class="nav-link" href="../coders/index.html">Coders</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="Coder.html">Coder</a>
+    <a class="nav-link" href="../coders/Coder.html">Coder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="CoderProvider.html">CoderProvider</a>
+    <a class="nav-link" href="../coders/CoderProvider.html">CoderProvider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="CoderProviders.html">CoderProviders</a>
+    <a class="nav-link" href="../coders/CoderProviders.html">CoderProviders</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="DefaultCoder.html">DefaultCoder</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="CoderRegistry.html">CoderRegistry</a>
+    <a class="nav-link" href="../coders/DefaultCoder.html">DefaultCoder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="CoderProviderRegistrar.html">CoderProviderRegistrar</a>
+    <a class="nav-link" href="../coders/CoderRegistry.html">CoderRegistry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
   </li>
 </ul>
   </li>
@@ -234,17 +234,35 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Apache Beam</a></li>
-    <li><a href="index.html">Coders</a></li>
-    <li><a href="CoderRegistry.html">CoderRegistry</a></li>
+    <li>Direct Runner</li>
+    <li><a href="DirectRunner.html">DirectRunner</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/coders/pages/CoderRegistry.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/direct/pages/DirectRunner.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">CoderRegistry</h1>
+<h1 class="page">DirectRunner</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><strong>CoderRegistry</strong> is&#8230;&#8203;FIXME</p>
+<p><code>DirectRunner</code> is a <a href="../PipelineRunner.html" class="page">PipelineRunner</a> that produces a <a href="DirectPipelineResult.html" class="page">DirectPipelineResult</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="running-pipeline"><a class="anchor" href="#running-pipeline"></a><a class="link" href="#running-pipeline"><a id="run"></a> Running Pipeline</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">DirectPipelineResult run(
+  Pipeline pipeline)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>run is part of the <a href="../PipelineRunner.html#run" class="page">PipelineRunner</a> abstraction.</p>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

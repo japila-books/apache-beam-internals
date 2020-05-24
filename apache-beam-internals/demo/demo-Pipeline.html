@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>CoderRegistry :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/coders/CoderRegistry.html">
+    <title>Demo: Running Pipeline :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/demo/demo-Pipeline.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -168,25 +168,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Coders</a>
+    <a class="nav-link" href="../coders/index.html">Coders</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="Coder.html">Coder</a>
+    <a class="nav-link" href="../coders/Coder.html">Coder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="CoderProvider.html">CoderProvider</a>
+    <a class="nav-link" href="../coders/CoderProvider.html">CoderProvider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="CoderProviders.html">CoderProviders</a>
+    <a class="nav-link" href="../coders/CoderProviders.html">CoderProviders</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="DefaultCoder.html">DefaultCoder</a>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="CoderRegistry.html">CoderRegistry</a>
+    <a class="nav-link" href="../coders/DefaultCoder.html">DefaultCoder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="CoderProviderRegistrar.html">CoderProviderRegistrar</a>
+    <a class="nav-link" href="../coders/CoderRegistry.html">CoderRegistry</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
   </li>
 </ul>
   </li>
@@ -198,8 +198,8 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Demo</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../demo/demo-Pipeline.html">Running Pipeline</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="demo-Pipeline.html">Running Pipeline</a>
   </li>
 </ul>
   </li>
@@ -234,17 +234,75 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Apache Beam</a></li>
-    <li><a href="index.html">Coders</a></li>
-    <li><a href="CoderRegistry.html">CoderRegistry</a></li>
+    <li>Demo</li>
+    <li><a href="demo-Pipeline.html">Running Pipeline</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/coders/pages/CoderRegistry.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/demo/pages/demo-Pipeline.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">CoderRegistry</h1>
-<div class="paragraph">
-<p><strong>CoderRegistry</strong> is&#8230;&#8203;FIXME</p>
+<h1 class="page">Demo: Running Pipeline</h1>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+// DEBUG Pipeline: Creating Pipeline#485965679
+
+scala&gt; :type p
+org.apache.beam.sdk.Pipeline
+
+import org.apache.beam.sdk.io.TextIO
+val lines = TextIO.read().from("*.txt")
+
+scala&gt; :type lines
+org.apache.beam.sdk.io.TextIO.Read
+
+// TextIO.Read extends PTransform&lt;PBegin, PCollection&lt;String&gt;&gt;
+// PBegin marks a source PTransform
+import org.apache.beam.sdk.transforms.PTransform
+assert(lines.isInstanceOf[PTransform[_, _]])
+
+// Add the PTransform to the pipeline
+val in = p.apply(lines)
+
+// DEBUG Pipeline: Adding TextIO.Read to Pipeline#485965679
+// DEBUG Pipeline: Adding Read(CompressedSource) to Pipeline#485965679
+
+scala&gt; :type in
+org.apache.beam.sdk.values.PCollection[String]
+
+scala&gt; println(in.toString)
+TextIO.Read2/Read.out [PCollection]
+
+val counts = TextIO.write().to("counts.txt")
+
+scala&gt; :type counts
+org.apache.beam.sdk.io.TextIO.Write
+
+// TextIO.Write extends PTransform&lt;PCollection&lt;String&gt;, PDone&gt;
+// PDone marks a sink PTransform
+assert(counts.isInstanceOf[PTransform[_, _]])
+
+val out = in.apply(counts)
+
+scala&gt; :type out
+org.apache.beam.sdk.values.PDone
+
+assert(out.getPipeline == p)
+
+val result = p.run()
+
+// DEBUG Pipeline: Running Pipeline#1238410324 via org.apache.beam.runners.direct.DirectRunner@58b5fd5b
+// DEBUG TransformHierarchy: Visiting composite node RootNode
+// DEBUG ExecutorServiceParallelExecutor: Pipeline has terminated. Shutting down.
+
+result.waitUntilFinish()
+
+import org.apache.beam.sdk.metrics.MetricResults
+val metrics = result.metrics</code></pre>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
