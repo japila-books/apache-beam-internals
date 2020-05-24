@@ -1,0 +1,63 @@
+= Demo: Running Pipeline
+:navtitle: Running Pipeline
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+// DEBUG Pipeline: Creating Pipeline#485965679
+
+scala> :type p
+org.apache.beam.sdk.Pipeline
+
+import org.apache.beam.sdk.io.TextIO
+val lines = TextIO.read().from("*.txt")
+
+scala> :type lines
+org.apache.beam.sdk.io.TextIO.Read
+
+// TextIO.Read extends PTransform<PBegin, PCollection<String>>
+// PBegin marks a source PTransform
+import org.apache.beam.sdk.transforms.PTransform
+assert(lines.isInstanceOf[PTransform[_, _]])
+
+// Add the PTransform to the pipeline
+val in = p.apply(lines)
+
+// DEBUG Pipeline: Adding TextIO.Read to Pipeline#485965679
+// DEBUG Pipeline: Adding Read(CompressedSource) to Pipeline#485965679
+
+scala> :type in
+org.apache.beam.sdk.values.PCollection[String]
+
+scala> println(in.toString)
+TextIO.Read2/Read.out [PCollection]
+
+val counts = TextIO.write().to("counts.txt")
+
+scala> :type counts
+org.apache.beam.sdk.io.TextIO.Write
+
+// TextIO.Write extends PTransform<PCollection<String>, PDone>
+// PDone marks a sink PTransform
+assert(counts.isInstanceOf[PTransform[_, _]])
+
+val out = in.apply(counts)
+
+scala> :type out
+org.apache.beam.sdk.values.PDone
+
+assert(out.getPipeline == p)
+
+val result = p.run()
+
+// DEBUG Pipeline: Running Pipeline#1238410324 via org.apache.beam.runners.direct.DirectRunner@58b5fd5b
+// DEBUG TransformHierarchy: Visiting composite node RootNode
+// DEBUG ExecutorServiceParallelExecutor: Pipeline has terminated. Shutting down.
+
+result.waitUntilFinish()
+
+import org.apache.beam.sdk.metrics.MetricResults
+val metrics = result.metrics
+----

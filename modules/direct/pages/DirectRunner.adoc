@@ -1,0 +1,13 @@
+= DirectRunner
+
+`DirectRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces a xref:DirectPipelineResult.adoc[].
+
+== [[run]] Running Pipeline
+
+[source,java]
+----
+DirectPipelineResult run(
+  Pipeline pipeline)
+----
+
+run is part of the xref:ROOT:PipelineRunner.adoc#run[PipelineRunner] abstraction.

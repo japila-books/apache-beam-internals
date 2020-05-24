@@ -1,0 +1,20 @@
+= PipelineDotRenderer
+
+`PipelineDotRenderer` is...FIXME
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.runners.core.construction.renderer.PipelineDotRenderer
+val dot = PipelineDotRenderer.toDotString(p)
+
+scala> println(dot)
+digraph {
+    rankdir=LR
+    subgraph cluster_0 {
+        label = ""
+    }
+}
+----

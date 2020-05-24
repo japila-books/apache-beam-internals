@@ -1,6 +1,7 @@
 = PipelineRunner
 
-`PipelineRunner[R]` is an <<contract, abstraction>> to run a xref:Pipeline.adoc[] (and produce a xref:PipelineResult.adoc[]).
+[[ResultT]]
+`PipelineRunner<ResultT extends PipelineResult>` is an <<contract, abstraction>> to <<run, run a Pipeline>> (and produce a xref:PipelineResult.adoc[]).
 
 PipelineRunner is defined using xref::PipelineOptions.adoc[].
 
@@ -27,7 +28,7 @@ org.apache.beam.sdk.PipelineRunner[_ <: org.apache.beam.sdk.PipelineResult]
 
 == [[implementations]] Available PipelineRunners
 
-[cols="30,70",options="header",width="100%"]
+[cols="40,60",options="header",width="100%"]
 |===
 | PipelineRunner
 | Description
@@ -35,7 +36,7 @@ org.apache.beam.sdk.PipelineRunner[_ <: org.apache.beam.sdk.PipelineResult]
 | DataflowRunner
 | [[DataflowRunner]]
 
-| DirectRunner
+| xref:direct:DirectRunner.adoc[]
 | [[DirectRunner]]
 
 | FlinkRunner
@@ -56,3 +57,18 @@ org.apache.beam.sdk.PipelineRunner[_ <: org.apache.beam.sdk.PipelineResult]
 |===
 
 NOTE: You can find more runners in the https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/PipelineRunner.html[official documentation].
+
+== [[contract]] Contract
+
+=== [[run]] run Method
+
+[source,java]
+----
+// ResultT extends PipelineResult
+ResultT run(
+  Pipeline pipeline)
+----
+
+run runs the given xref:Pipeline.adoc[] and produces a xref:PipelineResult.adoc[] (as a <<ResultT, ResultT>>)
+
+Used when Pipeline is requested to xref:Pipeline.adoc#run[run].

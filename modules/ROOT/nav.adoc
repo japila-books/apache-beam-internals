@@ -3,6 +3,7 @@
 * xref:PCollection.adoc[]
 * xref:PTransform.adoc[]
 * xref:Pipeline.adoc[]
+** xref:TransformHierarchy.adoc[]
 * xref:PipelineResult.adoc[]
 
 * xref:PipelineOptions.adoc[]
@@ -17,3 +18,5 @@
 * xref:TextIO.adoc[]
 * xref:Metrics.adoc[]
 * xref:DoFn.adoc[]
+
+* xref:PipelineDotRenderer.adoc[]

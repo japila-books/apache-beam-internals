@@ -1,6 +1,6 @@
 = SparkStructuredStreamingRunner
 
-`SparkStructuredStreamingRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces `SparkStructuredStreamingPipelineResult`.
+`SparkStructuredStreamingRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces a SparkStructuredStreamingPipelineResult.
 
 SparkStructuredStreamingRunner can be configured using xref:SparkStructuredStreamingPipelineOptions.adoc[].
 

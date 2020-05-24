@@ -2,23 +2,37 @@
 
 `Pipeline` is a *directed acyclic graph* (https://en.wikipedia.org/wiki/Directed_acyclic_graph[DAG]) of xref::PTransform.adoc[PTransforms] and xref::PCollection.adoc[PCollections].
 
-[source,scala]
-----
-// FIXME Enable DEBUG log level for more fun
-
-import org.apache.beam.sdk.Pipeline
-val pipeline = Pipeline.create()
-
-assert(pipeline.isInstanceOf[org.apache.beam.sdk.Pipeline])
-
-import org.apache.beam.sdk.io.TextIO
-val linesIn = TextIO.read().from("*.txt")
-
-// Add the source to the pipeline
-val lines = pipeline.apply(linesIn)
-
-val countsOut = TextIO.write().to("counts.txt")
-lines.apply(countsOut)
-----
-
 Once constructed, a Pipeline can be run using a xref::PipelineRunner.adoc[].
+
+== [[creating-instance]] Creating Instance
+
+Pipeline takes the following to be created:
+
+* [[transforms]] xref:TransformHierarchy.adoc[]
+* [[options]] xref:PipelineOptions.adoc[]
+
+Pipeline cannot be created directly and can only be created using <<create, Pipeline.create>> utility.
+
+== [[create]] Creating Pipeline
+
+[source,java]
+----
+Pipeline create() // <1>
+Pipeline create(
+  PipelineOptions options)
+----
+<1> Uses PipelineOptionsFactory to xref:PipelineOptionsFactory.adoc#create[create a PipelineOptions]
+
+create...FIXME
+
+== [[run]] Running
+
+[source,java]
+----
+PipelineResult run() // <1>
+PipelineResult run(
+  PipelineOptions options)
+----
+<1> Uses the <<defaultOptions, default options>>
+
+run...FIXME
