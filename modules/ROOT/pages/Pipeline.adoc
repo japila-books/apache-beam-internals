@@ -4,16 +4,7 @@
 
 Once constructed, a Pipeline can be run using a xref::PipelineRunner.adoc[].
 
-== [[creating-instance]] Creating Instance
-
-Pipeline takes the following to be created:
-
-* [[transforms]] xref:TransformHierarchy.adoc[]
-* [[options]] xref:PipelineOptions.adoc[]
-
-Pipeline cannot be created directly and can only be created using <<create, Pipeline.create>> utility.
-
-== [[create]] Creating Pipeline -- create Utility
+== [[create]] Creating Pipeline
 
 [source,java]
 ----
@@ -23,7 +14,7 @@ Pipeline create(
 ----
 <1> Uses PipelineOptionsFactory to xref:PipelineOptionsFactory.adoc#create[create a PipelineOptions]
 
-create creates a new Pipeline (using the provided xref:PipelineOptions.adoc[] or requests xref:PipelineOptionsFactory.adoc[] to xref:PipelineOptionsFactory.adoc#create[create one]).
+`Pipeline.create` utility creates a new Pipeline (using the provided xref:PipelineOptions.adoc[] or requests xref:PipelineOptionsFactory.adoc[] to xref:PipelineOptionsFactory.adoc#create[create one]).
 
 create prints out the following DEBUG message to the logs:
 
@@ -32,7 +23,7 @@ create prints out the following DEBUG message to the logs:
 Creating [pipeline]
 ----
 
-== [[run]] Running
+== [[run]] Running Pipeline
 
 [source,java]
 ----
@@ -42,4 +33,32 @@ PipelineResult run(
 ----
 <1> Uses the <<defaultOptions, default options>>
 
-run...FIXME
+run creates a xref:PipelineRunner.adoc[] (using xref:PipelineRunner.adoc#fromOptions[PipelineRunner.fromOptions]).
+
+run prints out the following DEBUG message to the logs:
+
+[source,plaintext]
+----
+Running [this] via [runner]
+----
+
+run <<validate, validates the options>> and requests the PipelineRunner to xref:PipelineRunner.adoc#run[run this pipeline].
+
+== [[validate]] Validating Pipeline Options
+
+[source,java]
+----
+void validate(
+  PipelineOptions options)
+----
+
+validate...FIXME
+
+== [[creating-instance]] Creating Instance
+
+Pipeline takes the following to be created:
+
+* [[transforms]] xref:TransformHierarchy.adoc[]
+* [[options]][[defaultOptions]] xref:PipelineOptions.adoc[]
+
+Pipeline cannot be created directly and can only be created using <<create, Pipeline.create>> utility.

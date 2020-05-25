@@ -2,8 +2,16 @@
 
 `PCollection<T>` is an immutable *collection* of values of type `T` (similar to `RDD[T]` in Apache Spark).
 
-A `PCollection` can contain either a bounded or unbounded number of elements.
+A PCollection can contain either a bounded or unbounded number of elements.
 
-A `PCollection` is produced as the output of xref::PTransform.adoc[].
+A PCollection is produced as the output of xref::PTransform.adoc[].
 
 == [[setCoder]] setCoder Method
+
+[source,java]
+----
+PCollection<T> setCoder(
+  Coder<T> coder)
+----
+
+setCoder...FIXME
