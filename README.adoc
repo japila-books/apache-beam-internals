@@ -25,7 +25,7 @@ In order to generate the book, use the commands as described in https://docs.ant
 Below are the steps I'm taking to deploy a new version of the site.
 
 ```
-$ docker run -u $UID --privileged -v `pwd`:/antora --rm -t antora/antora antora-playbook.yml
+$ docker run -u $UID --privileged -v `pwd`:/antora --rm -t antora/antora local-antora-playbook.yml
 
 // alternatively and recommended
 $ docker run --entrypoint ash --privileged -v `pwd`:/antora --rm -it antora/antora

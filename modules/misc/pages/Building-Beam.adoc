@@ -1,0 +1,16 @@
+= Building Beam
+
+[source,plain]
+----
+$ ./gradlew \
+    -p sdks/java \
+    -x test \
+    -x :sdks:java:container:goPrepare \
+    -x :sdks:java:container:resolveBuildDependencies \
+    -x :sdks:go:goPrepare \
+    -x :sdks:go:buildDarwinAmd64 \
+    clean build
+...
+BUILD SUCCESSFUL in 4m 10s
+601 actionable tasks: 394 executed, 111 from cache, 96 up-to-date
+----

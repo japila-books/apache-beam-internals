@@ -13,7 +13,7 @@ Pipeline takes the following to be created:
 
 Pipeline cannot be created directly and can only be created using <<create, Pipeline.create>> utility.
 
-== [[create]] Creating Pipeline
+== [[create]] Creating Pipeline -- create Utility
 
 [source,java]
 ----
@@ -23,7 +23,14 @@ Pipeline create(
 ----
 <1> Uses PipelineOptionsFactory to xref:PipelineOptionsFactory.adoc#create[create a PipelineOptions]
 
-create...FIXME
+create creates a new Pipeline (using the provided xref:PipelineOptions.adoc[] or requests xref:PipelineOptionsFactory.adoc[] to xref:PipelineOptionsFactory.adoc#create[create one]).
+
+create prints out the following DEBUG message to the logs:
+
+[source,plaintext]
+----
+Creating [pipeline]
+----
 
 == [[run]] Running
 

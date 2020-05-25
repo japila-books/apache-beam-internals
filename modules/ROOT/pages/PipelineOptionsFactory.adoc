@@ -10,7 +10,12 @@ val options = PipelineOptionsFactory.create()
 assert(options.isInstanceOf[org.apache.beam.sdk.options.PipelineOptions])
 ----
 
-== [[fromArgs]] fromArgs Method
+== [[fromArgs]] fromArgs Utility
+
+[source,java]
+----
+Builder fromArgs(String... args)
+----
 
 The most common way to construct a `PipelineOptions` is using `PipelineOptionsFactory.fromArgs` and command-line arguments.
 
@@ -54,7 +59,7 @@ Use --help=<OptionsName> for detailed help. For example:
   --help=org.apache.beam.sdk.options.DataflowPipelineOptions
 ----
 
-== [[create]] Creating PipelineOptions
+== [[create]] Creating PipelineOptions -- create Utility
 
 [source,java]
 ----
@@ -62,3 +67,13 @@ PipelineOptions create()
 ----
 
 create...FIXME
+
+== [[as]] Converting PipelineOptions -- as Utility
+
+[source,java]
+----
+<T extends PipelineOptions> T as(
+  Class<T> klass)
+----
+
+as...FIXME

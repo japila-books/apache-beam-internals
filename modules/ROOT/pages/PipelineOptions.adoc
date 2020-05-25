@@ -1,5 +1,38 @@
 = PipelineOptions
 
-`PipelineOptions` is used to configure a xref::Pipeline.adoc[].
+PipelineOptions is used to configure a xref::Pipeline.adoc[].
 
-PipelineOptions is a xref:HasDisplayData.adoc[] and uses `@JsonSerialize(using = Serializer.class)` annotation to define the default JSON serialization and deserialization class.
+PipelineOptions can be created using xref:PipelineOptionsFactory.adoc[] utilities:
+
+* xref:PipelineOptionsFactory.adoc#create[PipelineOptionsFactory.create]
+* xref:PipelineOptionsFactory.adoc#as[PipelineOptionsFactory.as]
+* xref:PipelineOptionsFactory.adoc#fromArgs[PipelineOptionsFactory.fromArgs] (from command-line arguments)
+
+PipelineOptions can be accessed from within a xref:DoFn.adoc[] via ProcessContext.
+
+== [[getRunner]][[setRunner]] PipelineRunner
+
+[source,java]
+----
+Class<? extends PipelineRunner<?>> getRunner()
+void setRunner(
+  Class<? extends PipelineRunner<?>> kls)
+----
+
+getRunner and setRunner manage the xref:PipelineRunner.adoc[] for executing the pipeline
+
+Default: xref:direct:DirectRunner.adoc[]
+
+== [[HasDisplayData]] HasDisplayData
+
+PipelineOptions is a xref:HasDisplayData.adoc[].
+
+== [[JsonSerialize]][[JsonDeserialize]] JSON SerDe
+
+PipelineOptions uses the following annotations to define the classes for JSON serialization and deserialization:
+
+[source,java]
+----
+@JsonSerialize(using = Serializer.class)
+@JsonDeserialize(using = Deserializer.class)
+----
