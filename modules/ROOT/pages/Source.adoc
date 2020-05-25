@@ -1,0 +1,22 @@
+= Source
+
+`Source<T>` is an <<contract, abstraction>> of input formats for reading the input.
+
+== [[extensions]] Base Sources
+
+[cols="30,70",options="header",width="100%"]
+|===
+| Source
+| Description
+
+| xref:BoundedSource.adoc[]
+| [[BoundedSource]] Produces a finite (_bounded_) amount of input
+
+| xref:UnboundedSource.adoc[]
+| [[UnboundedSource]] Produces an unbounded amount of input
+
+|===
+
+== [[HasDisplayData]] HasDisplayData
+
+Source is a xref:HasDisplayData.adoc[].

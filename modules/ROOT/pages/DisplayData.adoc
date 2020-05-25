@@ -1,36 +1,27 @@
 = DisplayData
 
-Display data is useful for pipeline runner UIs and diagnostic dashboards to display details about [PTransforms](#PTransforms) that make up a pipeline.
+Display data is useful for pipeline runner UIs and diagnostic dashboards to display details about xref:PTransform.adoc[]s that make up a pipeline.
 
 Display data is optional and used for informational purposes.
 
-Components specify display data by implementing the [HasDisplayData](#HasDisplayData) interface.
+Components specify display data by implementing the xref:HasDisplayData.adoc[] interface.
 
-UIs can collect DisplayData from a component using [DisplayData.from](#DisplayData.from).
+UIs can collect DisplayData from a component using <<from, DisplayData.from>> utility.
 
-PipelineOptions is a [HasDisplayData](#HasDisplayData) and uses `@JsonSerialize(using = Serializer.class)` annotation for JSON serialization.
+== [[from]] from Utility
 
-== HasDisplayData
+[source,java]
+----
+static DisplayData from(
+  HasDisplayData component)
+----
 
-`HasDisplayData` is a marker interface with just a single method `populateDisplayData`.
+`from` is used when the `JsonSerializer` (of xref:PipelineOptions.adoc[] as `ProxyInvocationHandler.Serializer`) is requested to serialize PipelineOptions.
 
-```java
-void populateDisplayData(DisplayData.Builder builder)
-```
-
-HasDisplayData is used in [DoFn](#DoFn), [WindowFn](#WindowFn), [GlobalCombineFn](#GlobalCombineFn), [PTransform](#PTransform), [Source](#Source), and [PipelineOptions](#PipelineOptions) among others.
-
-== DisplayData.from
-
-```java
-public static DisplayData from(HasDisplayData component)
-```
-
-```scala
+[source,scala]
+----
 import org.apache.beam.sdk.transforms.display.DisplayData
 DisplayData.from(...)
-```
-
-`DisplayData.from` is used when the `JsonSerializer` (of PipelineOptions as `ProxyInvocationHandler.Serializer`) is requested to serialize PipelineOptions.
+----
 
 This JsonSerializer is only used to serialize a `PipelineOptions` (marked with `@JsonSerialize(using = Serializer.class)` annotation).

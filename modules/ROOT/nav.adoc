@@ -14,8 +14,16 @@
 ** xref:PipelineRunnerRegistrar.adoc[]
 
 * xref:DisplayData.adoc[]
+** xref:HasDisplayData.adoc[]
 
-* xref:TextIO.adoc[]
+* I/O PTransforms
+** xref:TextIO.adoc[]
+** xref:AvroIO.adoc[]
+** xref:Source.adoc[]
+*** xref:BoundedSource.adoc[]
+*** xref:UnboundedSource.adoc[]
+**** xref:CheckpointMark.adoc[]
+
 * xref:Metrics.adoc[]
 * xref:DoFn.adoc[]
 

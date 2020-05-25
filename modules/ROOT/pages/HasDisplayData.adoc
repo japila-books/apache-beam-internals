@@ -1,0 +1,11 @@
+= HasDisplayData
+
+`HasDisplayData` is an interface that is used in xref:DoFn.adoc[], WindowFn, GlobalCombineFn, xref:PTransform.adoc[], xref:Source.adoc[], and xref:PipelineOptions.adoc[] among others.
+
+== [[populateDisplayData]] populateDisplayData Method
+
+[source,java]
+----
+void populateDisplayData(
+  DisplayData.Builder builder)
+----

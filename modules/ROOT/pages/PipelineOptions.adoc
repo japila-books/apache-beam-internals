@@ -1,3 +1,5 @@
 = PipelineOptions
 
 `PipelineOptions` is used to configure a xref::Pipeline.adoc[].
+
+PipelineOptions is a xref:HasDisplayData.adoc[] and uses `@JsonSerialize(using = Serializer.class)` annotation to define the default JSON serialization and deserialization class.

@@ -1,0 +1,3 @@
+= BoundedSource
+
+`BoundedSource<T>` is a xref:Source.adoc[] that produces an finite amount of input (of type `T`).

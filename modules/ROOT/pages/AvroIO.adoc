@@ -1,0 +1,53 @@
+= AvroIO
+
+`AvroIO` is a utility to create xref:PTransform.adoc[]s for <<read, reading>> and <<write, writing>> Avro files.
+
+[source,plain]
+----
+import org.apache.beam.sdk.io.AvroIO
+val records = AvroIO.read(classOf[String]).from("*.avro")
+
+scala> :type records
+org.apache.beam.sdk.io.AvroIO.Read[String]
+----
+
+== [[read]] Reading In
+
+[source,java]
+----
+<T> Read<T> read(
+  Class<T> recordClass)
+<T> ReadFiles<T> readFiles(
+  Class<T> recordClass)
+<T> ReadAll<T> readAll(
+  Class<T> recordClass)
+Read<GenericRecord> readGenericRecords(
+  Schema schema)
+ReadFiles<GenericRecord> readFilesGenericRecords(
+  Schema schema)
+ReadAll<GenericRecord> readAllGenericRecords(
+  Schema schema)
+Read<GenericRecord> readGenericRecords(
+  String schema)
+ReadFiles<GenericRecord> readFilesGenericRecords(
+  String schema)
+<T> Parse<T> parseGenericRecords(
+  SerializableFunction<GenericRecord, T> parseFn)
+<T> ParseFiles<T> parseFilesGenericRecords(
+  SerializableFunction<GenericRecord, T> parseFn)
+----
+
+read creates a xref:PTransform.adoc#source[source PTransform] that produces a xref:PCollection.adoc[] of records (of type `T` or `GenericRecord`, i.e. `PTransform<PBegin, PCollection<T>>`).
+
+== [[write]] Writing Out
+
+[source,java]
+----
+<T> Write<T> write(
+  Class<T> recordClass)
+Write<GenericRecord> writeGenericRecords(
+  Schema schema)
+// other writes
+----
+
+write creates a xref:PTransform.adoc#sink[sink PTransform] (`PTransform<PCollection<T>, PDone>`).

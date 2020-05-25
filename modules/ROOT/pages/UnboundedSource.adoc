@@ -1,0 +1,7 @@
+= UnboundedSource
+
+`UnboundedSource<T>` is a xref:Source.adoc[] that produces an unbounded amount of input (of type `T`).
+
+== [[CheckpointMark]] CheckpointMark
+
+UnboundedSource requires a xref:CheckpointMark.adoc[].
