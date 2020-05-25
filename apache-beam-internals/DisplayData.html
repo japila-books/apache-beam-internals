@@ -110,10 +110,43 @@
 </ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="HasDisplayData.html">HasDisplayData</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">I/O PTransforms</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="TextIO.html">TextIO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="AvroIO.html">AvroIO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="Source.html">Source</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="UnboundedSource.html">UnboundedSource</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="CheckpointMark.html">CheckpointMark</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="Metrics.html">Metrics</a>
@@ -245,54 +278,36 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Display data is useful for pipeline runner UIs and diagnostic dashboards to display details about [PTransforms](#PTransforms) that make up a pipeline.</p>
+<p>Display data is useful for pipeline runner UIs and diagnostic dashboards to display details about <a href="PTransform.html" class="page">PTransform</a>s that make up a pipeline.</p>
 </div>
 <div class="paragraph">
 <p>Display data is optional and used for informational purposes.</p>
 </div>
 <div class="paragraph">
-<p>Components specify display data by implementing the [HasDisplayData](#HasDisplayData) interface.</p>
+<p>Components specify display data by implementing the <a href="HasDisplayData.html" class="page">HasDisplayData</a> interface.</p>
 </div>
 <div class="paragraph">
-<p>UIs can collect DisplayData from a component using [DisplayData.from](#DisplayData.from).</p>
-</div>
-<div class="paragraph">
-<p>PipelineOptions is a [HasDisplayData](#HasDisplayData) and uses <code>@JsonSerialize(using = Serializer.class)</code> annotation for JSON serialization.</p>
+<p>UIs can collect DisplayData from a component using <a href="#from">DisplayData.from</a> utility.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="hasdisplaydata"><a class="anchor" href="#hasdisplaydata"></a><a class="link" href="#hasdisplaydata">HasDisplayData</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>HasDisplayData</code> is a marker interface with just a single method <code>populateDisplayData</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void populateDisplayData(DisplayData.Builder builder)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>HasDisplayData is used in [DoFn](#DoFn), [WindowFn](#WindowFn), [GlobalCombineFn](#GlobalCombineFn), [PTransform](#PTransform), [Source](#Source), and [PipelineOptions](#PipelineOptions) among others.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="displaydata-from"><a class="anchor" href="#displaydata-from"></a><a class="link" href="#displaydata-from">DisplayData.from</a></h2>
+<h2 id="from-utility"><a class="anchor" href="#from-utility"></a><a class="link" href="#from-utility"><a id="from"></a> from Utility</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public static DisplayData from(HasDisplayData component)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">static DisplayData from(
+  HasDisplayData component)</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><code>from</code> is used when the <code>JsonSerializer</code> (of <a href="PipelineOptions.html" class="page">PipelineOptions</a> as <code>ProxyInvocationHandler.Serializer</code>) is requested to serialize PipelineOptions.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.transforms.display.DisplayData
 DisplayData.from(...)</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p><code>DisplayData.from</code> is used when the <code>JsonSerializer</code> (of PipelineOptions as <code>ProxyInvocationHandler.Serializer</code>) is requested to serialize PipelineOptions.</p>
 </div>
 <div class="paragraph">
 <p>This JsonSerializer is only used to serialize a <code>PipelineOptions</code> (marked with <code>@JsonSerialize(using = Serializer.class)</code> annotation).</p>

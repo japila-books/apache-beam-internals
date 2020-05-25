@@ -110,10 +110,43 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="HasDisplayData.html">HasDisplayData</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">I/O PTransforms</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="TextIO.html">TextIO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="AvroIO.html">AvroIO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="Source.html">Source</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="UnboundedSource.html">UnboundedSource</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="CheckpointMark.html">CheckpointMark</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="Metrics.html">Metrics</a>
@@ -258,18 +291,18 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="root-ptransform"><a class="anchor" href="#root-ptransform"></a><a class="link" href="#root-ptransform">Root PTransform</a></h2>
+<h2 id="source-ptransform"><a class="anchor" href="#source-ptransform"></a><a class="link" href="#source-ptransform"><a id="source"></a> Source PTransform</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Root PTransform</strong> (<strong>source PTransform</strong>) is a <code>PTransform&lt;PBegin, PCollection&lt;&#8230;&#8203;&gt;&gt;</code> that takes no input (conventionally marked as <code>PBegin</code> input type), e.g. <code>TextIO.Read</code> or <code>Create</code>.</p>
+<p><strong>Source PTransform</strong> (<em>Root PTransform</em>) is a <code>PTransform&lt;PBegin, PCollection&lt;&#8230;&#8203;&gt;&gt;</code> that takes no input (conventionally marked as <code>PBegin</code> input type), e.g. <a href="TextIO.html#read" class="page">TextIO.Read</a> or <code>Create</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="outputting-ptransform"><a class="anchor" href="#outputting-ptransform"></a><a class="link" href="#outputting-ptransform">Outputting PTransform</a></h2>
+<h2 id="sink-ptransform"><a class="anchor" href="#sink-ptransform"></a><a class="link" href="#sink-ptransform"><a id="sink"></a> Sink PTransform</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Outputting PTransform</strong> (<strong>sink PTransform</strong>) is a <code>PTransform&lt;PCollection&lt;&#8230;&#8203;&gt;, PDone&gt;</code> that has no output (conventionally marked as <code>PDone</code> output type), e.g. <code>TextIO.Write</code>.</p>
+<p><strong>Sink PTransform</strong> (<em>Output PTransform</em>) is a <code>PTransform&lt;PCollection&lt;&#8230;&#8203;&gt;, PDone&gt;</code> that has no output (conventionally marked as <code>PDone</code> output type), e.g. <code>TextIO.Write</code>.</p>
 </div>
 </div>
 </div>

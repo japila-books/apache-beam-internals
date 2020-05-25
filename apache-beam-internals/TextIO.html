@@ -110,10 +110,43 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="HasDisplayData.html">HasDisplayData</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">I/O PTransforms</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="TextIO.html">TextIO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="AvroIO.html">AvroIO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="Source.html">Source</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="UnboundedSource.html">UnboundedSource</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="CheckpointMark.html">CheckpointMark</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="Metrics.html">Metrics</a>
@@ -234,6 +267,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
+    <li>I/O PTransforms</li>
     <li><a href="TextIO.html">TextIO</a></li>
   </ul>
 </nav>
@@ -242,16 +276,46 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">TextIO</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><code>TextIO.read</code> creates a root transformation, i.e. that has no input (<code>PBegin</code>) and returns a bounded <code>PCollection</code> of lines from the input files (<code>PTransform&lt;PBegin, PCollection&lt;String&gt;&gt;</code>).</p>
+<p><code>TextIO</code> is a utility to create <a href="PTransform.html" class="page">PTransform</a>s for <a href="#read">reading</a> and <a href="#write">writing</a> text files.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>import org.apache.beam.sdk.io.TextIO
+<pre class="highlightjs highlight"><code class="language-plain hljs" data-lang="plain">import org.apache.beam.sdk.io.TextIO
 val lines = TextIO.read().from("*.txt")
 
 scala&gt; :type lines
 org.apache.beam.sdk.io.TextIO.Read</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="reading-bounded-pcollectionread-utility"><a class="anchor" href="#reading-bounded-pcollectionread-utility"></a><a class="link" href="#reading-bounded-pcollectionread-utility"><a id="read"></a> Reading Bounded PCollection&#8201;&#8212;&#8201;read Utility</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Read read()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>read creates a <a href="PTransform.html#source" class="page">source PTransform</a> that produces a bounded <a href="PCollection.html" class="page">PCollection</a> of text lines (<code>PTransform&lt;PBegin, PCollection&lt;String&gt;&gt;</code>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="writing-pcollection-to-text-filewrite-utility"><a class="anchor" href="#writing-pcollection-to-text-filewrite-utility"></a><a class="link" href="#writing-pcollection-to-text-filewrite-utility"><a id="write"></a> Writing PCollection to Text File&#8201;&#8212;&#8201;write Utility</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Write write()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>write creates a <a href="PTransform.html#sink" class="page">sink PTransform</a> (<code>PTransform&lt;PCollection&lt;String&gt;, PDone&gt;</code>).</p>
+</div>
 </div>
 </div>
 </article>
