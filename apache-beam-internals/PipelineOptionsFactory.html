@@ -238,6 +238,19 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Misc</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc/Building-Beam.html">Building Beam</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
 </ul>
   </nav>
 </div>
@@ -292,8 +305,13 @@ assert(options.isInstanceOf[org.apache.beam.sdk.options.PipelineOptions])</code>
 </div>
 </div>
 <div class="sect1">
-<h2 id="fromargs-method"><a class="anchor" href="#fromargs-method"></a><a class="link" href="#fromargs-method"><a id="fromArgs"></a> fromArgs Method</a></h2>
+<h2 id="fromargs-utility"><a class="anchor" href="#fromargs-utility"></a><a class="link" href="#fromargs-utility"><a id="fromArgs"></a> fromArgs Utility</a></h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Builder fromArgs(String... args)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>The most common way to construct a <code>PipelineOptions</code> is using <code>PipelineOptionsFactory.fromArgs</code> and command-line arguments.</p>
 </div>
@@ -344,7 +362,7 @@ Use --help=&lt;OptionsName&gt; for detailed help. For example:
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating-pipelineoptions"><a class="anchor" href="#creating-pipelineoptions"></a><a class="link" href="#creating-pipelineoptions"><a id="create"></a> Creating PipelineOptions</a></h2>
+<h2 id="creating-pipelineoptionscreate-utility"><a class="anchor" href="#creating-pipelineoptionscreate-utility"></a><a class="link" href="#creating-pipelineoptionscreate-utility"><a id="create"></a> Creating PipelineOptions&#8201;&#8212;&#8201;create Utility</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -353,6 +371,20 @@ Use --help=&lt;OptionsName&gt; for detailed help. For example:
 </div>
 <div class="paragraph">
 <p>create&#8230;&#8203;FIXME</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="converting-pipelineoptionsas-utility"><a class="anchor" href="#converting-pipelineoptionsas-utility"></a><a class="link" href="#converting-pipelineoptionsas-utility"><a id="as"></a> Converting PipelineOptions&#8201;&#8212;&#8201;as Utility</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">&lt;T extends PipelineOptions&gt; T as(
+  Class&lt;T&gt; klass)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>as&#8230;&#8203;FIXME</p>
 </div>
 </div>
 </div>

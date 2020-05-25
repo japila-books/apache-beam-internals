@@ -238,6 +238,19 @@
   </li>
 </ul>
   </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Misc</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc/Building-Beam.html">Building Beam</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
 </ul>
   </nav>
 </div>
@@ -275,11 +288,71 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">PipelineOptions</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><code>PipelineOptions</code> is used to configure a <a href="Pipeline.html" class="page">Pipeline</a>.</p>
+<p>PipelineOptions is used to configure a <a href="Pipeline.html" class="page">Pipeline</a>.</p>
 </div>
 <div class="paragraph">
-<p>PipelineOptions is a <a href="HasDisplayData.html" class="page">HasDisplayData</a> and uses <code>@JsonSerialize(using = Serializer.class)</code> annotation to define the default JSON serialization and deserialization class.</p>
+<p>PipelineOptions can be created using <a href="PipelineOptionsFactory.html" class="page">PipelineOptionsFactory</a> utilities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="PipelineOptionsFactory.html#create" class="page">PipelineOptionsFactory.create</a></p>
+</li>
+<li>
+<p><a href="PipelineOptionsFactory.html#as" class="page">PipelineOptionsFactory.as</a></p>
+</li>
+<li>
+<p><a href="PipelineOptionsFactory.html#fromArgs" class="page">PipelineOptionsFactory.fromArgs</a> (from command-line arguments)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>PipelineOptions can be accessed from within a <a href="DoFn.html" class="page">DoFn</a> via ProcessContext.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pipelinerunner"><a class="anchor" href="#pipelinerunner"></a><a class="link" href="#pipelinerunner"><a id="getRunner"></a><a id="setRunner"></a> PipelineRunner</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Class&lt;? extends PipelineRunner&lt;?&gt;&gt; getRunner()
+void setRunner(
+  Class&lt;? extends PipelineRunner&lt;?&gt;&gt; kls)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>getRunner and setRunner manage the <a href="PipelineRunner.html" class="page">PipelineRunner</a> for executing the pipeline</p>
+</div>
+<div class="paragraph">
+<p>Default: <a href="direct/DirectRunner.html" class="page">DirectRunner</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="hasdisplaydata"><a class="anchor" href="#hasdisplaydata"></a><a class="link" href="#hasdisplaydata"><a id="HasDisplayData"></a> HasDisplayData</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PipelineOptions is a <a href="HasDisplayData.html" class="page">HasDisplayData</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="json-serde"><a class="anchor" href="#json-serde"></a><a class="link" href="#json-serde"><a id="JsonSerialize"></a><a id="JsonDeserialize"></a> JSON SerDe</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PipelineOptions uses the following annotations to define the classes for JSON serialization and deserialization:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@JsonSerialize(using = Serializer.class)
+@JsonDeserialize(using = Deserializer.class)</code></pre>
+</div>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
