@@ -299,28 +299,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a> Creating Instance</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Pipeline takes the following to be created:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a id="transforms"></a> <a href="TransformHierarchy.html" class="page">TransformHierarchy</a></p>
-</li>
-<li>
-<p><a id="options"></a> <a href="PipelineOptions.html" class="page">PipelineOptions</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Pipeline cannot be created directly and can only be created using <a href="#create">Pipeline.create</a> utility.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="creating-pipelinecreate-utility"><a class="anchor" href="#creating-pipelinecreate-utility"></a><a class="link" href="#creating-pipelinecreate-utility"><a id="create"></a> Creating Pipeline&#8201;&#8212;&#8201;create Utility</a></h2>
+<h2 id="creating-pipeline"><a class="anchor" href="#creating-pipeline"></a><a class="link" href="#creating-pipeline"><a id="create"></a> Creating Pipeline</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -338,7 +317,7 @@ Pipeline create(
 </table>
 </div>
 <div class="paragraph">
-<p>create creates a new Pipeline (using the provided <a href="PipelineOptions.html" class="page">PipelineOptions</a> or requests <a href="PipelineOptionsFactory.html" class="page">PipelineOptionsFactory</a> to <a href="PipelineOptionsFactory.html#create" class="page">create one</a>).</p>
+<p><code>Pipeline.create</code> utility creates a new Pipeline (using the provided <a href="PipelineOptions.html" class="page">PipelineOptions</a> or requests <a href="PipelineOptionsFactory.html" class="page">PipelineOptionsFactory</a> to <a href="PipelineOptionsFactory.html#create" class="page">create one</a>).</p>
 </div>
 <div class="paragraph">
 <p>create prints out the following DEBUG message to the logs:</p>
@@ -351,7 +330,7 @@ Pipeline create(
 </div>
 </div>
 <div class="sect1">
-<h2 id="running"><a class="anchor" href="#running"></a><a class="link" href="#running"><a id="run"></a> Running</a></h2>
+<h2 id="running-pipeline"><a class="anchor" href="#running-pipeline"></a><a class="link" href="#running-pipeline"><a id="run"></a> Running Pipeline</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -369,7 +348,53 @@ PipelineResult run(
 </table>
 </div>
 <div class="paragraph">
-<p>run&#8230;&#8203;FIXME</p>
+<p>run creates a <a href="PipelineRunner.html" class="page">PipelineRunner</a> (using <a href="PipelineRunner.html#fromOptions" class="page">PipelineRunner.fromOptions</a>).</p>
+</div>
+<div class="paragraph">
+<p>run prints out the following DEBUG message to the logs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">Running [this] via [runner]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>run <a href="#validate">validates the options</a> and requests the PipelineRunner to <a href="PipelineRunner.html#run" class="page">run this pipeline</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="validating-pipeline-options"><a class="anchor" href="#validating-pipeline-options"></a><a class="link" href="#validating-pipeline-options"><a id="validate"></a> Validating Pipeline Options</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void validate(
+  PipelineOptions options)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>validate&#8230;&#8203;FIXME</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a> Creating Instance</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pipeline takes the following to be created:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="transforms"></a> <a href="TransformHierarchy.html" class="page">TransformHierarchy</a></p>
+</li>
+<li>
+<p><a id="options"></a><a id="defaultOptions"></a> <a href="PipelineOptions.html" class="page">PipelineOptions</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Pipeline cannot be created directly and can only be created using <a href="#create">Pipeline.create</a> utility.</p>
 </div>
 </div>
 </div>
