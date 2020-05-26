@@ -26,5 +26,3 @@
 
 * xref:Metrics.adoc[]
 * xref:DoFn.adoc[]
-
-* xref:PipelineDotRenderer.adoc[]

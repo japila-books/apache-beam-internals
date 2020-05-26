@@ -22,8 +22,8 @@ org.apache.beam.sdk.io.TextIO.Read
 import org.apache.beam.sdk.transforms.PTransform
 assert(lines.isInstanceOf[PTransform[_, _]])
 
-// Add the PTransform to the pipeline
-val in = p.apply(lines)
+// Add the root PTransform to the pipeline
+val in = p.apply("Read Text Files", lines)
 
 // DEBUG Pipeline: Adding TextIO.Read to Pipeline#485965679
 // DEBUG Pipeline: Adding Read(CompressedSource) to Pipeline#485965679
@@ -32,7 +32,7 @@ scala> :type in
 org.apache.beam.sdk.values.PCollection[String]
 
 scala> println(in.toString)
-TextIO.Read2/Read.out [PCollection]
+Read Text Files/Read.out [PCollection]
 
 val counts = TextIO.write().to("counts.txt")
 
@@ -43,7 +43,7 @@ org.apache.beam.sdk.io.TextIO.Write
 // PDone marks a sink PTransform
 assert(counts.isInstanceOf[PTransform[_, _]])
 
-val out = in.apply(counts)
+val out = in.apply("Write to counts.txt", counts)
 
 scala> :type out
 org.apache.beam.sdk.values.PDone

@@ -1,2 +1,3 @@
 * Misc
+** xref:PipelineDotRenderer.adoc[]
 ** xref:Building-Beam.adoc[]
