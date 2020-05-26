@@ -1,5 +1,6 @@
 = PTransform
 
+[[In]]
 `PTransform[In, Out]` is an *operation* (*function*) with an input of type `In` and an output of type `Out`.
 
 [source,plaintext]
@@ -9,9 +10,11 @@ PTransform: In => Out
 
 A directed acyclic graph of PTransforms and PCollections is a xref::Pipeline.adoc[].
 
-== [[source]] Source PTransform
+== [[source]][[root]] Root PTransform
 
-*Source PTransform* (_Root PTransform_) is a `PTransform<PBegin, PCollection<...>>` that takes no input (conventionally marked as `PBegin` input type), e.g. xref:TextIO.adoc#read[TextIO.Read] or `Create`.
+*Root PTransform* (_Source PTransform_) is a PTransform with PBegin as the <<In, In>> type (`PTransform<PBegin, PCollection<...>>`).
+
+Root PTransform takes no input (conventionally marked as `PBegin`), e.g. xref:TextIO.adoc#read[TextIO.Read] or `Create`.
 
 == [[sink]] Sink PTransform
 

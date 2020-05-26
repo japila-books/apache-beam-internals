@@ -16,13 +16,16 @@
 * xref:DisplayData.adoc[]
 ** xref:HasDisplayData.adoc[]
 
-* I/O PTransforms
-** xref:TextIO.adoc[]
+* xref:Source.adoc[]
+** xref:BoundedSource.adoc[]
+** xref:UnboundedSource.adoc[]
+*** xref:CheckpointMark.adoc[]
+
+* I/O Utilities
 ** xref:AvroIO.adoc[]
-** xref:Source.adoc[]
-*** xref:BoundedSource.adoc[]
-*** xref:UnboundedSource.adoc[]
-**** xref:CheckpointMark.adoc[]
+** xref:KafkaIO.adoc[]
+*** xref:KafkaIO-Read.adoc[]
+** xref:TextIO.adoc[]
 
 * xref:Metrics.adoc[]
 * xref:DoFn.adoc[]

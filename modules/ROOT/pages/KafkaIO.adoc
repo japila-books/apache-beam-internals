@@ -1,0 +1,64 @@
+= KafkaIO
+
+`KafkaIO` is a utility to create xref:PTransform.adoc[]s for <<read, reading>> and <<write, writing>> records from Kafka topics.
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.io.kafka.KafkaIO
+import org.apache.kafka.common.serialization.Serdes
+val records = KafkaIO
+  .read[String, String]()
+  .withBootstrapServers(":9092")
+  .withTopic("beam-input")
+  .withKeyDeserializer(Serdes.String.deserializer.getClass)
+  .withValueDeserializer(Serdes.String.deserializer.getClass)
+import org.apache.beam.sdk.io.kafka.KafkaIO.Read
+assert(records.isInstanceOf[Read[_, _]])
+
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+scala> p.apply("Records from beam-input topic", records)
+DEBUG Pipeline: Adding KafkaIO.Read to Pipeline#505559573
+DEBUG CoderRegistry: Coder for java.lang.String: StringUtf8Coder
+DEBUG CoderRegistry: Coder for java.lang.String: StringUtf8Coder
+DEBUG Pipeline: Adding Read(KafkaUnboundedSource) to Pipeline#505559573
+----
+
+== [[read]] Reading Kafka Records -- read Utility
+
+[source,java]
+----
+<K, V> Read<K, V> read()
+----
+
+read creates a xref:PTransform.adoc#source[source PTransform] that produces a xref:PCollection.adoc[] of `KafkaRecords` (`PTransform<PBegin, PCollection<KafkaRecord<K, V>>>`).
+
+== [[readBytes]] Reading Kafka Records -- readBytes Utility
+
+[source,java]
+----
+Read<byte[], byte[]> readBytes()
+----
+
+readBytes creates a xref:PTransform.adoc#source[source PTransform] that produces a xref:PCollection.adoc[] of `KafkaRecords` (`PTransform<PBegin, PCollection<KafkaRecord<byte[], byte[]>>>`).
+
+readBytes is a specialized <<read, read>> with ByteArrayDeserializer for the keys and values.
+
+== [[write]] Writing Records to Kafka Topic -- write Utility
+
+[source,java]
+----
+<K, V> Write<K, V> write()
+----
+
+write creates a xref:PTransform.adoc#sink[sink PTransform] (`PTransform<PCollection<KV<K, V>>, PDone>`).
+
+== [[writeRecords]] Writing Records to Kafka Topic -- writeRecords Utility
+
+[source,java]
+----
+<K, V> WriteRecords<K, V> writeRecords()
+----
+
+writeRecords creates a xref:PTransform.adoc#sink[sink PTransform] (`PTransform<PCollection<ProducerRecord<K, V>>, PDone>`).

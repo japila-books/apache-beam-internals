@@ -1,0 +1,17 @@
+= Read
+
+`Read<K, V>` is a xref:PTransform.adoc#root[root PTransform] to produce xref:PCollection.adoc[] of KafkaRecords (`PTransform<PBegin, PCollection<KafkaRecord<K, V>>>`).
+
+Read is a static class of xref:KafkaIO.adoc[].
+
+== [[expand]] expand Method
+
+[source,java]
+----
+PCollection<KafkaRecord<K, V>> expand(
+  PBegin input)
+----
+
+expand...FIXME
+
+expand is part of xref:PTransform.adoc[] abstraction.
