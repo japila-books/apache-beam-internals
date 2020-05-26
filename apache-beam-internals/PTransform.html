@@ -120,31 +120,40 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">I/O PTransforms</span>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="TextIO.html">TextIO</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="AvroIO.html">AvroIO</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Source.html">Source</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="UnboundedSource.html">UnboundedSource</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="4">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="CheckpointMark.html">CheckpointMark</a>
   </li>
 </ul>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">I/O Utilities</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="AvroIO.html">AvroIO</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="KafkaIO.html">KafkaIO</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="KafkaIO-Read.html">Read</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="TextIO.html">TextIO</a>
   </li>
 </ul>
   </li>
@@ -153,9 +162,6 @@
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="DoFn.html">DoFn</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PipelineDotRenderer.html">PipelineDotRenderer</a>
   </li>
 </ul>
   </li>
@@ -245,6 +251,9 @@
     <span class="nav-text">Misc</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="misc/PipelineDotRenderer.html">PipelineDotRenderer</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="misc/Building-Beam.html">Building Beam</a>
   </li>
 </ul>
@@ -290,7 +299,7 @@
 <h1 class="page">PTransform</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
+<div id="In" class="paragraph">
 <p><code>PTransform[In, Out]</code> is an <strong>operation</strong> (<strong>function</strong>) with an input of type <code>In</code> and an output of type <code>Out</code>.</p>
 </div>
 <div class="listingblock">
@@ -304,10 +313,13 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="source-ptransform"><a class="anchor" href="#source-ptransform"></a><a class="link" href="#source-ptransform"><a id="source"></a> Source PTransform</a></h2>
+<h2 id="root-ptransform"><a class="anchor" href="#root-ptransform"></a><a class="link" href="#root-ptransform"><a id="source"></a><a id="root"></a> Root PTransform</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Source PTransform</strong> (<em>Root PTransform</em>) is a <code>PTransform&lt;PBegin, PCollection&lt;&#8230;&#8203;&gt;&gt;</code> that takes no input (conventionally marked as <code>PBegin</code> input type), e.g. <a href="TextIO.html#read" class="page">TextIO.Read</a> or <code>Create</code>.</p>
+<p><strong>Root PTransform</strong> (<em>Source PTransform</em>) is a PTransform with PBegin as the <a href="#In">In</a> type (<code>PTransform&lt;PBegin, PCollection&lt;&#8230;&#8203;&gt;&gt;</code>).</p>
+</div>
+<div class="paragraph">
+<p>Root PTransform takes no input (conventionally marked as <code>PBegin</code>), e.g. <a href="TextIO.html#read" class="page">TextIO.Read</a> or <code>Create</code>.</p>
 </div>
 </div>
 </div>

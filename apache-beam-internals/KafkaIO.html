@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>PipelineRunnerRegistrar :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/PipelineRunnerRegistrar.html">
+    <title>KafkaIO :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/KafkaIO.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -104,7 +104,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="PipelineRunner.html">PipelineRunner</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
 </ul>
@@ -143,7 +143,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="AvroIO.html">AvroIO</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="KafkaIO.html">KafkaIO</a>
 <ul class="nav-list">
@@ -289,88 +289,97 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="PipelineRunner.html">PipelineRunner</a></li>
-    <li><a href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a></li>
+    <li>I/O Utilities</li>
+    <li><a href="KafkaIO.html">KafkaIO</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/PipelineRunnerRegistrar.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/KafkaIO.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">PipelineRunnerRegistrar</h1>
+<h1 class="page">KafkaIO</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>PipelineRunnerRegistrar</code> is a way for Beam developers to extend the Beam framework with a new <a href="PipelineRunner.html" class="page">PipelineRunner</a>.</p>
+<p><code>KafkaIO</code> is a utility to create <a href="PTransform.html" class="page">PTransform</a>s for <a href="#read">reading</a> and <a href="#write">writing</a> records from Kafka topics.</p>
 </div>
-<div class="paragraph">
-<p>PipelineRunnerRegistrar uses <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ServiceLoader.html">java.util.ServiceLoader</a> utility (with a corresponding <code>META-INF/services</code> directory).</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.io.kafka.KafkaIO
+import org.apache.kafka.common.serialization.Serdes
+val records = KafkaIO
+  .read[String, String]()
+  .withBootstrapServers(":9092")
+  .withTopic("beam-input")
+  .withKeyDeserializer(Serdes.String.deserializer.getClass)
+  .withValueDeserializer(Serdes.String.deserializer.getClass)
+import org.apache.beam.sdk.io.kafka.KafkaIO.Read
+assert(records.isInstanceOf[Read[_, _]])
+
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+scala&gt; p.apply("Records from beam-input topic", records)
+DEBUG Pipeline: Adding KafkaIO.Read to Pipeline#505559573
+DEBUG CoderRegistry: Coder for java.lang.String: StringUtf8Coder
+DEBUG CoderRegistry: Coder for java.lang.String: StringUtf8Coder
+DEBUG Pipeline: Adding Read(KafkaUnboundedSource) to Pipeline#505559573</code></pre>
 </div>
-<div class="paragraph">
-<p>Apache Beam recommends using <a href="https://github.com/google/auto/tree/master/service">@AutoService</a> annotation to generate the necessary META-INF files automatically at build time.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cache-register"><a class="anchor" href="#cache-register"></a><a class="link" href="#cache-register"><a id="register"></a> Cache.register</a></h2>
+<h2 id="reading-kafka-recordsread-utility"><a class="anchor" href="#reading-kafka-recordsread-utility"></a><a class="link" href="#reading-kafka-recordsread-utility"><a id="read"></a> Reading Kafka Records&#8201;&#8212;&#8201;read Utility</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void register(
-  Class&lt;? extends PipelineOptions&gt; iface)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">&lt;K, V&gt; Read&lt;K, V&gt; read()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>register</code> is used to register a new <a href="PipelineOptions.html" class="page">PipelineOptions</a>.</p>
-</div>
-<div class="paragraph">
-<p><code>register</code> is used when:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>PipelineOptionsFactory is requested to <a href="PipelineOptionsFactory.html#register" class="page">register</a></p>
-</li>
-<li>
-<p>Cache (of PipelineOptionsFactory) is requested to <a href="#initializeRegistry">initializeRegistry</a></p>
-</li>
-</ul>
+<p>read creates a <a href="PTransform.html#source" class="page">source PTransform</a> that produces a <a href="PCollection.html" class="page">PCollection</a> of <code>KafkaRecords</code> (<code>PTransform&lt;PBegin, PCollection&lt;KafkaRecord&lt;K, V&gt;&gt;&gt;</code>).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cache-initializeregistry"><a class="anchor" href="#cache-initializeregistry"></a><a class="link" href="#cache-initializeregistry"><a id="initializeRegistry"></a> Cache.initializeRegistry</a></h2>
+<h2 id="reading-kafka-recordsreadbytes-utility"><a class="anchor" href="#reading-kafka-recordsreadbytes-utility"></a><a class="link" href="#reading-kafka-recordsreadbytes-utility"><a id="readBytes"></a> Reading Kafka Records&#8201;&#8212;&#8201;readBytes Utility</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void initializeRegistry(
-  ClassLoader loader)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Read&lt;byte[], byte[]&gt; readBytes()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>initializeRegistry</code> finds all <a href="PipelineOptionsRegistrar.html" class="page">PipelineOptionsRegistrars</a> (in the given ClassLoader) and requests them for <a href="PipelineOptionsRegistrar.html#getPipelineOptions" class="page">PipelineOptions</a>.</p>
+<p>readBytes creates a <a href="PTransform.html#source" class="page">source PTransform</a> that produces a <a href="PCollection.html" class="page">PCollection</a> of <code>KafkaRecords</code> (<code>PTransform&lt;PBegin, PCollection&lt;KafkaRecord&lt;byte[], byte[]&gt;&gt;&gt;</code>).</p>
 </div>
 <div class="paragraph">
-<p><code>initializeRegistry</code> is used when the Cache is created (that happens in a static initialization block of <a href="PipelineOptionsFactory.html" class="page">PipelineOptionsFactory</a> when requested to <a href="#resetCache">resetCache</a>).</p>
+<p>readBytes is a specialized <a href="#read">read</a> with ByteArrayDeserializer for the keys and values.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="cache-resetcache"><a class="anchor" href="#cache-resetcache"></a><a class="link" href="#cache-resetcache"><a id="resetCache"></a> Cache.resetCache</a></h2>
+<h2 id="writing-records-to-kafka-topicwrite-utility"><a class="anchor" href="#writing-records-to-kafka-topicwrite-utility"></a><a class="link" href="#writing-records-to-kafka-topicwrite-utility"><a id="write"></a> Writing Records to Kafka Topic&#8201;&#8212;&#8201;write Utility</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><code>resetCache</code> resets the factory to the default state. That triggers searching the application&#8217;s classloader for [PipelineRunnerRegistrars](#PipelineRunnerRegistrar) (using [ReflectHelpers.loadServicesOrdered](#ReflectHelpers)). The PipelineRunnerRegistrars are requested for [PipelineRunners](#PipelineRunner). The PipelineRunners are requested for [PipelineOptions](#PipelineOptions).</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">&lt;K, V&gt; Write&lt;K, V&gt; write()</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>With that, [PipelineRunners](#PipelineRunner) and [PipelineOptions](#PipelineOptions) are all registered with the [PipelineOptionsFactory](#PipelineOptionsFactory).</p>
+<p>write creates a <a href="PTransform.html#sink" class="page">sink PTransform</a> (<code>PTransform&lt;PCollection&lt;KV&lt;K, V&gt;&gt;, PDone&gt;</code>).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="reflecthelpers-loadservicesordered"><a class="anchor" href="#reflecthelpers-loadservicesordered"></a><a class="link" href="#reflecthelpers-loadservicesordered"><a id="loadServicesOrdered"></a> ReflectHelpers.loadServicesOrdered</a></h2>
+<h2 id="writing-records-to-kafka-topicwriterecords-utility"><a class="anchor" href="#writing-records-to-kafka-topicwriterecords-utility"></a><a class="link" href="#writing-records-to-kafka-topicwriterecords-utility"><a id="writeRecords"></a> Writing Records to Kafka Topic&#8201;&#8212;&#8201;writeRecords Utility</a></h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">&lt;K, V&gt; WriteRecords&lt;K, V&gt; writeRecords()</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p><code>loadServicesOrdered</code> is used to discover PipelineRunnerRegistrars and <a href="PipelineOptionsRegistrar.html" class="page">PipelineOptionsRegistrars</a>.</p>
+<p>writeRecords creates a <a href="PTransform.html#sink" class="page">sink PTransform</a> (<code>PTransform&lt;PCollection&lt;ProducerRecord&lt;K, V&gt;&gt;, PDone&gt;</code>).</p>
 </div>
 </div>
 </div>
