@@ -119,11 +119,32 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="Read.html">Read</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Source.html">Source</a>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="OffsetBasedSource.html">OffsetBasedSource</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="FileBasedSource.html">FileBasedSource</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="BlockBasedSource.html">BlockBasedSource</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="CompressedSource.html">CompressedSource</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="TextSource.html">TextSource</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -298,8 +319,56 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">BoundedSource</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><code>BoundedSource&lt;T&gt;</code> is a <a href="Source.html" class="page">Source</a> that produces an finite amount of input (of type <code>T</code>).</p>
+<p><code>BoundedSource&lt;T&gt;</code> is an <a href="#contract">extension</a> of the <a href="Source.html" class="page">Source</a> abstraction for <a href="#implementations">sources</a> that produce an finite (<em>bounded</em>) amount of input (of type <code>T</code>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boundedsource-extensions"><a class="anchor" href="#boundedsource-extensions"></a><a class="link" href="#boundedsource-extensions"><a id="extensions"></a> BoundedSource Extensions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="OffsetBasedSource.html" class="page">OffsetBasedSource</a> is the only known BoundedSource extension.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contract"><a class="anchor" href="#contract"></a><a class="link" href="#contract"><a id="contract"></a> Contract</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="createreader-method"><a class="anchor" href="#createreader-method"></a><a class="link" href="#createreader-method"><a id="createReader"></a> createReader Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">BoundedReader&lt;T&gt; createReader(
+  PipelineOptions options)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Creates a BoundedReader (based on the given <a href="PipelineOptions.html" class="page">PipelineOptions</a>)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="getestimatedsizebytes-method"><a class="anchor" href="#getestimatedsizebytes-method"></a><a class="link" href="#getestimatedsizebytes-method"><a id="getEstimatedSizeBytes"></a> getEstimatedSizeBytes Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">long getEstimatedSizeBytes(
+  PipelineOptions options)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="split-method"><a class="anchor" href="#split-method"></a><a class="link" href="#split-method"><a id="split"></a> split Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">List&lt;? extends BoundedSource&lt;T&gt;&gt; split(
+  long desiredBundleSizeBytes,
+  PipelineOptions options)</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
