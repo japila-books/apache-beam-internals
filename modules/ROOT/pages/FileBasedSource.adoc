@@ -1,0 +1,25 @@
+= FileBasedSource
+
+`FileBasedSource<T>` is an <<contract, extension>> of the xref:OffsetBasedSource.adoc[] abstraction for <<implementations, file-based bounded sources>> that use offsets.
+
+== [[implementations]] Available FileBasedSources
+
+.FileBasedSources (Direct Implementations and Extensions Only)
+[cols="30,70",options="header",width="100%"]
+|===
+| FileBasedSource
+| Description
+
+| xref:BlockBasedSource.adoc[]
+| [[BlockBasedSource]]
+
+| xref:CompressedSource.adoc[]
+| [[CompressedSource]]
+
+| TFRecordSource
+| [[TFRecordSource]]
+
+| xref:TextSource.adoc[]
+| [[TextSource]]
+
+|===

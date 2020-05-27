@@ -1,3 +1,36 @@
 = BoundedSource
 
-`BoundedSource<T>` is a xref:Source.adoc[] that produces an finite amount of input (of type `T`).
+`BoundedSource<T>` is an <<contract, extension>> of the xref:Source.adoc[] abstraction for <<implementations, sources>> that produce an finite (_bounded_) amount of input (of type `T`).
+
+== [[extensions]] BoundedSource Extensions
+
+xref:OffsetBasedSource.adoc[] is the only known BoundedSource extension.
+
+== [[contract]] Contract
+
+=== [[createReader]] createReader Method
+
+[source,java]
+----
+BoundedReader<T> createReader(
+  PipelineOptions options)
+----
+
+Creates a BoundedReader (based on the given xref:PipelineOptions.adoc[])
+
+=== [[getEstimatedSizeBytes]] getEstimatedSizeBytes Method
+
+[source,java]
+----
+long getEstimatedSizeBytes(
+  PipelineOptions options)
+----
+
+=== [[split]] split Method
+
+[source,java]
+----
+List<? extends BoundedSource<T>> split(
+  long desiredBundleSizeBytes,
+  PipelineOptions options)
+----

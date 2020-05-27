@@ -16,8 +16,14 @@
 * xref:DisplayData.adoc[]
 ** xref:HasDisplayData.adoc[]
 
+* xref:Read.adoc[]
 * xref:Source.adoc[]
 ** xref:BoundedSource.adoc[]
+*** xref:OffsetBasedSource.adoc[]
+*** xref:FileBasedSource.adoc[]
+*** xref:BlockBasedSource.adoc[]
+*** xref:CompressedSource.adoc[]
+*** xref:TextSource.adoc[]
 ** xref:UnboundedSource.adoc[]
 *** xref:CheckpointMark.adoc[]
 

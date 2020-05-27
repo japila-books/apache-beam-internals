@@ -1,0 +1,32 @@
+= OffsetBasedSource
+
+`OffsetBasedSource<T>` is an <<contract, extension>> of the xref:BoundedSource.adoc[] abstraction for <<implementations, bounded sources>> that produce an finite amount of input (of type `T`) using offsets.
+
+== [[implementations]] Available OffsetBasedSources
+
+.OffsetBasedSources (Direct Implementations and Extensions Only)
+[cols="30,70",options="header",width="100%"]
+|===
+| OffsetBasedSource
+| Description
+
+| CreateSource
+| [[CreateSource]]
+
+| xref:FileBasedSource.adoc[]
+| [[FileBasedSource]]
+
+| BoundedCountingSource
+| [[BoundedCountingSource]]
+
+|===
+
+== [[creating-instance]] Creating Instance
+
+OffsetBasedSource takes the following to be created:
+
+* [[startOffset]] Starting Offset
+* [[endOffset]] End Offset
+* [[minBundleSize]] Minimum Bundle Size
+
+OffsetBasedSource is an abstract class and cannot be created directly. It is created indirectly for the <<implementations, concrete OffsetBasedSources>>.

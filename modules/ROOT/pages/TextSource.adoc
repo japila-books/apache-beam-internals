@@ -1,0 +1,13 @@
+= TextSource
+
+`TextSource` is a xref:FileBasedSource.adoc[] of text lines with a <<delimiter, delimiter>>.
+
+== [[creating-instance]] Creating Instance
+
+TextSource takes the following to be created:
+
+* [[fileSpec]] ValueProvider<String>
+* [[emptyMatchTreatment]] EmptyMatchTreatment
+* [[delimiter]] Delimiter
+
+TextSource is created for TextIO.Read and TextIO.ReadFiles utilities.

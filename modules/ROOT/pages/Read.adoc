@@ -1,0 +1,45 @@
+= Read
+
+`Read` gives utilities to read from a <<from-BoundedSource, bounded>> and <<from-UnboundedSource, unbounded>> sources (by creating root xref:PTransform.adoc[]s).
+
+[source,scala]
+----
+import org.apache.beam.sdk.io.Read
+
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.io.BoundedSource
+val lines: BoundedSource = ???
+
+val bounded = Read.from(lines)
+p.apply("Read from bounded source", bounded)
+----
+
+== [[from-BoundedSource]] Reading From Bounded Source -- from Utility
+
+[source,java]
+----
+<T> Bounded<T> from(
+  BoundedSource<T> source)
+----
+
+from static method creates a <<Bounded, Read.Bounded>> root PTransform for the given xref:BoundedSource.adoc[].
+
+== [[from-UnboundedSource]] Reading From Unbounded Source -- from Utility
+
+[source,java]
+----
+<T> Unbounded<T> from(
+  UnboundedSource<T, ?> source)
+----
+
+from static method creates a <<Unbounded, Read.Unbounded>> root PTransform for the given xref:UnboundedSource.adoc[].
+
+== [[Bounded]] Bounded Root PTransform
+
+`Bounded<T>` is a xref:PTransform.adoc#root[root PTransform] (`PTransform<PBegin, PCollection<T>>`).
+
+== [[Unbounded]] Unbounded Root PTransform
+
+`Unbounded<T>` is a xref:PTransform.adoc#root[root PTransform] (`PTransform<PBegin, PCollection<T>>`).
