@@ -1,0 +1,29 @@
+= DataflowRunner
+
+`DataflowRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces a xref:DataflowPipelineJob.adoc[].
+
+DataflowRunner requires that *appName* option is defined.
+
+== [[creating-instance]][[options]] Creating Instance
+
+DataflowRunner takes a single xref:DataflowPipelineOptions.adoc[] to be created.
+
+DataflowRunner is created using <<fromOptions, fromOptions>> utility.
+
+== [[fromOptions]] fromOptions Utility
+
+[source,java]
+----
+DataflowRunner fromOptions(
+  PipelineOptions options)
+----
+
+fromOptions...FIXME
+
+== [[dataflowClient]] DataflowClient
+
+== [[translator]] DataflowPipelineTranslator
+
+== [[pcollectionsRequiringIndexedFormat]] PCollections of Indexed Format
+
+== [[ptransformViewsWithNonDeterministicKeyCoders]] PTransform with Non-Deterministic Key Coders

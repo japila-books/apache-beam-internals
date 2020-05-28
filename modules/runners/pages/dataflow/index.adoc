@@ -1,0 +1,33 @@
+= Beam Runner for Google Cloud Dataflow
+:navtitle: Google Cloud Dataflow
+
+Beam applications can be executed on https://cloud.google.com/dataflow[Google Cloud Dataflow] using xref:DataflowRunner.adoc[].
+
+== [[dependencies]] Dependencies
+
+DataflowRunner is included in a separate Beam library that is required to be specified explicitly as a project dependency.
+
+.build.sbt
+[source,plaintext]
+----
+libraryDependencies ++= Seq(
+  "org.apache.beam" % "beam-runners-google-cloud-dataflow-java" % "2.20.0",
+  "com.google.guava" % "guava" % "29.0-jre")
+----
+
+== [[example]] Example
+
+[source,scala]
+----
+import org.apache.beam.sdk.options.PipelineOptionsFactory
+import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions
+val options = PipelineOptionsFactory
+  .create()
+  .as(classOf[DataflowPipelineOptions])
+options.setAppName("Beam on Dataflow Test")
+options.setProject("ProjectID")
+options.setTempLocation("gs://bucket/dataflow-beam-runner")
+
+import org.apache.beam.runners.dataflow.DataflowRunner
+DataflowRunner.fromOptions(options)
+----

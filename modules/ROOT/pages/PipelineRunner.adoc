@@ -33,7 +33,7 @@ org.apache.beam.sdk.PipelineRunner[_ <: org.apache.beam.sdk.PipelineResult]
 | PipelineRunner
 | Description
 
-| DataflowRunner
+| xref:runners:DataflowRunner.adoc[]
 | [[DataflowRunner]]
 
 | xref:direct:DirectRunner.adoc[]
