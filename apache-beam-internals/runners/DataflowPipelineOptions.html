@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>HasDisplayData :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/HasDisplayData.html">
+    <title>DataflowPipelineOptions :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/runners/DataflowPipelineOptions.html">
     <meta name="generator" content="Antora 2.3.1">
-    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
     <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','UA-151208281-2')</script>
   </head>
@@ -63,95 +63,95 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Apache Beam</a></h3>
+    <h3 class="title"><a href="../index.html">Apache Beam</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="intro.html">Introduction</a>
+    <a class="nav-link" href="../intro.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PCollection.html">PCollection</a>
+    <a class="nav-link" href="../PCollection.html">PCollection</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PTransform.html">PTransform</a>
+    <a class="nav-link" href="../PTransform.html">PTransform</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="Pipeline.html">Pipeline</a>
+    <a class="nav-link" href="../Pipeline.html">Pipeline</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="TransformHierarchy.html">TransformHierarchy</a>
+    <a class="nav-link" href="../TransformHierarchy.html">TransformHierarchy</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PipelineResult.html">PipelineResult</a>
+    <a class="nav-link" href="../PipelineResult.html">PipelineResult</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PipelineOptions.html">PipelineOptions</a>
+    <a class="nav-link" href="../PipelineOptions.html">PipelineOptions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
+    <a class="nav-link" href="../PipelineOptionsFactory.html">PipelineOptionsFactory</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PipelineRunner.html">PipelineRunner</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
+    <a class="nav-link" href="../PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="DisplayData.html">DisplayData</a>
+    <a class="nav-link" href="../PipelineRunner.html">PipelineRunner</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="HasDisplayData.html">HasDisplayData</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="Read.html">Read</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../DisplayData.html">DisplayData</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../HasDisplayData.html">HasDisplayData</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../Read.html">Read</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="Source.html">Source</a>
+    <a class="nav-link" href="../Source.html">Source</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
+    <a class="nav-link" href="../BoundedSource.html">BoundedSource</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="OffsetBasedSource.html">OffsetBasedSource</a>
+    <a class="nav-link" href="../OffsetBasedSource.html">OffsetBasedSource</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="FileBasedSource.html">FileBasedSource</a>
+    <a class="nav-link" href="../FileBasedSource.html">FileBasedSource</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="BlockBasedSource.html">BlockBasedSource</a>
+    <a class="nav-link" href="../BlockBasedSource.html">BlockBasedSource</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="CompressedSource.html">CompressedSource</a>
+    <a class="nav-link" href="../CompressedSource.html">CompressedSource</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="TextSource.html">TextSource</a>
+    <a class="nav-link" href="../TextSource.html">TextSource</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="UnboundedSource.html">UnboundedSource</a>
+    <a class="nav-link" href="../UnboundedSource.html">UnboundedSource</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="CheckpointMark.html">CheckpointMark</a>
+    <a class="nav-link" href="../CheckpointMark.html">CheckpointMark</a>
   </li>
 </ul>
   </li>
@@ -162,27 +162,27 @@
     <span class="nav-text">I/O Utilities</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="AvroIO.html">AvroIO</a>
+    <a class="nav-link" href="../AvroIO.html">AvroIO</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="KafkaIO.html">KafkaIO</a>
+    <a class="nav-link" href="../KafkaIO.html">KafkaIO</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="KafkaIO-Read.html">Read</a>
+    <a class="nav-link" href="../KafkaIO-Read.html">Read</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="TextIO.html">TextIO</a>
+    <a class="nav-link" href="../TextIO.html">TextIO</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="Metrics.html">Metrics</a>
+    <a class="nav-link" href="../Metrics.html">Metrics</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="DoFn.html">DoFn</a>
+    <a class="nav-link" href="../DoFn.html">DoFn</a>
   </li>
 </ul>
   </li>
@@ -194,16 +194,16 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="runners/dataflow/index.html">Google Cloud Dataflow</a>
+    <a class="nav-link" href="dataflow/index.html">Google Cloud Dataflow</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/DataflowRunner.html">DataflowRunner</a>
+    <a class="nav-link" href="DataflowRunner.html">DataflowRunner</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="DataflowPipelineOptions.html">DataflowPipelineOptions</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/DataflowPipelineOptions.html">DataflowPipelineOptions</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/DataflowPipelineJob.html">DataflowPipelineJob</a>
+    <a class="nav-link" href="DataflowPipelineJob.html">DataflowPipelineJob</a>
   </li>
 </ul>
   </li>
@@ -218,16 +218,16 @@
     <span class="nav-text">Direct Runner</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="direct/DirectRunner.html">DirectRunner</a>
+    <a class="nav-link" href="../direct/DirectRunner.html">DirectRunner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="direct/DirectPipelineResult.html">DirectPipelineResult</a>
+    <a class="nav-link" href="../direct/DirectPipelineResult.html">DirectPipelineResult</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="direct/PipelineExecutor.html">PipelineExecutor</a>
+    <a class="nav-link" href="../direct/PipelineExecutor.html">PipelineExecutor</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="direct/EvaluationContext.html">EvaluationContext</a>
+    <a class="nav-link" href="../direct/EvaluationContext.html">EvaluationContext</a>
   </li>
 </ul>
   </li>
@@ -240,10 +240,10 @@
     <span class="nav-text">Spark Runner</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="spark/SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
+    <a class="nav-link" href="../spark/SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="spark/SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
+    <a class="nav-link" href="../spark/SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
   </li>
 </ul>
   </li>
@@ -253,25 +253,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="coders/index.html">Coders</a>
+    <a class="nav-link" href="../coders/index.html">Coders</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/Coder.html">Coder</a>
+    <a class="nav-link" href="../coders/Coder.html">Coder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProvider.html">CoderProvider</a>
+    <a class="nav-link" href="../coders/CoderProvider.html">CoderProvider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProviders.html">CoderProviders</a>
+    <a class="nav-link" href="../coders/CoderProviders.html">CoderProviders</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/DefaultCoder.html">DefaultCoder</a>
+    <a class="nav-link" href="../coders/DefaultCoder.html">DefaultCoder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderRegistry.html">CoderRegistry</a>
+    <a class="nav-link" href="../coders/CoderRegistry.html">CoderRegistry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
+    <a class="nav-link" href="../coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
   </li>
 </ul>
   </li>
@@ -284,7 +284,7 @@
     <span class="nav-text">Demo</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="demo/demo-Pipeline.html">Running Pipeline</a>
+    <a class="nav-link" href="../demo/demo-Pipeline.html">Running Pipeline</a>
   </li>
 </ul>
   </li>
@@ -297,10 +297,10 @@
     <span class="nav-text">Misc</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="misc/PipelineDotRenderer.html">PipelineDotRenderer</a>
+    <a class="nav-link" href="../misc/PipelineDotRenderer.html">PipelineDotRenderer</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="misc/Building-Beam.html">Building Beam</a>
+    <a class="nav-link" href="../misc/Building-Beam.html">Building Beam</a>
   </li>
 </ul>
   </li>
@@ -319,7 +319,7 @@
       <span class="title">Apache Beam</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">2.20.0</a>
+          <a href="../index.html">2.20.0</a>
         </li>
       </ul>
     </li>
@@ -331,36 +331,22 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link"></a>
+  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="DisplayData.html">DisplayData</a></li>
-    <li><a href="HasDisplayData.html">HasDisplayData</a></li>
+    <li><a href="../index.html">Apache Beam</a></li>
+    <li>Runners</li>
+    <li><a href="dataflow/index.html">Google Cloud Dataflow</a></li>
+    <li><a href="DataflowPipelineOptions.html">DataflowPipelineOptions</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/HasDisplayData.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/runners/pages/DataflowPipelineOptions.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">HasDisplayData</h1>
-<div id="preamble">
-<div class="sectionbody">
+<h1 class="page">DataflowPipelineOptions</h1>
 <div class="paragraph">
-<p><code>HasDisplayData</code> is an interface that is used in <a href="DoFn.html" class="page">DoFn</a>, WindowFn, GlobalCombineFn, <a href="PTransform.html" class="page">PTransform</a>, <a href="Source.html" class="page">Source</a>, and <a href="PipelineOptions.html" class="page">PipelineOptions</a> among others.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="populatedisplaydata-method"><a class="anchor" href="#populatedisplaydata-method"></a><a class="link" href="#populatedisplaydata-method"><a id="populateDisplayData"></a> populateDisplayData Method</a></h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void populateDisplayData(
-  DisplayData.Builder builder)</code></pre>
-</div>
-</div>
-</div>
+<p><code>DataflowPipelineOptions</code> is a <a href="../PipelineOptions.html" class="page">PipelineOptions</a> of <a href="DataflowRunner.html" class="page">DataflowRunner</a>.</p>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -373,7 +359,7 @@
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
   </body>
 </html>
