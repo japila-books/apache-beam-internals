@@ -1,0 +1,43 @@
+= GroupByKey
+
+`GroupByKey<K, V>` is a xref:PTransform.adoc[] of key-value pairs to produce pairs of the input keys and the associated values.
+
+In other words, GroupByKey<K, V> is the following:
+
+[source,java]
+----
+PTransform<PCollection<KV<K, V>>, PCollection<KV<K, Iterable<V>>>>
+----
+
+that could be _translated_ to the following function-oriented notation:
+
+[source,plaintext]
+----
+PCollection<KV<K, V>> ~~[GroupByKey<K, V>]~~> PCollection<KV<K, Iterable<V>>>
+----
+
+== [[create]] GroupByKey.create Utility
+
+[source,java]
+----
+<K, V> GroupByKey<K, V> create()
+----
+
+create creates a GroupByKey with the <<fewKeys, fewKeys>> flag disabled (`false`).
+
+== [[createWithFewKeys]] GroupByKey.createWithFewKeys Utility
+
+[source,java]
+----
+<K, V> GroupByKey<K, V> createWithFewKeys()
+----
+
+createWithFewKeys creates a GroupByKey with the <<fewKeys, fewKeys>> flag enabled (`true`).
+
+createWithFewKeys is used when Combine.PerKey is requested to expand.
+
+== [[creating-instance]][[fewKeys]] Creating Instance
+
+GroupByKey takes a single `fewKeys` flag to be created.
+
+GroupByKey is created using <<create, create>> or <<createWithFewKeys, createWithFewKeys>> utilities.

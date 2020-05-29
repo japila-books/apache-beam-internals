@@ -2,6 +2,8 @@
 
 * xref:PCollection.adoc[]
 * xref:PTransform.adoc[]
+** xref:GroupByKey.adoc[]
+
 * xref:Pipeline.adoc[]
 ** xref:TransformHierarchy.adoc[]
 * xref:PipelineResult.adoc[]
