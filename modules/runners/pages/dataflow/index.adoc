@@ -11,7 +11,7 @@ DataflowRunner is included in a separate Beam library that is required to be spe
 [source,plaintext]
 ----
 libraryDependencies ++= Seq(
-  "org.apache.beam" % "beam-runners-google-cloud-dataflow-java" % "2.20.0",
+  "org.apache.beam" % "beam-runners-google-cloud-dataflow-java" % "2.21.0",
   "com.google.guava" % "guava" % "29.0-jre")
 ----
 
