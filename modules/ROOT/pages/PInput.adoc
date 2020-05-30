@@ -1,0 +1,49 @@
+= PInput
+
+`PInput` is an <<contract, abstraction>> of <<implementations, input values>> to xref:PTransform.adoc[]s.
+
+== [[contract]] Contract
+
+=== [[getPipeline]] getPipeline Method
+
+[source,java]
+----
+Pipeline getPipeline()
+----
+
+The owning xref:Pipeline.adoc[] (the PInput belongs to)
+
+=== [[expand]] expand Method
+
+[source,java]
+----
+Map<TupleTag<?>, PValue> expand()
+----
+
+== [[implementations]] Available PInputs
+
+.PInputs (Direct Implementations and Extensions Only)
+[cols="30,70",options="header",width="100%"]
+|===
+| PInput
+| Description
+
+| KeyedPCollectionTuple
+| [[KeyedPCollectionTuple]]
+
+| xref:PBegin.adoc[]
+| [[PBegin]]
+
+| PCollectionList
+| [[PCollectionList]]
+
+| PCollectionTuple
+| [[PCollectionTuple]]
+
+| PValue
+| [[PValue]]
+
+| Result
+| [[Result]]
+
+|===

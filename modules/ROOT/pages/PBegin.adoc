@@ -1,0 +1,29 @@
+= PBegin
+
+`PBegin` is a marker xref:PInput.adoc[] of xref:PTransform.adoc#root[root PTransforms].
+
+== [[creating-instance]][[pipeline]] Creating Instance
+
+PBegin takes a xref:Pipeline.adoc[] to be created.
+
+PBegin is created using <<in, PBegin.in>> utility.
+
+== [[in]] in Utility
+
+[source,java]
+----
+PBegin in(Pipeline pipeline)
+----
+
+in creates a <<creating-instance, PBegin>> for the given xref:Pipeline.adoc[].
+
+== [[demo]] Demo
+
+[source,scala]
+----
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.values.PBegin
+val begin = PBegin.in(p)
+----

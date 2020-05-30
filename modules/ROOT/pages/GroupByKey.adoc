@@ -41,3 +41,14 @@ createWithFewKeys is used when Combine.PerKey is requested to expand.
 GroupByKey takes a single `fewKeys` flag to be created.
 
 GroupByKey is created using <<create, create>> or <<createWithFewKeys, createWithFewKeys>> utilities.
+
+== [[demo]] Demo
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.transforms.GroupByKey
+val groupByKey = GroupByKey.create[String, String]
+----
