@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>BoundedSource :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/BoundedSource.html">
+    <title>Create :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/Create.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -146,7 +146,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Source.html">Source</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
 <ul class="nav-list">
@@ -182,7 +182,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">I/O Utilities</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Create.html">Create</a>
 <ul class="nav-list">
@@ -368,62 +368,109 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="Source.html">Source</a></li>
-    <li><a href="BoundedSource.html">BoundedSource</a></li>
+    <li>I/O Utilities</li>
+    <li><a href="Create.html">Create</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/BoundedSource.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/Create.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">BoundedSource</h1>
+<h1 class="page">Create</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>BoundedSource&lt;T&gt;</code> is an <a href="#contract">extension</a> of the <a href="Source.html" class="page">Source</a> abstraction for <a href="#implementations">sources</a> that produce an finite (<em>bounded</em>) amount of input (of type <code>T</code>).</p>
+<p><code>Create</code> is a utility to create in-memory collections (as <a href="Values.html" class="page">Values</a> or <a href="TimestampedValues.html" class="page">TimestampedValues</a> root PTransforms that produce the values when executed).</p>
+</div>
+<div class="paragraph">
+<p>Create utility is especially useful during testing.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="boundedsource-extensions"><a class="anchor" href="#boundedsource-extensions"></a><a class="link" href="#boundedsource-extensions"><a id="extensions"></a> BoundedSource Extensions</a></h2>
+<h2 id="empty-utility"><a class="anchor" href="#empty-utility"></a><a class="link" href="#empty-utility"><a id="empty"></a> empty Utility</a></h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Values&lt;T&gt; empty(
+  Coder&lt;T&gt; coder)
+Values&lt;Row&gt; empty(
+  Schema schema)
+Values&lt;T&gt; empty(
+  TypeDescriptor&lt;T&gt; type)</code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p><a href="OffsetBasedSource.html" class="page">OffsetBasedSource</a> is the only known BoundedSource extension.</p>
+<p>empty creates an empty <a href="Values.html" class="page">Values</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="contract"><a class="anchor" href="#contract"></a><a class="link" href="#contract"><a id="contract"></a> Contract</a></h2>
+<h2 id="of-utility"><a class="anchor" href="#of-utility"></a><a class="link" href="#of-utility"><a id="of"></a> of Utility</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="createreader-method"><a class="anchor" href="#createreader-method"></a><a class="link" href="#createreader-method"><a id="createReader"></a> createReader Method</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">BoundedReader&lt;T&gt; createReader(
-  PipelineOptions options)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Values&lt;T&gt; of(
+  Iterable&lt;T&gt; elems)
+Values&lt;KV&lt;K, V&gt;&gt; of(
+  Map&lt;K, V&gt; elems)
+Values&lt;T&gt; of(
+  T elem,
+  T... elems)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Creates a BoundedReader (based on the given <a href="PipelineOptions.html" class="page">PipelineOptions</a>)</p>
+<p>of creates a <a href="Values.html" class="page">Values</a> with the elements given.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="getestimatedsizebytes-method"><a class="anchor" href="#getestimatedsizebytes-method"></a><a class="link" href="#getestimatedsizebytes-method"><a id="getEstimatedSizeBytes"></a> getEstimatedSizeBytes Method</a></h3>
+</div>
+<div class="sect1">
+<h2 id="ofprovider-utility"><a class="anchor" href="#ofprovider-utility"></a><a class="link" href="#ofprovider-utility"><a id="ofProvider"></a> ofProvider Utility</a></h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">long getEstimatedSizeBytes(
-  PipelineOptions options)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">OfValueProvider&lt;T&gt; ofProvider(
+  ValueProvider&lt;T&gt; provider,
+  Coder&lt;T&gt; coder)</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="split-method"><a class="anchor" href="#split-method"></a><a class="link" href="#split-method"><a id="split"></a> split Method</a></h3>
+</div>
+<div class="sect1">
+<h2 id="timestamped-utility"><a class="anchor" href="#timestamped-utility"></a><a class="link" href="#timestamped-utility"><a id="timestamped"></a> timestamped Utility</a></h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">List&lt;? extends BoundedSource&lt;T&gt;&gt; split(
-  long desiredBundleSizeBytes,
-  PipelineOptions options)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">TimestampedValues&lt;T&gt; timestamped(
+  Iterable&lt;T&gt; values,
+  Iterable&lt;Long&gt; timestamps)
+TimestampedValues&lt;T&gt; timestamped(
+  Iterable&lt;TimestampedValue&lt;T&gt;&gt; elems)
+TimestampedValues&lt;T&gt; timestamped(
+  TimestampedValue&lt;T&gt; elem,
+  TimestampedValue&lt;T&gt;... elems)</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>timestamped creates a <a href="TimestampedValues.html" class="page">TimestampedValues</a> with the elements given.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.transforms.Create
+val nums = Create.of(0, 1, 2, 3, 4, 5)
+
+scala&gt; :type nums
+org.apache.beam.sdk.transforms.Create.Values[Int]
+
+p.apply("Input Numbers", nums)</code></pre>
 </div>
 </div>
 </div>

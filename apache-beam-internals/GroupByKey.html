@@ -125,6 +125,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="PInput.html">PInput</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="KV.html">KV</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -179,6 +182,18 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">I/O Utilities</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="Create.html">Create</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="Values.html">Values</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="TimestampedValues.html">TimestampedValues</a>
+  </li>
+</ul>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="AvroIO.html">AvroIO</a>
   </li>
@@ -433,8 +448,22 @@
 <pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.Pipeline
 val p = Pipeline.create()
 
+import org.apache.beam.sdk.transforms.Create
+import org.apache.beam.sdk.values.KV
+val kvs = Create.of(
+  KV.of(0,0),
+  KV.of(0,1),
+  KV.of(1,1))
+
+val root = p.apply("Input Key-Value Pairs", kvs)
+
 import org.apache.beam.sdk.transforms.GroupByKey
-val groupByKey = GroupByKey.create[String, String]</code></pre>
+val groupByKey = GroupByKey.create[Int, Int]
+
+scala&gt; :type groupByKey
+org.apache.beam.sdk.transforms.GroupByKey[Int,Int]
+
+val groupped = root.apply("Group Numbers", groupByKey)</code></pre>
 </div>
 </div>
 </div>

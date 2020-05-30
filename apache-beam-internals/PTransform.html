@@ -125,6 +125,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="PInput.html">PInput</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="KV.html">KV</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -179,6 +182,18 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">I/O Utilities</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="Create.html">Create</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="Values.html">Values</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="TimestampedValues.html">TimestampedValues</a>
+  </li>
+</ul>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="AvroIO.html">AvroIO</a>
   </li>
@@ -380,7 +395,7 @@
 <h2 id="root-ptransform"><a class="anchor" href="#root-ptransform"></a><a class="link" href="#root-ptransform"><a id="source"></a><a id="root"></a> Root PTransform</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Root PTransform</strong> (<em>Source PTransform</em>) is a PTransform with <a href="PBegin.html" class="page">PBegin</a> input value.</p>
+<p><strong>Root PTransform</strong> (<em>Source PTransform</em>) is a PTransform that takes no input (conventionally marked as <a href="PBegin.html" class="page">PBegin</a>) and produces a <a href="PCollection.html" class="page">PCollection</a> (of values of type <code>T</code>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -388,7 +403,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Root PTransform takes no input (conventionally marked as <code>PBegin</code>), e.g. <a href="TextIO.html#read" class="page">TextIO.Read</a>, <a href="AvroIO.html#read" class="page">AvroIO.Read</a> or <code>Create</code>.</p>
+<p>Available root PTransforms: <a href="TextIO.html#read" class="page">TextIO.Read</a>, <a href="AvroIO.html#read" class="page">AvroIO.Read</a>, <a href="Create.html" class="page">Create</a>.</p>
 </div>
 </div>
 </div>

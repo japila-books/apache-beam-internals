@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>BoundedSource :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/BoundedSource.html">
+    <title>KV :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/KV.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -125,7 +125,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="PInput.html">PInput</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="KV.html">KV</a>
   </li>
 </ul>
@@ -146,7 +146,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Source.html">Source</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
 <ul class="nav-list">
@@ -368,63 +368,60 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="Source.html">Source</a></li>
-    <li><a href="BoundedSource.html">BoundedSource</a></li>
+    <li>Values</li>
+    <li><a href="KV.html">KV</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/BoundedSource.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/KV.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">BoundedSource</h1>
+<h1 class="page">KV</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>BoundedSource&lt;T&gt;</code> is an <a href="#contract">extension</a> of the <a href="Source.html" class="page">Source</a> abstraction for <a href="#implementations">sources</a> that produce an finite (<em>bounded</em>) amount of input (of type <code>T</code>).</p>
+<p><code>KV&lt;K, V&gt;</code> is an immutable key-value pair.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.values.KV
+val kv_00 = KV.of(0,0)
+val kv_01 = KV.of(0,1)
+val kv_11 = KV.of(1,1)</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="boundedsource-extensions"><a class="anchor" href="#boundedsource-extensions"></a><a class="link" href="#boundedsource-extensions"><a id="extensions"></a> BoundedSource Extensions</a></h2>
+<h2 id="of-utility"><a class="anchor" href="#of-utility"></a><a class="link" href="#of-utility"><a id="of"></a> of Utility</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><a href="OffsetBasedSource.html" class="page">OffsetBasedSource</a> is the only known BoundedSource extension.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">KV&lt;K, V&gt; of(
+  K key,
+  V value)</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="contract"><a class="anchor" href="#contract"></a><a class="link" href="#contract"><a id="contract"></a> Contract</a></h2>
+<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a> Creating Instance</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="createreader-method"><a class="anchor" href="#createreader-method"></a><a class="link" href="#createreader-method"><a id="createReader"></a> createReader Method</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">BoundedReader&lt;T&gt; createReader(
-  PipelineOptions options)</code></pre>
+<div class="paragraph">
+<p>KV takes the following to be created:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="key"></a><a id="K"></a> Key of type <code>K</code></p>
+</li>
+<li>
+<p><a id="value"></a><a id="V"></a> Value of type <code>V</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Creates a BoundedReader (based on the given <a href="PipelineOptions.html" class="page">PipelineOptions</a>)</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="getestimatedsizebytes-method"><a class="anchor" href="#getestimatedsizebytes-method"></a><a class="link" href="#getestimatedsizebytes-method"><a id="getEstimatedSizeBytes"></a> getEstimatedSizeBytes Method</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">long getEstimatedSizeBytes(
-  PipelineOptions options)</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="split-method"><a class="anchor" href="#split-method"></a><a class="link" href="#split-method"><a id="split"></a> split Method</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">List&lt;? extends BoundedSource&lt;T&gt;&gt; split(
-  long desiredBundleSizeBytes,
-  PipelineOptions options)</code></pre>
-</div>
-</div>
+<p>KV is created using <a href="#of">KV.of</a> utility.</p>
 </div>
 </div>
 </div>
