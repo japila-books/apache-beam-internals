@@ -117,6 +117,18 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <span class="nav-text">Values</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="PBegin.html">PBegin</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="PInput.html">PInput</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
@@ -368,10 +380,15 @@
 <h2 id="root-ptransform"><a class="anchor" href="#root-ptransform"></a><a class="link" href="#root-ptransform"><a id="source"></a><a id="root"></a> Root PTransform</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Root PTransform</strong> (<em>Source PTransform</em>) is a PTransform with PBegin as the <a href="#In">In</a> type (<code>PTransform&lt;PBegin, PCollection&lt;&#8230;&#8203;&gt;&gt;</code>).</p>
+<p><strong>Root PTransform</strong> (<em>Source PTransform</em>) is a PTransform with <a href="PBegin.html" class="page">PBegin</a> input value.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PBegin, PCollection&lt;T&gt;&gt;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Root PTransform takes no input (conventionally marked as <code>PBegin</code>), e.g. <a href="TextIO.html#read" class="page">TextIO.Read</a> or <code>Create</code>.</p>
+<p>Root PTransform takes no input (conventionally marked as <code>PBegin</code>), e.g. <a href="TextIO.html#read" class="page">TextIO.Read</a>, <a href="AvroIO.html#read" class="page">AvroIO.Read</a> or <code>Create</code>.</p>
 </div>
 </div>
 </div>

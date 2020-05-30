@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>TransformHierarchy :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/TransformHierarchy.html">
+    <title>PBegin :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/PBegin.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -86,7 +86,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Pipeline.html">Pipeline</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="TransformHierarchy.html">TransformHierarchy</a>
   </li>
 </ul>
@@ -119,7 +119,7 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Values</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="PBegin.html">PBegin</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -353,17 +353,59 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="Pipeline.html">Pipeline</a></li>
-    <li><a href="TransformHierarchy.html">TransformHierarchy</a></li>
+    <li>Values</li>
+    <li><a href="PBegin.html">PBegin</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/TransformHierarchy.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/PBegin.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">TransformHierarchy</h1>
+<h1 class="page">PBegin</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><code>TransformHierarchy</code> is&#8230;&#8203;FIXME</p>
+<p><code>PBegin</code> is a marker <a href="PInput.html" class="page">PInput</a> of <a href="PTransform.html#root" class="page">root PTransforms</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a><a id="pipeline"></a> Creating Instance</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PBegin takes a <a href="Pipeline.html" class="page">Pipeline</a> to be created.</p>
+</div>
+<div class="paragraph">
+<p>PBegin is created using <a href="#in">PBegin.in</a> utility.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="in-utility"><a class="anchor" href="#in-utility"></a><a class="link" href="#in-utility"><a id="in"></a> in Utility</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PBegin in(Pipeline pipeline)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>in creates a <a href="#creating-instance">PBegin</a> for the given <a href="Pipeline.html" class="page">Pipeline</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.values.PBegin
+val begin = PBegin.in(p)</code></pre>
+</div>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
