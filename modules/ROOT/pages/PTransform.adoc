@@ -12,14 +12,14 @@ A directed acyclic graph of PTransforms and PCollections is a xref::Pipeline.ado
 
 == [[source]][[root]] Root PTransform
 
-*Root PTransform* (_Source PTransform_) is a PTransform with xref:PBegin.adoc[] input value.
+*Root PTransform* (_Source PTransform_) is a PTransform that takes no input (conventionally marked as xref:PBegin.adoc[]) and produces a xref:PCollection.adoc[] (of values of type `T`).
 
 [source,java]
 ----
 PTransform<PBegin, PCollection<T>>
 ----
 
-Root PTransform takes no input (conventionally marked as `PBegin`), e.g. xref:TextIO.adoc#read[TextIO.Read], xref:AvroIO.adoc#read[AvroIO.Read] or `Create`.
+Available root PTransforms: xref:TextIO.adoc#read[TextIO.Read], xref:AvroIO.adoc#read[AvroIO.Read], xref:Create.adoc[].
 
 == [[sink]] Sink PTransform
 

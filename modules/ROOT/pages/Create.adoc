@@ -1,0 +1,75 @@
+= Create
+
+`Create` is a utility to create in-memory collections (as xref:Values.adoc[] or xref:TimestampedValues.adoc[] root PTransforms that produce the values when executed).
+
+Create utility is especially useful during testing.
+
+== [[empty]] empty Utility
+
+[source,java]
+----
+Values<T> empty(
+  Coder<T> coder)
+Values<Row> empty(
+  Schema schema)
+Values<T> empty(
+  TypeDescriptor<T> type)
+----
+
+empty creates an empty xref:Values.adoc[].
+
+== [[of]] of Utility
+
+[source,java]
+----
+Values<T> of(
+  Iterable<T> elems)
+Values<KV<K, V>> of(
+  Map<K, V> elems)
+Values<T> of(
+  T elem,
+  T... elems)
+----
+
+of creates a xref:Values.adoc[] with the elements given.
+
+== [[ofProvider]] ofProvider Utility
+
+[source,java]
+----
+OfValueProvider<T> ofProvider(
+  ValueProvider<T> provider,
+  Coder<T> coder)
+----
+
+== [[timestamped]] timestamped Utility
+
+[source,java]
+----
+TimestampedValues<T> timestamped(
+  Iterable<T> values,
+  Iterable<Long> timestamps)
+TimestampedValues<T> timestamped(
+  Iterable<TimestampedValue<T>> elems)
+TimestampedValues<T> timestamped(
+  TimestampedValue<T> elem,
+  TimestampedValue<T>... elems)
+----
+
+timestamped creates a xref:TimestampedValues.adoc[] with the elements given.
+
+== [[demo]] Demo
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.transforms.Create
+val nums = Create.of(0, 1, 2, 3, 4, 5)
+
+scala> :type nums
+org.apache.beam.sdk.transforms.Create.Values[Int]
+
+p.apply("Input Numbers", nums)
+----

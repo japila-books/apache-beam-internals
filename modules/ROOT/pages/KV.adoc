@@ -1,0 +1,29 @@
+= KV
+
+`KV<K, V>` is an immutable key-value pair.
+
+[source,scala]
+----
+import org.apache.beam.sdk.values.KV
+val kv_00 = KV.of(0,0)
+val kv_01 = KV.of(0,1)
+val kv_11 = KV.of(1,1)
+----
+
+== [[of]] of Utility
+
+[source,java]
+----
+KV<K, V> of(
+  K key,
+  V value)
+----
+
+== [[creating-instance]] Creating Instance
+
+KV takes the following to be created:
+
+* [[key]][[K]] Key of type `K`
+* [[value]][[V]] Value of type `V`
+
+KV is created using <<of, KV.of>> utility.

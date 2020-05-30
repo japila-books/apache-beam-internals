@@ -18,6 +18,7 @@
 * Values
 ** xref:PBegin.adoc[]
 ** xref:PInput.adoc[]
+** xref:KV.adoc[]
 
 * xref:DisplayData.adoc[]
 ** xref:HasDisplayData.adoc[]
@@ -34,6 +35,9 @@
 *** xref:CheckpointMark.adoc[]
 
 * I/O Utilities
+** xref:Create.adoc[]
+*** xref:Values.adoc[]
+*** xref:TimestampedValues.adoc[]
 ** xref:AvroIO.adoc[]
 ** xref:KafkaIO.adoc[]
 *** xref:KafkaIO-Read.adoc[]
