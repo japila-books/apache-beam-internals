@@ -2,15 +2,37 @@
 
 [source,plain]
 ----
+// Pull all tags
+$ git fetch --all --tags --prune
+
+// Find the most recent v2.* tag
+$ git tag --list 'v2.*' --sort=-creatordate | head -1
+
+// Create a branch for the latest release tag
+$ git checkout v2.21.0 && git switch -c v2.21.0
+
+// Make sure Java 8 is used
+$ java -version
+openjdk version "1.8.0_242"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_242-b08)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.242-b08, mixed mode)
+
+// Build the sources
+// FIXME How to get rid of these excluded tasks
+//       and replace them with regex-based ones if possible?
 $ ./gradlew \
     -p sdks/java \
     -x test \
+    -x :sdks:java:container:goVet \
+    -x :sdks:java:container:gofmt \
     -x :sdks:java:container:goPrepare \
     -x :sdks:java:container:resolveBuildDependencies \
+    -x :sdks:java:container:resolveTestDependencies \
+    -x :sdks:java:container:buildLinuxAmd64 \
     -x :sdks:go:goPrepare \
     -x :sdks:go:buildDarwinAmd64 \
     clean build
 ...
-BUILD SUCCESSFUL in 4m 10s
-601 actionable tasks: 394 executed, 111 from cache, 96 up-to-date
+BUILD SUCCESSFUL in 7m 9s
+624 actionable tasks: 559 executed, 6 from cache, 59 up-to-date
 ----
