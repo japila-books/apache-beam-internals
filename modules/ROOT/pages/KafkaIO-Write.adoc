@@ -1,0 +1,30 @@
+= Write
+
+`Write<K, V>` is an xref:PTransform.adoc#output[output PTransform].
+
+[source,java]
+----
+PTransform<PCollection<KV<K, V>>, PDone>
+----
+
+Write is created using xref:KafkaIO.adoc#write[KafkaIO.write] utility.
+
+Write is a static class of xref:KafkaIO.adoc[].
+
+== [[demo]] Demo
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.io.kafka.KafkaIO
+import org.apache.kafka.common.serialization.{LongSerializer, StringSerializer}
+import java.lang.{Long => JLong}
+val write =
+  KafkaIO.write[JLong, String]()
+    .withBootstrapServers("myotherkafka:9092")
+    .withTopic("my_output_topic")
+    .withKeySerializer(classOf[LongSerializer])
+    .withValueSerializer(classOf[StringSerializer])
+
+scala> :type write
+org.apache.beam.sdk.io.kafka.KafkaIO.Write[String,String]
+----

@@ -1,8 +1,8 @@
 = Pipeline
 
-`Pipeline` is a *directed acyclic graph* (https://en.wikipedia.org/wiki/Directed_acyclic_graph[DAG]) of xref::PTransform.adoc[PTransforms] and xref::PCollection.adoc[PCollections].
+`Pipeline` is a *directed acyclic graph* (https://en.wikipedia.org/wiki/Directed_acyclic_graph[DAG]) of xref::PTransform.adoc[]s and xref::PCollection.adoc[]s.
 
-Once constructed, a Pipeline can be run using a xref::PipelineRunner.adoc[].
+Pipeline can be run using a xref::PipelineRunner.adoc[].
 
 == [[create]] Creating Pipeline
 
@@ -62,3 +62,59 @@ Pipeline takes the following to be created:
 * [[options]][[defaultOptions]] xref:PipelineOptions.adoc[]
 
 Pipeline cannot be created directly and can only be created using <<create, Pipeline.create>> utility.
+
+== [[applyTransform]] applyTransform Utility
+
+[source,java]
+----
+<
+  InputT extends PInput,
+  OutputT extends POutput>
+OutputT applyTransform(
+  InputT input,
+  PTransform<? super InputT, OutputT> transform) // <1>
+<
+  InputT extends PInput,
+  OutputT extends POutput>
+OutputT applyTransform(
+  String name,
+  InputT input,
+  PTransform<? super InputT, OutputT> transform)
+----
+<1> Uses the xref:PTransform.adoc#name[name] of the PTransform
+
+applyTransform...FIXME
+
+applyTransform is used when Pipeline is requested to <<applyTransform, applyTransform>>.
+
+== [[applyInternal]] applyInternal Method
+
+[source,java]
+----
+<
+  InputT extends PInput,
+  OutputT extends POutput>
+OutputT applyInternal(
+  String name,
+  InputT input,
+  PTransform<? super InputT, OutputT> transform)
+----
+
+applyInternal...FIXME
+
+applyInternal is used when Pipeline is requested to <<applyTransform, applyTransform>>.
+
+== [[applyReplacement]] applyReplacement Method
+
+[source,java]
+----
+<
+  InputT extends PInput,
+  OutputT extends POutput,
+  TransformT extends PTransform<? super InputT, OutputT>>
+void applyReplacement(
+  Node original,
+  PTransformOverrideFactory<InputT, OutputT, TransformT> replacementFactory)
+----
+
+applyReplacement...FIXME

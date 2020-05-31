@@ -1,0 +1,45 @@
+= MapElements
+
+`MapElements<InputT, OutputT>` is a xref:PTransform.adoc[] of a xref:PCollection.adoc[] of type `InputT` to a xref:PCollection.adoc[] of type `OutputT`.
+
+[source,plaintext]
+----
+PCollection<? extends InputT> ~~[MapElements<InputT, OutputT>]~~> PCollection<OutputT>
+----
+
+== [[creating-instance]] Creating Instance
+
+MapElements takes the following to be created:
+
+* [[fn]] `Contextful<Fn<InputT, OutputT>>`
+* [[originalFnForDisplayData]] originalFnForDisplayData
+* [[inputType]] `TypeDescriptor<InputT>`
+* [[outputType]] `TypeDescriptor<OutputT>`
+
+MapElements is created using <<via, MapElements.via>> and <<into, MapElements.into>> utilities.
+
+== [[via]] MapElements.via Utility
+
+[source,java]
+----
+MapElements<NewInputT, OutputT> via(
+  Contextful<Fn<NewInputT, OutputT>> fn)
+MapElements<InputT, OutputT> via(
+  InferableFunction<InputT, OutputT> fn)
+MapElements<NewInputT, OutputT> via(
+  ProcessFunction<NewInputT, OutputT> fn)
+MapElements<NewInputT, OutputT> via(
+  SerializableFunction<NewInputT, OutputT> fn)
+MapElements<InputT, OutputT> via(
+  SimpleFunction<InputT, OutputT> fn)
+----
+
+via creates a MapElements for the given function.
+
+== [[into]] MapElements.into Utility
+
+[source,java]
+----
+MapElements<?, OutputT> into(
+  TypeDescriptor<OutputT> outputType)
+----

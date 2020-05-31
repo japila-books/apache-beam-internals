@@ -2,6 +2,46 @@
 
 `KafkaIO` is a utility to create xref:PTransform.adoc[]s for <<read, reading>> and <<write, writing>> records from Kafka topics.
 
+== [[read]] Reading Kafka Records -- read Utility
+
+[source,java]
+----
+Read<K, V> read()
+----
+
+read creates a xref:KafkaIO-Read.adoc[] root PTransform (that produces a xref:PCollection.adoc[] of KafkaRecords of K-keys and V-values).
+
+== [[readBytes]] Reading Kafka Records -- readBytes Utility
+
+[source,java]
+----
+Read<byte[], byte[]> readBytes()
+----
+
+readBytes creates a xref:KafkaIO-Read.adoc[] root PTransform (that produces a xref:PCollection.adoc[] of KafkaRecords of `byte[]` keys and values).
+
+readBytes is a specialized <<read, read>> with ByteArrayDeserializer for the keys and values.
+
+== [[write]] Writing Records to Kafka Topic -- write Utility
+
+[source,java]
+----
+Write<K, V> write()
+----
+
+write creates a xref:KafkaIO-Write.adoc[] output PTransform.
+
+== [[writeRecords]] Writing Records to Kafka Topic -- writeRecords Utility
+
+[source,java]
+----
+WriteRecords<K, V> writeRecords()
+----
+
+writeRecords creates a xref:PTransform.adoc#sink[sink PTransform] (`PTransform<PCollection<ProducerRecord<K, V>>, PDone>`).
+
+== [[demo]] Demo
+
 [source,plaintext]
 ----
 import org.apache.beam.sdk.io.kafka.KafkaIO
@@ -24,41 +64,3 @@ DEBUG CoderRegistry: Coder for java.lang.String: StringUtf8Coder
 DEBUG CoderRegistry: Coder for java.lang.String: StringUtf8Coder
 DEBUG Pipeline: Adding Read(KafkaUnboundedSource) to Pipeline#505559573
 ----
-
-== [[read]] Reading Kafka Records -- read Utility
-
-[source,java]
-----
-<K, V> Read<K, V> read()
-----
-
-read creates a xref:PTransform.adoc#source[source PTransform] that produces a xref:PCollection.adoc[] of `KafkaRecords` (`PTransform<PBegin, PCollection<KafkaRecord<K, V>>>`).
-
-== [[readBytes]] Reading Kafka Records -- readBytes Utility
-
-[source,java]
-----
-Read<byte[], byte[]> readBytes()
-----
-
-readBytes creates a xref:PTransform.adoc#source[source PTransform] that produces a xref:PCollection.adoc[] of `KafkaRecords` (`PTransform<PBegin, PCollection<KafkaRecord<byte[], byte[]>>>`).
-
-readBytes is a specialized <<read, read>> with ByteArrayDeserializer for the keys and values.
-
-== [[write]] Writing Records to Kafka Topic -- write Utility
-
-[source,java]
-----
-<K, V> Write<K, V> write()
-----
-
-write creates a xref:PTransform.adoc#sink[sink PTransform] (`PTransform<PCollection<KV<K, V>>, PDone>`).
-
-== [[writeRecords]] Writing Records to Kafka Topic -- writeRecords Utility
-
-[source,java]
-----
-<K, V> WriteRecords<K, V> writeRecords()
-----
-
-writeRecords creates a xref:PTransform.adoc#sink[sink PTransform] (`PTransform<PCollection<ProducerRecord<K, V>>, PDone>`).

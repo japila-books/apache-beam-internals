@@ -18,10 +18,13 @@ static DisplayData from(
 
 `from` is used when the `JsonSerializer` (of xref:PipelineOptions.adoc[] as `ProxyInvocationHandler.Serializer`) is requested to serialize PipelineOptions.
 
-[source,scala]
+[source,plaintext]
 ----
+import org.apache.beam.sdk.transforms.Create
+val component = Create.of(0, 1, 2, 3, 4, 5)
+
 import org.apache.beam.sdk.transforms.display.DisplayData
-DisplayData.from(...)
+val displayData = DisplayData.from(component)
 ----
 
 This JsonSerializer is only used to serialize a `PipelineOptions` (marked with `@JsonSerialize(using = Serializer.class)` annotation).

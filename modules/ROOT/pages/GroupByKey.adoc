@@ -20,7 +20,7 @@ PCollection<KV<K, V>> ~~[GroupByKey<K, V>]~~> PCollection<KV<K, Iterable<V>>>
 
 [source,java]
 ----
-<K, V> GroupByKey<K, V> create()
+GroupByKey<K, V> create()
 ----
 
 create creates a GroupByKey with the <<fewKeys, fewKeys>> flag disabled (`false`).
@@ -29,7 +29,7 @@ create creates a GroupByKey with the <<fewKeys, fewKeys>> flag disabled (`false`
 
 [source,java]
 ----
-<K, V> GroupByKey<K, V> createWithFewKeys()
+GroupByKey<K, V> createWithFewKeys()
 ----
 
 createWithFewKeys creates a GroupByKey with the <<fewKeys, fewKeys>> flag enabled (`true`).

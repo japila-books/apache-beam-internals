@@ -1,14 +1,49 @@
 = PTransform
 
-[[In]]
-`PTransform[In, Out]` is an *operation* (*function*) with an input of type `In` and an output of type `Out`.
+[[OutputT]][[InputT]]
+`PTransform<PInput, POutput>` is an <<contract, abstraction>> of *operations* (_transformations_ or simply _functions_) with xref:PInput.adoc[] input and xref:POutput.adoc[] output.
 
 [source,plaintext]
 ----
-PTransform: In => Out
+PTransform: PInput => POutput
 ----
 
-A directed acyclic graph of PTransforms and PCollections is a xref::Pipeline.adoc[].
+== [[creating-instance]][[name]] Creating Instance
+
+PTransform takes an optional name to be created.
+
+PTransform is an abstract class and cannot be created directly. It is created indirectly for the <<implementations, concrete PTransforms>>.
+
+== [[contract]] Contract
+
+=== [[expand]] expand Method
+
+[source,java]
+----
+OutputT expand(
+  InputT input)
+----
+
+Used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal] and xref:Pipeline.adoc#applyReplacement[applyReplacement].
+
+== [[implementations]] Subset of Available PTransforms
+
+.PTransforms (Direct Implementations and Extensions Only)
+[cols="30,70",options="header",width="100%"]
+|===
+| PTransform
+| Description
+
+| xref:GroupByKey.adoc[]
+| [[GroupByKey]]
+
+| xref:MapElements.adoc[]
+| [[MapElements]]
+
+| _others_
+|
+
+|===
 
 == [[source]][[root]] Root PTransform
 
@@ -19,7 +54,7 @@ A directed acyclic graph of PTransforms and PCollections is a xref::Pipeline.ado
 PTransform<PBegin, PCollection<T>>
 ----
 
-Available root PTransforms: xref:AvroIO.adoc#read[AvroIO.Read], xref:TextIO.adoc#read[TextIO.Read], xref:Create.adoc[].
+Examples of root PTransforms: xref:AvroIO.adoc#read[AvroIO.Read], xref:TextIO.adoc#read[TextIO.Read], xref:Create.adoc[], xref:KafkaIO.adoc#read[KafkaIO.Read].
 
 == [[sink]][[output]] Output PTransform
 
@@ -30,4 +65,4 @@ Available root PTransforms: xref:AvroIO.adoc#read[AvroIO.Read], xref:TextIO.adoc
 PTransform<PCollection<T>, PDone>
 ----
 
-Available output PTransforms: xref:AvroIO.adoc#write[AvroIO.Write], xref:TextIO.adoc#write[TextIO.Write].
+Examples of output PTransforms: xref:AvroIO.adoc#write[AvroIO.Write], xref:TextIO.adoc#write[TextIO.Write], xref:KafkaIO.adoc#write[KafkaIO.Write].

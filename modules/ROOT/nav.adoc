@@ -1,8 +1,10 @@
 * xref:intro.adoc[]
 
 * xref:PCollection.adoc[]
+
 * xref:PTransform.adoc[]
 ** xref:GroupByKey.adoc[]
+** xref:MapElements.adoc[]
 
 * xref:Pipeline.adoc[]
 ** xref:TransformHierarchy.adoc[]
@@ -41,6 +43,7 @@
 ** xref:AvroIO.adoc[]
 ** xref:KafkaIO.adoc[]
 *** xref:KafkaIO-Read.adoc[]
+*** xref:KafkaIO-Write.adoc[]
 ** xref:TextIO.adoc[]
 
 * xref:Metrics.adoc[]
