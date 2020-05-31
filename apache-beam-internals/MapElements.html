@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>HasDisplayData :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/HasDisplayData.html">
+    <title>MapElements :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/MapElements.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -80,7 +80,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="GroupByKey.html">GroupByKey</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="MapElements.html">MapElements</a>
   </li>
 </ul>
@@ -149,7 +149,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="HasDisplayData.html">HasDisplayData</a>
   </li>
 </ul>
@@ -377,29 +377,83 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="DisplayData.html">DisplayData</a></li>
-    <li><a href="HasDisplayData.html">HasDisplayData</a></li>
+    <li><a href="PTransform.html">PTransform</a></li>
+    <li><a href="MapElements.html">MapElements</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/HasDisplayData.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/MapElements.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">HasDisplayData</h1>
+<h1 class="page">MapElements</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>HasDisplayData</code> is an interface that is used in <a href="DoFn.html" class="page">DoFn</a>, WindowFn, GlobalCombineFn, <a href="PTransform.html" class="page">PTransform</a>, <a href="Source.html" class="page">Source</a>, and <a href="PipelineOptions.html" class="page">PipelineOptions</a> among others.</p>
+<p><code>MapElements&lt;InputT, OutputT&gt;</code> is a <a href="PTransform.html" class="page">PTransform</a> of a <a href="PCollection.html" class="page">PCollection</a> of type <code>InputT</code> to a <a href="PCollection.html" class="page">PCollection</a> of type <code>OutputT</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">PCollection&lt;? extends InputT&gt; ~~[MapElements&lt;InputT, OutputT&gt;]~~&gt; PCollection&lt;OutputT&gt;</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="populatedisplaydata-method"><a class="anchor" href="#populatedisplaydata-method"></a><a class="link" href="#populatedisplaydata-method"><a id="populateDisplayData"></a> populateDisplayData Method</a></h2>
+<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a> Creating Instance</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>MapElements takes the following to be created:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="fn"></a> <code>Contextful&lt;Fn&lt;InputT, OutputT&gt;&gt;</code></p>
+</li>
+<li>
+<p><a id="originalFnForDisplayData"></a> originalFnForDisplayData</p>
+</li>
+<li>
+<p><a id="inputType"></a> <code>TypeDescriptor&lt;InputT&gt;</code></p>
+</li>
+<li>
+<p><a id="outputType"></a> <code>TypeDescriptor&lt;OutputT&gt;</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>MapElements is created using <a href="#via">MapElements.via</a> and <a href="#into">MapElements.into</a> utilities.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mapelements-via-utility"><a class="anchor" href="#mapelements-via-utility"></a><a class="link" href="#mapelements-via-utility"><a id="via"></a> MapElements.via Utility</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void populateDisplayData(
-  DisplayData.Builder builder)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MapElements&lt;NewInputT, OutputT&gt; via(
+  Contextful&lt;Fn&lt;NewInputT, OutputT&gt;&gt; fn)
+MapElements&lt;InputT, OutputT&gt; via(
+  InferableFunction&lt;InputT, OutputT&gt; fn)
+MapElements&lt;NewInputT, OutputT&gt; via(
+  ProcessFunction&lt;NewInputT, OutputT&gt; fn)
+MapElements&lt;NewInputT, OutputT&gt; via(
+  SerializableFunction&lt;NewInputT, OutputT&gt; fn)
+MapElements&lt;InputT, OutputT&gt; via(
+  SimpleFunction&lt;InputT, OutputT&gt; fn)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>via creates a MapElements for the given function.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mapelements-into-utility"><a class="anchor" href="#mapelements-into-utility"></a><a class="link" href="#mapelements-into-utility"><a id="into"></a> MapElements.into Utility</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">MapElements&lt;?, OutputT&gt; into(
+  TypeDescriptor&lt;OutputT&gt; outputType)</code></pre>
 </div>
 </div>
 </div>

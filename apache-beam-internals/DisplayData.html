@@ -80,6 +80,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="GroupByKey.html">GroupByKey</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="MapElements.html">MapElements</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -206,6 +209,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="KafkaIO-Read.html">Read</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="KafkaIO-Write.html">Write</a>
   </li>
 </ul>
   </li>
@@ -409,8 +415,11 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.transforms.display.DisplayData
-DisplayData.from(...)</code></pre>
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.transforms.Create
+val component = Create.of(0, 1, 2, 3, 4, 5)
+
+import org.apache.beam.sdk.transforms.display.DisplayData
+val displayData = DisplayData.from(component)</code></pre>
 </div>
 </div>
 <div class="paragraph">

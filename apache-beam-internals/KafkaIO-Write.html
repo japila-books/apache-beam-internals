@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>HasDisplayData :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/HasDisplayData.html">
+    <title>Write :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/KafkaIO-Write.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -149,7 +149,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="DisplayData.html">DisplayData</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="HasDisplayData.html">HasDisplayData</a>
   </li>
 </ul>
@@ -210,7 +210,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="KafkaIO-Read.html">Read</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="KafkaIO-Write.html">Write</a>
   </li>
 </ul>
@@ -377,29 +377,51 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="DisplayData.html">DisplayData</a></li>
-    <li><a href="HasDisplayData.html">HasDisplayData</a></li>
+    <li>I/O Utilities</li>
+    <li><a href="KafkaIO.html">KafkaIO</a></li>
+    <li><a href="KafkaIO-Write.html">Write</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/HasDisplayData.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/KafkaIO-Write.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">HasDisplayData</h1>
+<h1 class="page">Write</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>HasDisplayData</code> is an interface that is used in <a href="DoFn.html" class="page">DoFn</a>, WindowFn, GlobalCombineFn, <a href="PTransform.html" class="page">PTransform</a>, <a href="Source.html" class="page">Source</a>, and <a href="PipelineOptions.html" class="page">PipelineOptions</a> among others.</p>
+<p><code>Write&lt;K, V&gt;</code> is an <a href="PTransform.html#output" class="page">output PTransform</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PCollection&lt;KV&lt;K, V&gt;&gt;, PDone&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Write is created using <a href="KafkaIO.html#write" class="page">KafkaIO.write</a> utility.</p>
+</div>
+<div class="paragraph">
+<p>Write is a static class of <a href="KafkaIO.html" class="page">KafkaIO</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="populatedisplaydata-method"><a class="anchor" href="#populatedisplaydata-method"></a><a class="link" href="#populatedisplaydata-method"><a id="populateDisplayData"></a> populateDisplayData Method</a></h2>
+<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void populateDisplayData(
-  DisplayData.Builder builder)</code></pre>
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.io.kafka.KafkaIO
+import org.apache.kafka.common.serialization.{LongSerializer, StringSerializer}
+import java.lang.{Long =&gt; JLong}
+val write =
+  KafkaIO.write[JLong, String]()
+    .withBootstrapServers("myotherkafka:9092")
+    .withTopic("my_output_topic")
+    .withKeySerializer(classOf[LongSerializer])
+    .withValueSerializer(classOf[StringSerializer])
+
+scala&gt; :type write
+org.apache.beam.sdk.io.kafka.KafkaIO.Write[String,String]</code></pre>
 </div>
 </div>
 </div>

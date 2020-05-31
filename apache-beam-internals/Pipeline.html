@@ -80,6 +80,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="GroupByKey.html">GroupByKey</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="MapElements.html">MapElements</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
@@ -206,6 +209,9 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="KafkaIO-Read.html">Read</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="KafkaIO-Write.html">Write</a>
   </li>
 </ul>
   </li>
@@ -382,10 +388,10 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>Pipeline</code> is a <strong>directed acyclic graph</strong> (<a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">DAG</a>) of <a href="PTransform.html" class="page">PTransforms</a> and <a href="PCollection.html" class="page">PCollections</a>.</p>
+<p><code>Pipeline</code> is a <strong>directed acyclic graph</strong> (<a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">DAG</a>) of <a href="PTransform.html" class="page">PTransform</a>s and <a href="PCollection.html" class="page">PCollection</a>s.</p>
 </div>
 <div class="paragraph">
-<p>Once constructed, a Pipeline can be run using a <a href="PipelineRunner.html" class="page">PipelineRunner</a>.</p>
+<p>Pipeline can be run using a <a href="PipelineRunner.html" class="page">PipelineRunner</a>.</p>
 </div>
 </div>
 </div>
@@ -486,6 +492,83 @@ PipelineResult run(
 </div>
 <div class="paragraph">
 <p>Pipeline cannot be created directly and can only be created using <a href="#create">Pipeline.create</a> utility.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="applytransform-utility"><a class="anchor" href="#applytransform-utility"></a><a class="link" href="#applytransform-utility"><a id="applyTransform"></a> applyTransform Utility</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">&lt;
+  InputT extends PInput,
+  OutputT extends POutput&gt;
+OutputT applyTransform(
+  InputT input,
+  PTransform&lt;? super InputT, OutputT&gt; transform) <i class="conum" data-value="1"></i><b>(1)</b>
+&lt;
+  InputT extends PInput,
+  OutputT extends POutput&gt;
+OutputT applyTransform(
+  String name,
+  InputT input,
+  PTransform&lt;? super InputT, OutputT&gt; transform)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Uses the <a href="PTransform.html#name" class="page">name</a> of the PTransform</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>applyTransform&#8230;&#8203;FIXME</p>
+</div>
+<div class="paragraph">
+<p>applyTransform is used when Pipeline is requested to <a href="#applyTransform">applyTransform</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="applyinternal-method"><a class="anchor" href="#applyinternal-method"></a><a class="link" href="#applyinternal-method"><a id="applyInternal"></a> applyInternal Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">&lt;
+  InputT extends PInput,
+  OutputT extends POutput&gt;
+OutputT applyInternal(
+  String name,
+  InputT input,
+  PTransform&lt;? super InputT, OutputT&gt; transform)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>applyInternal&#8230;&#8203;FIXME</p>
+</div>
+<div class="paragraph">
+<p>applyInternal is used when Pipeline is requested to <a href="#applyTransform">applyTransform</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="applyreplacement-method"><a class="anchor" href="#applyreplacement-method"></a><a class="link" href="#applyreplacement-method"><a id="applyReplacement"></a> applyReplacement Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">&lt;
+  InputT extends PInput,
+  OutputT extends POutput,
+  TransformT extends PTransform&lt;? super InputT, OutputT&gt;&gt;
+void applyReplacement(
+  Node original,
+  PTransformOverrideFactory&lt;InputT, OutputT, TransformT&gt; replacementFactory)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>applyReplacement&#8230;&#8203;FIXME</p>
 </div>
 </div>
 </div>
