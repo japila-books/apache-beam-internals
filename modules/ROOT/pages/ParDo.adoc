@@ -1,0 +1,45 @@
+= ParDo
+
+`ParDo` is a utility to <<of, create ParDo.SingleOutput transformations>> (to execute xref:DoFn.adoc[] element-wise functions).
+
+== [[of]] ParDo.of Utility
+
+[source,java]
+----
+SingleOutput<InputT, OutputT> of(
+  DoFn<InputT, OutputT> fn)
+----
+
+`ParDo.of` creates a <<SingleOutput, ParDo.SingleOutput>> transformation.
+
+== [[SingleOutput]] ParDo.SingleOutput PTransform
+
+`SingleOutput<InputT, OutputT>` is a xref:PTransform.adoc[] that is created using <<do, ParDo.of>> utility.
+
+[source,java]
+----
+PTransform<PCollection<? extends InputT>, PCollection<OutputT>>
+----
+
+== [[demo]] Demo
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.transforms.Create
+val nums = p.apply("Input Numbers", Create.of(0, 1, 2, 3, 4, 5))
+
+import org.apache.beam.sdk.transforms.DoFn
+import org.apache.beam.sdk.transforms.DoFn._
+val multiplyBy2 = new DoFn[Int, Int]() {
+  // Must return void or ProcessContinuation
+  @ProcessElement
+  def processElement(@Element element: Int): Unit = {
+    element * 2
+  }
+}
+import org.apache.beam.sdk.transforms.ParDo
+val multipliedByTwo = nums.apply("Multiply By Two", ParDo.of(multiplyBy2))
+----

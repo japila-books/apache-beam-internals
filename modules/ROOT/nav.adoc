@@ -5,6 +5,8 @@
 * xref:PTransform.adoc[]
 ** xref:GroupByKey.adoc[]
 ** xref:MapElements.adoc[]
+** xref:ParDo.adoc[]
+*** xref:DoFn.adoc[]
 
 * xref:Pipeline.adoc[]
 ** xref:TransformHierarchy.adoc[]
@@ -47,4 +49,3 @@
 ** xref:TextIO.adoc[]
 
 * xref:Metrics.adoc[]
-* xref:DoFn.adoc[]

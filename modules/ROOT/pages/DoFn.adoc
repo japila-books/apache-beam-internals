@@ -1,3 +1,3 @@
 = DoFn
 
-`DoFn` is...FIXME
+`DoFn<InputT, OutputT>` is an abstraction of...FIXME
