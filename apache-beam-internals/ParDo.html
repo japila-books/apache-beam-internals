@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>POutput :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/POutput.html">
+    <title>ParDo :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/ParDo.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -83,7 +83,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="MapElements.html">MapElements</a>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="ParDo.html">ParDo</a>
 <ul class="nav-list">
@@ -140,7 +140,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="POutput.html">POutput</a>
 <ul class="nav-list">
@@ -383,99 +383,60 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li>Values</li>
-    <li><a href="POutput.html">POutput</a></li>
+    <li><a href="PTransform.html">PTransform</a></li>
+    <li><a href="ParDo.html">ParDo</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/POutput.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/ParDo.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">POutput</h1>
+<h1 class="page">ParDo</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>POutput</code> is an <a href="#contract">abstraction</a> of <a href="#implementations">output values</a> of <a href="PTransform.html" class="page">PTransform</a>s.</p>
+<p><code>ParDo</code> is&#8230;&#8203;FIXME</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="contract"><a class="anchor" href="#contract"></a><a class="link" href="#contract"><a id="contract"></a> Contract</a></h2>
+<h2 id="of-utility"><a class="anchor" href="#of-utility"></a><a class="link" href="#of-utility"><a id="of"></a> of Utility</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="getpipeline-method"><a class="anchor" href="#getpipeline-method"></a><a class="link" href="#getpipeline-method"><a id="getPipeline"></a> getPipeline Method</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Pipeline getPipeline()</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SingleOutput&lt;InputT, OutputT&gt; of(
+  DoFn&lt;InputT, OutputT&gt; fn)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The owning <a href="Pipeline.html" class="page">Pipeline</a> of the POutput</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="expand-method"><a class="anchor" href="#expand-method"></a><a class="link" href="#expand-method"><a id="expand"></a> expand Method</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;TupleTag&lt;?&gt;, PValue&gt; expand()</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="finishspecifyingoutput-method"><a class="anchor" href="#finishspecifyingoutput-method"></a><a class="link" href="#finishspecifyingoutput-method"><a id="finishSpecifyingOutput"></a> finishSpecifyingOutput Method</a></h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void finishSpecifyingOutput(
-  String transformName,
-  PInput input,
-  PTransform&lt;?, ?&gt; transform)</code></pre>
-</div>
-</div>
+<p>of creates a SingleOutput transformation.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="available-poutputs"><a class="anchor" href="#available-poutputs"></a><a class="link" href="#available-poutputs"><a id="implementations"></a> Available POutputs</a></h2>
+<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. POutputs (Direct Implementations and Extensions Only)</caption>
-<colgroup>
-<col style="width: 30%;">
-<col style="width: 70%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">POutput</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PCollectionList</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PCollectionList"></a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PCollectionTuple</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PCollectionTuple"></a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="PDone.html" class="page">PDone</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PDone"></a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PValue</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PValue"></a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="Result"></a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">WriteFilesResult</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="WriteFilesResult"></a></p></td>
-</tr>
-</tbody>
-</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.transforms.Create
+val nums = p.apply("Input Numbers", Create.of(0, 1, 2, 3, 4, 5))
+
+import org.apache.beam.sdk.transforms.DoFn
+import org.apache.beam.sdk.transforms.DoFn._
+val multiplyBy2 = new DoFn[Int, Int]() {
+  // Must return void or ProcessContinuation
+  @ProcessElement
+  def processElement(@Element element: Int): Unit = {
+    element * 2
+  }
+}
+import org.apache.beam.sdk.transforms.ParDo
+val multipliedByTwo = nums.apply("Multiply By Two", ParDo.of(multiplyBy2))</code></pre>
+</div>
+</div>
 </div>
 </div>
 </article>
