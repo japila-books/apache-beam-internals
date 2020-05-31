@@ -120,10 +120,22 @@
     <span class="nav-text">Values</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="PInput.html">PInput</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="PBegin.html">PBegin</a>
   </li>
+</ul>
+  </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PInput.html">PInput</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="POutput.html">POutput</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="PDone.html">PDone</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="KV.html">KV</a>
@@ -183,16 +195,7 @@
     <span class="nav-text">I/O Utilities</span>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="Create.html">Create</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="Values.html">Values</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="TimestampedValues.html">TimestampedValues</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="AvroIO.html">AvroIO</a>
@@ -380,7 +383,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>Create</code> is a utility to create in-memory collections (as <a href="Values.html" class="page">Values</a> or <a href="TimestampedValues.html" class="page">TimestampedValues</a> root PTransforms that produce the values when executed).</p>
+<p><code>Create</code> is a utility to create in-memory collections (as <a href="#Values">Values</a> or <a href="#TimestampedValues">TimestampedValues</a> root PTransforms that produce the values when executed).</p>
 </div>
 <div class="paragraph">
 <p>Create utility is especially useful during testing.</p>
@@ -401,7 +404,7 @@ Values&lt;T&gt; empty(
 </div>
 </div>
 <div class="paragraph">
-<p>empty creates an empty <a href="Values.html" class="page">Values</a>.</p>
+<p>empty creates an empty <a href="#Values">Values</a> root PTransform.</p>
 </div>
 </div>
 </div>
@@ -420,7 +423,7 @@ Values&lt;T&gt; of(
 </div>
 </div>
 <div class="paragraph">
-<p>of creates a <a href="Values.html" class="page">Values</a> with the elements given.</p>
+<p>of creates a <a href="#Values">Values</a> root PTransform with the elements given.</p>
 </div>
 </div>
 </div>
@@ -452,7 +455,7 @@ TimestampedValues&lt;T&gt; timestamped(
 </div>
 </div>
 <div class="paragraph">
-<p>timestamped creates a <a href="TimestampedValues.html" class="page">TimestampedValues</a> with the elements given.</p>
+<p>timestamped creates a <a href="#TimestampedValues">TimestampedValues</a> with the elements given.</p>
 </div>
 </div>
 </div>
@@ -472,6 +475,49 @@ org.apache.beam.sdk.transforms.Create.Values[Int]
 
 p.apply("Input Numbers", nums)</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="values-root-ptransform"><a class="anchor" href="#values-root-ptransform"></a><a class="link" href="#values-root-ptransform"><a id="Values"></a> Values Root PTransform</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>Values&lt;T&gt;</code> is a <a href="PTransform.html#root" class="page">root PTransform</a> that produces a <a href="PCollection.html" class="page">PCollection</a> from a set of in-memory objects (of type <code>T</code>).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PBegin, PCollection&lt;T&gt;&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Values takes the following to be created:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="elems"></a> Elements (<code>Iterable&lt;T&gt;</code>)</p>
+</li>
+<li>
+<p><a id="coder"></a> Optional <a href="coders/Coder.html" class="page">Coder</a> (<code>Optional&lt;Coder&lt;T&gt;&gt;</code>)</p>
+</li>
+<li>
+<p><a id="typeDescriptor"></a> Optional TypeDescriptor (<code>Optional&lt;TypeDescriptor&lt;T&gt;&gt;</code>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Values is created using <a href="#of">Create.of</a> and <a href="#empty">Create.empty</a> utilities.</p>
+</div>
+<div class="paragraph">
+<p>Values is a static class of <a href="#">[]</a> utility.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="timestampedvalues-root-ptransform"><a class="anchor" href="#timestampedvalues-root-ptransform"></a><a class="link" href="#timestampedvalues-root-ptransform"><a id="TimestampedValues"></a> TimestampedValues Root PTransform</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>TimestampedValues&lt;T&gt;</code> is&#8230;&#8203;FIXME</p>
 </div>
 </div>
 </div>

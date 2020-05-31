@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>PTransform :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/PTransform.html">
+    <title>POutput :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/POutput.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -73,7 +73,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="PCollection.html">PCollection</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="PTransform.html">PTransform</a>
 <ul class="nav-list">
@@ -128,7 +128,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="POutput.html">POutput</a>
 <ul class="nav-list">
@@ -371,59 +371,99 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="PTransform.html">PTransform</a></li>
+    <li>Values</li>
+    <li><a href="POutput.html">POutput</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/PTransform.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/POutput.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">PTransform</h1>
+<h1 class="page">POutput</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div id="In" class="paragraph">
-<p><code>PTransform[In, Out]</code> is an <strong>operation</strong> (<strong>function</strong>) with an input of type <code>In</code> and an output of type <code>Out</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">PTransform: In =&gt; Out</code></pre>
-</div>
-</div>
 <div class="paragraph">
-<p>A directed acyclic graph of PTransforms and PCollections is a <a href="Pipeline.html" class="page">Pipeline</a>.</p>
+<p><code>POutput</code> is an <a href="#contract">abstraction</a> of <a href="#implementations">output values</a> of <a href="PTransform.html" class="page">PTransform</a>s.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="root-ptransform"><a class="anchor" href="#root-ptransform"></a><a class="link" href="#root-ptransform"><a id="source"></a><a id="root"></a> Root PTransform</a></h2>
+<h2 id="contract"><a class="anchor" href="#contract"></a><a class="link" href="#contract"><a id="contract"></a> Contract</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><strong>Root PTransform</strong> (<em>Source PTransform</em>) is a PTransform that takes no input (conventionally marked as <a href="PBegin.html" class="page">PBegin</a> input type) and produces a <a href="PCollection.html" class="page">PCollection</a> (of values of type <code>T</code>).</p>
-</div>
+<div class="sect2">
+<h3 id="getpipeline-method"><a class="anchor" href="#getpipeline-method"></a><a class="link" href="#getpipeline-method"><a id="getPipeline"></a> getPipeline Method</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PBegin, PCollection&lt;T&gt;&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Pipeline getPipeline()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Available root PTransforms: <a href="AvroIO.html#read" class="page">AvroIO.Read</a>, <a href="TextIO.html#read" class="page">TextIO.Read</a>, <a href="Create.html" class="page">Create</a>.</p>
+<p>The owning <a href="Pipeline.html" class="page">Pipeline</a> of the POutput</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="expand-method"><a class="anchor" href="#expand-method"></a><a class="link" href="#expand-method"><a id="expand"></a> expand Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;TupleTag&lt;?&gt;, PValue&gt; expand()</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finishspecifyingoutput-method"><a class="anchor" href="#finishspecifyingoutput-method"></a><a class="link" href="#finishspecifyingoutput-method"><a id="finishSpecifyingOutput"></a> finishSpecifyingOutput Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void finishSpecifyingOutput(
+  String transformName,
+  PInput input,
+  PTransform&lt;?, ?&gt; transform)</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="output-ptransform"><a class="anchor" href="#output-ptransform"></a><a class="link" href="#output-ptransform"><a id="sink"></a><a id="output"></a> Output PTransform</a></h2>
+<h2 id="available-poutputs"><a class="anchor" href="#available-poutputs"></a><a class="link" href="#available-poutputs"><a id="implementations"></a> Available POutputs</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><strong>Output PTransform</strong> (<em>Sink PTransform</em>) is a PTransform that has no output (conventionally marked as <a href="PDone.html" class="page">PDone</a> output type).</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PCollection&lt;T&gt;, PDone&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Available output PTransforms: <a href="AvroIO.html#write" class="page">AvroIO.Write</a>, <a href="TextIO.html#write" class="page">TextIO.Write</a>.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. POutputs (Direct Implementations and Extensions Only)</caption>
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">POutput</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PCollectionList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PCollectionList"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PCollectionTuple</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PCollectionTuple"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="PDone.html" class="page">PDone</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PDone"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PValue</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="PValue"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="Result"></a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WriteFilesResult</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a id="WriteFilesResult"></a></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </article>

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>PTransform :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/PTransform.html">
+    <title>PDone :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/PDone.html">
     <meta name="generator" content="Antora 2.3.1">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -73,7 +73,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="PCollection.html">PCollection</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="PTransform.html">PTransform</a>
 <ul class="nav-list">
@@ -132,7 +132,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="POutput.html">POutput</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="PDone.html">PDone</a>
   </li>
 </ul>
@@ -371,58 +371,58 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="PTransform.html">PTransform</a></li>
+    <li>Values</li>
+    <li><a href="POutput.html">POutput</a></li>
+    <li><a href="PDone.html">PDone</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/PTransform.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/PDone.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">PTransform</h1>
+<h1 class="page">PDone</h1>
 <div id="preamble">
 <div class="sectionbody">
-<div id="In" class="paragraph">
-<p><code>PTransform[In, Out]</code> is an <strong>operation</strong> (<strong>function</strong>) with an input of type <code>In</code> and an output of type <code>Out</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">PTransform: In =&gt; Out</code></pre>
-</div>
-</div>
 <div class="paragraph">
-<p>A directed acyclic graph of PTransforms and PCollections is a <a href="Pipeline.html" class="page">Pipeline</a>.</p>
+<p><code>PDone</code> is a <a href="POutput.html" class="page">POutput</a> of <a href="PTransform.html#output" class="page">output PTransforms</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="root-ptransform"><a class="anchor" href="#root-ptransform"></a><a class="link" href="#root-ptransform"><a id="source"></a><a id="root"></a> Root PTransform</a></h2>
+<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a><a id="pipeline"></a> Creating Instance</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Root PTransform</strong> (<em>Source PTransform</em>) is a PTransform that takes no input (conventionally marked as <a href="PBegin.html" class="page">PBegin</a> input type) and produces a <a href="PCollection.html" class="page">PCollection</a> (of values of type <code>T</code>).</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PBegin, PCollection&lt;T&gt;&gt;</code></pre>
-</div>
+<p>PDone takes a <a href="Pipeline.html" class="page">Pipeline</a> to be created.</p>
 </div>
 <div class="paragraph">
-<p>Available root PTransforms: <a href="AvroIO.html#read" class="page">AvroIO.Read</a>, <a href="TextIO.html#read" class="page">TextIO.Read</a>, <a href="Create.html" class="page">Create</a>.</p>
+<p>PDone is created using <a href="#in">PDone.in</a> utility.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="output-ptransform"><a class="anchor" href="#output-ptransform"></a><a class="link" href="#output-ptransform"><a id="sink"></a><a id="output"></a> Output PTransform</a></h2>
+<h2 id="in-utility"><a class="anchor" href="#in-utility"></a><a class="link" href="#in-utility"><a id="in"></a> in Utility</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><strong>Output PTransform</strong> (<em>Sink PTransform</em>) is a PTransform that has no output (conventionally marked as <a href="PDone.html" class="page">PDone</a> output type).</p>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PCollection&lt;T&gt;, PDone&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PDone in(Pipeline pipeline)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Available output PTransforms: <a href="AvroIO.html#write" class="page">AvroIO.Write</a>, <a href="TextIO.html#write" class="page">TextIO.Write</a>.</p>
+<p>in creates a PBegin for the given <a href="Pipeline.html" class="page">Pipeline</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.values.PDone
+val done = PDone.in(p)</code></pre>
+</div>
 </div>
 </div>
 </div>
