@@ -395,12 +395,12 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>ParDo</code> is&#8230;&#8203;FIXME</p>
+<p><code>ParDo</code> is a utility to <a href="#of">create ParDo.SingleOutput transformations</a> (to execute <a href="DoFn.html" class="page">DoFn</a> element-wise functions).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="of-utility"><a class="anchor" href="#of-utility"></a><a class="link" href="#of-utility"><a id="of"></a> of Utility</a></h2>
+<h2 id="pardo-of-utility"><a class="anchor" href="#pardo-of-utility"></a><a class="link" href="#pardo-of-utility"><a id="of"></a> ParDo.of Utility</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -409,7 +409,20 @@
 </div>
 </div>
 <div class="paragraph">
-<p>of creates a SingleOutput transformation.</p>
+<p><code>ParDo.of</code> creates a <a href="#SingleOutput">ParDo.SingleOutput</a> transformation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pardo-singleoutput-ptransform"><a class="anchor" href="#pardo-singleoutput-ptransform"></a><a class="link" href="#pardo-singleoutput-ptransform"><a id="SingleOutput"></a> ParDo.SingleOutput PTransform</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>SingleOutput&lt;InputT, OutputT&gt;</code> is a <a href="PTransform.html" class="page">PTransform</a> that is created using <a href="#do">ParDo.of</a> utility.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PCollection&lt;? extends InputT&gt;, PCollection&lt;OutputT&gt;&gt;</code></pre>
+</div>
 </div>
 </div>
 </div>
