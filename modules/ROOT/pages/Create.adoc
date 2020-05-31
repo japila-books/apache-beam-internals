@@ -1,6 +1,6 @@
 = Create
 
-`Create` is a utility to create in-memory collections (as xref:Values.adoc[] or xref:TimestampedValues.adoc[] root PTransforms that produce the values when executed).
+`Create` is a utility to create in-memory collections (as <<Values, Values>> or <<TimestampedValues, TimestampedValues>> root PTransforms that produce the values when executed).
 
 Create utility is especially useful during testing.
 
@@ -16,7 +16,7 @@ Values<T> empty(
   TypeDescriptor<T> type)
 ----
 
-empty creates an empty xref:Values.adoc[].
+empty creates an empty <<Values, Values>> root PTransform.
 
 == [[of]] of Utility
 
@@ -31,7 +31,7 @@ Values<T> of(
   T... elems)
 ----
 
-of creates a xref:Values.adoc[] with the elements given.
+of creates a <<Values, Values>> root PTransform with the elements given.
 
 == [[ofProvider]] ofProvider Utility
 
@@ -56,7 +56,7 @@ TimestampedValues<T> timestamped(
   TimestampedValue<T>... elems)
 ----
 
-timestamped creates a xref:TimestampedValues.adoc[] with the elements given.
+timestamped creates a <<TimestampedValues, TimestampedValues>> with the elements given.
 
 == [[demo]] Demo
 
@@ -73,3 +73,26 @@ org.apache.beam.sdk.transforms.Create.Values[Int]
 
 p.apply("Input Numbers", nums)
 ----
+
+== [[Values]] Values Root PTransform
+
+`Values<T>` is a xref:PTransform.adoc#root[root PTransform] that produces a xref:PCollection.adoc[] from a set of in-memory objects (of type `T`).
+
+[source,java]
+----
+PTransform<PBegin, PCollection<T>>
+----
+
+Values takes the following to be created:
+
+* [[elems]] Elements (`Iterable<T>`)
+* [[coder]] Optional xref:coders:Coder.adoc[] (`Optional<Coder<T>>`)
+* [[typeDescriptor]] Optional TypeDescriptor (`Optional<TypeDescriptor<T>>`)
+
+Values is created using xref:Create.adoc#of[Create.of] and xref:Create.adoc#empty[Create.empty] utilities.
+
+Values is a static class of xref:Create.adoc[] utility.
+
+== [[TimestampedValues]] TimestampedValues Root PTransform
+
+`TimestampedValues<T>` is...FIXME

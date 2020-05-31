@@ -15,7 +15,7 @@ PBegin is created using <<in, PBegin.in>> utility.
 PBegin in(Pipeline pipeline)
 ----
 
-in creates a <<creating-instance, PBegin>> for the given xref:Pipeline.adoc[].
+in creates a PBegin for the given xref:Pipeline.adoc[].
 
 == [[demo]] Demo
 

@@ -12,15 +12,22 @@ A directed acyclic graph of PTransforms and PCollections is a xref::Pipeline.ado
 
 == [[source]][[root]] Root PTransform
 
-*Root PTransform* (_Source PTransform_) is a PTransform that takes no input (conventionally marked as xref:PBegin.adoc[]) and produces a xref:PCollection.adoc[] (of values of type `T`).
+*Root PTransform* (_Source PTransform_) is a PTransform that takes no input (conventionally marked as xref:PBegin.adoc[] input type) and produces a xref:PCollection.adoc[] (of values of type `T`).
 
 [source,java]
 ----
 PTransform<PBegin, PCollection<T>>
 ----
 
-Available root PTransforms: xref:TextIO.adoc#read[TextIO.Read], xref:AvroIO.adoc#read[AvroIO.Read], xref:Create.adoc[].
+Available root PTransforms: xref:AvroIO.adoc#read[AvroIO.Read], xref:TextIO.adoc#read[TextIO.Read], xref:Create.adoc[].
 
-== [[sink]] Sink PTransform
+== [[sink]][[output]] Output PTransform
 
-*Sink PTransform* (_Output PTransform_) is a `PTransform<PCollection<...>, PDone>` that has no output (conventionally marked as `PDone` output type), e.g. `TextIO.Write`.
+*Output PTransform* (_Sink PTransform_) is a PTransform that has no output (conventionally marked as xref:PDone.adoc[] output type).
+
+[source,java]
+----
+PTransform<PCollection<T>, PDone>
+----
+
+Available output PTransforms: xref:AvroIO.adoc#write[AvroIO.Write], xref:TextIO.adoc#write[TextIO.Write].

@@ -1,0 +1,59 @@
+= POutput
+
+`POutput` is an <<contract, abstraction>> of <<implementations, output values>> of xref:PTransform.adoc[]s.
+
+== [[contract]] Contract
+
+=== [[getPipeline]] getPipeline Method
+
+[source,java]
+----
+Pipeline getPipeline()
+----
+
+The owning xref:Pipeline.adoc[] of the POutput
+
+=== [[expand]] expand Method
+
+[source,java]
+----
+Map<TupleTag<?>, PValue> expand()
+----
+
+=== [[finishSpecifyingOutput]] finishSpecifyingOutput Method
+
+[source,java]
+----
+void finishSpecifyingOutput(
+  String transformName,
+  PInput input,
+  PTransform<?, ?> transform)
+----
+
+== [[implementations]] Available POutputs
+
+.POutputs (Direct Implementations and Extensions Only)
+[cols="30,70",options="header",width="100%"]
+|===
+| POutput
+| Description
+
+| PCollectionList
+| [[PCollectionList]]
+
+| PCollectionTuple
+| [[PCollectionTuple]]
+
+| xref:PDone.adoc[]
+| [[PDone]]
+
+| PValue
+| [[PValue]]
+
+| Result
+| [[Result]]
+
+| WriteFilesResult
+| [[WriteFilesResult]]
+
+|===

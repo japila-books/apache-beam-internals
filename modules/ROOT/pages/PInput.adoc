@@ -11,7 +11,7 @@
 Pipeline getPipeline()
 ----
 
-The owning xref:Pipeline.adoc[] (the PInput belongs to)
+The owning xref:Pipeline.adoc[] of the PInput
 
 === [[expand]] expand Method
 

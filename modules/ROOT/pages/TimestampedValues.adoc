@@ -1,3 +1,0 @@
-= TimestampedValues
-
-`TimestampedValues` is...FIXME

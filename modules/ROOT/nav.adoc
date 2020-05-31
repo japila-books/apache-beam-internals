@@ -16,8 +16,10 @@
 ** xref:PipelineRunnerRegistrar.adoc[]
 
 * Values
-** xref:PBegin.adoc[]
 ** xref:PInput.adoc[]
+*** xref:PBegin.adoc[]
+** xref:POutput.adoc[]
+*** xref:PDone.adoc[]
 ** xref:KV.adoc[]
 
 * xref:DisplayData.adoc[]
@@ -36,8 +38,6 @@
 
 * I/O Utilities
 ** xref:Create.adoc[]
-*** xref:Values.adoc[]
-*** xref:TimestampedValues.adoc[]
 ** xref:AvroIO.adoc[]
 ** xref:KafkaIO.adoc[]
 *** xref:KafkaIO-Read.adoc[]

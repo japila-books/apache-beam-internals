@@ -1,0 +1,29 @@
+= PDone
+
+`PDone` is a xref:POutput.adoc[] of xref:PTransform.adoc#output[output PTransforms].
+
+== [[creating-instance]][[pipeline]] Creating Instance
+
+PDone takes a xref:Pipeline.adoc[] to be created.
+
+PDone is created using <<in, PDone.in>> utility.
+
+== [[in]] in Utility
+
+[source,java]
+----
+PDone in(Pipeline pipeline)
+----
+
+in creates a PBegin for the given xref:Pipeline.adoc[].
+
+== [[demo]] Demo
+
+[source,scala]
+----
+import org.apache.beam.sdk.Pipeline
+val p = Pipeline.create()
+
+import org.apache.beam.sdk.values.PDone
+val done = PDone.in(p)
+----
