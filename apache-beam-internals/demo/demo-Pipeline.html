@@ -90,6 +90,12 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="../DoFn.html">DoFn</a>
   </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../DoFn-WindowedContext.html">WindowedContext</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../DoFn-ProcessContext.html">ProcessContext</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -405,7 +411,8 @@ org.apache.beam.sdk.Pipeline
 // Create.Values is a root PTransform
 // Add the root PTransform to the pipeline
 import org.apache.beam.sdk.transforms.Create
-val filepatterns = p.apply("Read File Patterns", Create.of("/tmp/txts/*.txt", "/tmp/csvs/*.csv"))
+val paths = Create.of("/tmp/txts/*.txt", "/tmp/csvs/*.csv")
+val filepatterns = p.apply("Read File Patterns", paths)
 
 scala&gt; :type filepatterns
 org.apache.beam.sdk.values.PCollection[String]
@@ -417,6 +424,39 @@ org.apache.beam.sdk.values.PCollection[String]
 scala&gt; println(filepatterns.toString)
 File Patterns/Read(CreateSource).out [PCollection]
 
+// Println the input to the console
+import org.apache.beam.sdk.transforms.DoFn
+import org.apache.beam.sdk.transforms.DoFn._
+val printlnDoFn = new DoFn[String, String]() {
+  @ProcessElement
+  def processElement(ctx: ProcessContext): Unit = {
+    val element = ctx.element()
+    println(s"[printlnDoFn] &gt;&gt;&gt; $element")
+    ctx.output(element)
+  }
+}
+import org.apache.beam.sdk.transforms.ParDo
+val doPrintln = ParDo.of(printlnDoFn)
+
+scala&gt; :type doPrintln
+org.apache.beam.sdk.transforms.ParDo.SingleOutput[Int,Int]
+
+val pathsPrintlnd = filepatterns.apply("Println Paths", doPrintln)
+
+scala&gt; :type pathsPrintlnd
+org.apache.beam.sdk.values.PCollection[String]
+
+val logElementsDoFn = new DoFn[String, String]() {
+  @ProcessElement
+  def processElement(@Element element: String): Unit = {
+    println(s"[logElementsDoFn] &gt;&gt;&gt; $element")
+  }
+}
+import org.apache.beam.sdk.transforms.ParDo
+val logElements = ParDo.of(logElementsDoFn)
+
+val elementsLogged = pathsPrintlnd.apply("Log Elements to Console", logElements)
+
 import org.apache.beam.sdk.io.TextIO
 val counts = TextIO.write().to("counts.txt")
 
@@ -426,7 +466,7 @@ org.apache.beam.sdk.io.TextIO.Write
 // TextIO.Write is a output PTransform
 assert(counts.isInstanceOf[PTransform[_, _]])
 
-val out = filepatterns.apply("Write to counts.txt", counts)
+val out = elementsLogged.apply("Write to counts.txt", counts)
 
 scala&gt; :type out
 org.apache.beam.sdk.values.PDone

@@ -90,6 +90,12 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="DoFn.html">DoFn</a>
   </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="DoFn-WindowedContext.html">WindowedContext</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="DoFn-ProcessContext.html">ProcessContext</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -446,8 +452,17 @@ val multiplyBy2 = new DoFn[Int, Int]() {
     element * 2
   }
 }
+
 import org.apache.beam.sdk.transforms.ParDo
-val multipliedByTwo = nums.apply("Multiply By Two", ParDo.of(multiplyBy2))</code></pre>
+val singleOutput = ParDo.of(multiplyBy2)
+
+scala&gt; :type singleOutput
+org.apache.beam.sdk.transforms.ParDo.SingleOutput[Int,Int]
+
+val multipliedByTwo = nums.apply("Multiply By Two", singleOutput)
+
+scala&gt; :type multipliedByTwo
+org.apache.beam.sdk.values.PCollection[Int]</code></pre>
 </div>
 </div>
 </div>

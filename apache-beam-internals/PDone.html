@@ -90,6 +90,12 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="DoFn.html">DoFn</a>
   </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="DoFn-WindowedContext.html">WindowedContext</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="DoFn-ProcessContext.html">ProcessContext</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -396,7 +402,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>PDone</code> is a <a href="POutput.html" class="page">POutput</a> of <a href="PTransform.html#output" class="page">output PTransforms</a>.</p>
+<p><code>PDone</code> is a <a href="POutput.html" class="page">POutput</a> (of <a href="PTransform.html#output" class="page">output PTransforms</a>).</p>
 </div>
 </div>
 </div>
@@ -416,11 +422,12 @@
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PDone in(Pipeline pipeline)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PDone in(
+  Pipeline pipeline)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>in creates a PBegin for the given <a href="Pipeline.html" class="page">Pipeline</a>.</p>
+<p>in creates a PDone for the given <a href="Pipeline.html" class="page">Pipeline</a>.</p>
 </div>
 </div>
 </div>
