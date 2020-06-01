@@ -1,6 +1,6 @@
 = PDone
 
-`PDone` is a xref:POutput.adoc[] of xref:PTransform.adoc#output[output PTransforms].
+`PDone` is a xref:POutput.adoc[] (of xref:PTransform.adoc#output[output PTransforms]).
 
 == [[creating-instance]][[pipeline]] Creating Instance
 
@@ -12,10 +12,11 @@ PDone is created using <<in, PDone.in>> utility.
 
 [source,java]
 ----
-PDone in(Pipeline pipeline)
+PDone in(
+  Pipeline pipeline)
 ----
 
-in creates a PBegin for the given xref:Pipeline.adoc[].
+in creates a PDone for the given xref:Pipeline.adoc[].
 
 == [[demo]] Demo
 

@@ -1,6 +1,6 @@
 = PBegin
 
-`PBegin` is a marker xref:PInput.adoc[] of xref:PTransform.adoc#root[root PTransforms].
+`PBegin` is a marker xref:PInput.adoc[] (of xref:PTransform.adoc#root[root PTransforms]).
 
 == [[creating-instance]][[pipeline]] Creating Instance
 

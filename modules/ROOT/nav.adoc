@@ -7,6 +7,8 @@
 ** xref:MapElements.adoc[]
 ** xref:ParDo.adoc[]
 *** xref:DoFn.adoc[]
+*** xref:DoFn-WindowedContext.adoc[]
+*** xref:DoFn-ProcessContext.adoc[]
 
 * xref:Pipeline.adoc[]
 ** xref:TransformHierarchy.adoc[]

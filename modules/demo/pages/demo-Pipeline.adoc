@@ -27,6 +27,39 @@ org.apache.beam.sdk.values.PCollection[String]
 scala> println(filepatterns.toString)
 File Patterns/Read(CreateSource).out [PCollection]
 
+// Println the input to the console
+import org.apache.beam.sdk.transforms.DoFn
+import org.apache.beam.sdk.transforms.DoFn._
+val printlnDoFn = new DoFn[String, String]() {
+  @ProcessElement
+  def processElement(ctx: ProcessContext): Unit = {
+    val element = ctx.element()
+    println(s"[printlnDoFn] >>> $element")
+    ctx.output(element)
+  }
+}
+import org.apache.beam.sdk.transforms.ParDo
+val doPrintln = ParDo.of(printlnDoFn)
+
+scala> :type doPrintln
+org.apache.beam.sdk.transforms.ParDo.SingleOutput[Int,Int]
+
+val pathsPrintlnd = filepatterns.apply("Println Paths", doPrintln)
+
+scala> :type pathsPrintlnd
+org.apache.beam.sdk.values.PCollection[String]
+
+val logElementsDoFn = new DoFn[String, String]() {
+  @ProcessElement
+  def processElement(@Element element: String): Unit = {
+    println(s"[logElementsDoFn] >>> $element")
+  }
+}
+import org.apache.beam.sdk.transforms.ParDo
+val logElements = ParDo.of(logElementsDoFn)
+
+val elementsLogged = pathsPrintlnd.apply("Log Elements to Console", logElements)
+
 import org.apache.beam.sdk.io.TextIO
 val counts = TextIO.write().to("counts.txt")
 
@@ -36,7 +69,7 @@ org.apache.beam.sdk.io.TextIO.Write
 // TextIO.Write is a output PTransform
 assert(counts.isInstanceOf[PTransform[_, _]])
 
-val out = filepatterns.apply("Write to counts.txt", counts)
+val out = elementsLogged.apply("Write to counts.txt", counts)
 
 scala> :type out
 org.apache.beam.sdk.values.PDone

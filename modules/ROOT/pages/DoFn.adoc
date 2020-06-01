@@ -1,3 +1,34 @@
 = DoFn
 
 `DoFn<InputT, OutputT>` is an abstraction of...FIXME
+
+== [[demo-Element]] Demo: @Element
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.transforms.DoFn
+import org.apache.beam.sdk.transforms.DoFn._
+val multiplyBy2 = new DoFn[Int, Int]() {
+  // Must return void or ProcessContinuation
+  @ProcessElement
+  def processElement(@Element element: Int): Unit = {
+    element * 2
+  }
+}
+----
+
+== [[demo-ProcessContext]] Demo ProcessContext
+
+[source,scala]
+----
+import org.apache.beam.sdk.transforms.DoFn
+import org.apache.beam.sdk.transforms.DoFn._
+val printlnDoFn = new DoFn[String, String]() {
+  @ProcessElement
+  def processElement(ctx: ProcessContext): Unit = {
+    val element = ctx.element()
+    println(s"[printlnDoFn] >>> $element")
+    ctx.output(element)
+  }
+}
+----
