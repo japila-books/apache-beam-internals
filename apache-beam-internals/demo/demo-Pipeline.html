@@ -397,44 +397,36 @@
 <pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.Pipeline
 val p = Pipeline.create()
 
-// DEBUG Pipeline: Creating Pipeline#485965679
+// DEBUG Pipeline: Creating Pipeline#654533401
 
 scala&gt; :type p
 org.apache.beam.sdk.Pipeline
 
-import org.apache.beam.sdk.io.TextIO
-val lines = TextIO.read().from("*.txt")
-
-scala&gt; :type lines
-org.apache.beam.sdk.io.TextIO.Read
-
-// TextIO.Read extends PTransform&lt;PBegin, PCollection&lt;String&gt;&gt;
-// PBegin marks a source PTransform
-import org.apache.beam.sdk.transforms.PTransform
-assert(lines.isInstanceOf[PTransform[_, _]])
-
+// Create.Values is a root PTransform
 // Add the root PTransform to the pipeline
-val in = p.apply("Read Text Files", lines)
+import org.apache.beam.sdk.transforms.Create
+val filepatterns = p.apply("Read File Patterns", Create.of("/tmp/txts/*.txt", "/tmp/csvs/*.csv"))
 
-// DEBUG Pipeline: Adding TextIO.Read to Pipeline#485965679
-// DEBUG Pipeline: Adding Read(CompressedSource) to Pipeline#485965679
-
-scala&gt; :type in
+scala&gt; :type filepatterns
 org.apache.beam.sdk.values.PCollection[String]
 
-scala&gt; println(in.toString)
-Read Text Files/Read.out [PCollection]
+// DEBUG Pipeline: Adding Create.Values to Pipeline#654533401
+// DEBUG CoderRegistry: Coder for java.lang.String: StringUtf8Coder
+// DEBUG Pipeline: Adding Read(CreateSource) to Pipeline#654533401
 
+scala&gt; println(filepatterns.toString)
+File Patterns/Read(CreateSource).out [PCollection]
+
+import org.apache.beam.sdk.io.TextIO
 val counts = TextIO.write().to("counts.txt")
 
 scala&gt; :type counts
 org.apache.beam.sdk.io.TextIO.Write
 
-// TextIO.Write extends PTransform&lt;PCollection&lt;String&gt;, PDone&gt;
-// PDone marks a sink PTransform
+// TextIO.Write is a output PTransform
 assert(counts.isInstanceOf[PTransform[_, _]])
 
-val out = in.apply("Write to counts.txt", counts)
+val out = filepatterns.apply("Write to counts.txt", counts)
 
 scala&gt; :type out
 org.apache.beam.sdk.values.PDone
@@ -443,14 +435,15 @@ assert(out.getPipeline == p)
 
 val result = p.run()
 
-// DEBUG Pipeline: Running Pipeline#1238410324 via org.apache.beam.runners.direct.DirectRunner@58b5fd5b
+// DEBUG Pipeline: Running Pipeline#654533401 via org.apache.beam.runners.direct.DirectRunner@5f23cad5
 // DEBUG TransformHierarchy: Visiting composite node RootNode
+// ...
 // DEBUG ExecutorServiceParallelExecutor: Pipeline has terminated. Shutting down.
 
-result.waitUntilFinish()
+val state = result.waitUntilFinish()
 
-import org.apache.beam.sdk.metrics.MetricResults
-val metrics = result.metrics</code></pre>
+import org.apache.beam.sdk.PipelineResult.State
+assert(state == State.DONE)</code></pre>
 </div>
 </div>
 </article>

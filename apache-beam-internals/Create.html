@@ -485,7 +485,10 @@ val nums = Create.of(0, 1, 2, 3, 4, 5)
 scala&gt; :type nums
 org.apache.beam.sdk.transforms.Create.Values[Int]
 
-p.apply("Input Numbers", nums)</code></pre>
+val input = p.apply("Input Numbers", nums)
+
+scala&gt; :type input
+org.apache.beam.sdk.values.PCollection[Int]</code></pre>
 </div>
 </div>
 </div>
