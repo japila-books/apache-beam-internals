@@ -2,15 +2,6 @@
 
 `TextIO` is a utility to create xref:PTransform.adoc[]s for <<read, reading>> and <<write, writing>> text files.
 
-[source,plain]
-----
-import org.apache.beam.sdk.io.TextIO
-val lines = TextIO.read().from("*.txt")
-
-scala> :type lines
-org.apache.beam.sdk.io.TextIO.Read
-----
-
 == [[read]] Reading Bounded PCollection -- read Utility
 
 [source,java]
@@ -28,3 +19,26 @@ Write write()
 ----
 
 write creates a xref:PTransform.adoc#sink[sink PTransform] (`PTransform<PCollection<String>, PDone>`).
+
+== [[demo]] Demo
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.io.TextIO
+val lines = TextIO.read().from("*.txt")
+
+scala> :type lines
+org.apache.beam.sdk.io.TextIO.Read
+
+// TextIO.Read is a root PTransform
+import org.apache.beam.sdk.transforms.PTransform
+assert(lines.isInstanceOf[PTransform[_, _]])
+
+val counts = TextIO.write().to("counts.txt")
+
+scala> :type counts
+org.apache.beam.sdk.io.TextIO.Write
+
+// TextIO.Write is a output PTransform
+assert(counts.isInstanceOf[PTransform[_, _]])
+----

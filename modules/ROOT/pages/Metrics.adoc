@@ -6,7 +6,12 @@ Metrics are `Counters`, `Distributions`, `Gauges` and can be created using `Metr
 
 A Metric is associated with a namespace and has a name.
 
-```plaintext
+MetricResults (available using `PipelineResults.metrics`) allow for querying metrics.
+
+== [[demo]] Demo
+
+[source,plaintext]
+----
 import org.apache.beam.sdk.metrics.Metrics
 // using String to make the sample "doable" without creating a proper class
 val counter = Metrics.counter(classOf[String], "my-counter")
@@ -19,6 +24,13 @@ scala> counter.inc
 
 import org.apache.beam.sdk.metrics.MetricsEnvironment
 MetricsEnvironment.setMetricsSupported(true)
-```
+----
 
-`MetricResults` (available using `PipelineResults.metrics`) allow for querying metrics.
+[source,plaintext]
+----
+scala> :type result
+org.apache.beam.sdk.PipelineResult
+
+import org.apache.beam.sdk.metrics.MetricResults
+val metrics = result.metrics
+----

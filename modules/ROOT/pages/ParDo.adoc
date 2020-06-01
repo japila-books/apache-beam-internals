@@ -40,6 +40,15 @@ val multiplyBy2 = new DoFn[Int, Int]() {
     element * 2
   }
 }
+
 import org.apache.beam.sdk.transforms.ParDo
-val multipliedByTwo = nums.apply("Multiply By Two", ParDo.of(multiplyBy2))
+val singleOutput = ParDo.of(multiplyBy2)
+
+scala> :type singleOutput
+org.apache.beam.sdk.transforms.ParDo.SingleOutput[Int,Int]
+
+val multipliedByTwo = nums.apply("Multiply By Two", singleOutput)
+
+scala> :type multipliedByTwo
+org.apache.beam.sdk.values.PCollection[Int]
 ----

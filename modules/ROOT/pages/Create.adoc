@@ -71,7 +71,10 @@ val nums = Create.of(0, 1, 2, 3, 4, 5)
 scala> :type nums
 org.apache.beam.sdk.transforms.Create.Values[Int]
 
-p.apply("Input Numbers", nums)
+val input = p.apply("Input Numbers", nums)
+
+scala> :type input
+org.apache.beam.sdk.values.PCollection[Int]
 ----
 
 == [[Values]] Values Root PTransform
