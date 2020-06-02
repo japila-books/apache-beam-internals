@@ -1,6 +1,6 @@
 = SparkStructuredStreamingPipelineOptions
 
-`SparkStructuredStreamingPipelineOptions` is a xref:ROOT:PipelineOptions.adoc[] of Spark configurations (e.g. `masterURL`) for xref:SparkStructuredStreamingRunner.adoc[].
+`SparkStructuredStreamingPipelineOptions` is a xref:ROOT:PipelineOptions.adoc[] of Spark configurations (e.g. `masterURL`) for xref:spark/SparkStructuredStreamingRunner.adoc[].
 
 [source,plaintext]
 ----

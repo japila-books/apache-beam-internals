@@ -1,0 +1,12 @@
+= DirectPipelineResult
+
+`DirectPipelineResult` is a xref:ROOT:PipelineResult.adoc[] of xref:direct/DirectRunner.adoc[].
+
+== [[creating-instance]] Creating Instance
+
+DirectPipelineResult takes the following to be created:
+
+* [[executor]] xref:direct/PipelineExecutor.adoc[]
+* [[evaluationContext]] xref:direct/EvaluationContext.adoc[]
+
+DirectPipelineResult is created when DirectRunner is requested to xref:direct/DirectRunner.adoc#run[run a pipeline].

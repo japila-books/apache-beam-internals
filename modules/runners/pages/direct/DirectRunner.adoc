@@ -1,6 +1,6 @@
 = DirectRunner
 
-`DirectRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces a xref:DirectPipelineResult.adoc[].
+`DirectRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces a xref:direct/DirectPipelineResult.adoc[].
 
 == [[run]] Running Pipeline
 

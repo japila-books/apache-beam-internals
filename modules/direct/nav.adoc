@@ -1,5 +1,0 @@
-* Direct Runner
-** xref:DirectRunner.adoc[]
-** xref:DirectPipelineResult.adoc[]
-** xref:PipelineExecutor.adoc[]
-** xref:EvaluationContext.adoc[]

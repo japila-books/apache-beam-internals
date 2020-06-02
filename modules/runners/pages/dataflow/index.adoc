@@ -1,7 +1,7 @@
 = Beam Runner for Google Cloud Dataflow
 :navtitle: Google Cloud Dataflow
 
-Beam applications can be executed on https://cloud.google.com/dataflow[Google Cloud Dataflow] using xref:DataflowRunner.adoc[].
+Beam applications can be executed on https://cloud.google.com/dataflow[Google Cloud Dataflow] using xref:dataflow/DataflowRunner.adoc[].
 
 == [[dependencies]] Dependencies
 
@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
   "com.google.guava" % "guava" % "29.0-jre")
 ----
 
-== [[example]] Example
+== [[demo]] Demo
 
 [source,scala]
 ----

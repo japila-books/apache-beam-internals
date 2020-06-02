@@ -1,3 +1,0 @@
-* Spark Runner
-** xref:SparkStructuredStreamingRunner.adoc[]
-** xref:SparkStructuredStreamingPipelineOptions.adoc[]

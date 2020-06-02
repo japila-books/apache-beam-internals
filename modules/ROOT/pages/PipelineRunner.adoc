@@ -33,10 +33,10 @@ org.apache.beam.sdk.PipelineRunner[_ <: org.apache.beam.sdk.PipelineResult]
 | PipelineRunner
 | Description
 
-| xref:runners:DataflowRunner.adoc[]
+| xref:runners:dataflow/DataflowRunner.adoc[]
 | [[DataflowRunner]]
 
-| xref:direct:DirectRunner.adoc[]
+| xref:runners:direct/DirectRunner.adoc[]
 | [[DirectRunner]]
 
 | FlinkRunner
@@ -48,7 +48,7 @@ org.apache.beam.sdk.PipelineRunner[_ <: org.apache.beam.sdk.PipelineResult]
 | SparkRunnerDebugger
 | [[SparkRunnerDebugger]]
 
-| xref:spark:SparkStructuredStreamingRunner.adoc[]
+| xref:runners:spark/SparkStructuredStreamingRunner.adoc[]
 | [[SparkStructuredStreamingRunner]]
 
 | TestSparkRunner

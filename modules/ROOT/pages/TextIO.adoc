@@ -25,7 +25,7 @@ write creates a xref:PTransform.adoc#sink[sink PTransform] (`PTransform<PCollect
 [source,plaintext]
 ----
 import org.apache.beam.sdk.io.TextIO
-val lines = TextIO.read().from("*.txt")
+val lines = TextIO.read().withHintMatchesManyFiles().from("*.txt")
 
 scala> :type lines
 org.apache.beam.sdk.io.TextIO.Read

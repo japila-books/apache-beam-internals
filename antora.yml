@@ -6,8 +6,6 @@ start_page: index.adoc
 nav:
 - modules/ROOT/nav.adoc
 - modules/runners/nav.adoc
-- modules/direct/nav.adoc
-- modules/spark/nav.adoc
 - modules/coders/nav.adoc
 - modules/demo/nav.adoc
 - modules/misc/nav.adoc

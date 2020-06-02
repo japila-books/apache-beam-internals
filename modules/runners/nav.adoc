@@ -1,6 +1,16 @@
 * Runners
 
 ** xref:dataflow/index.adoc[]
-*** xref:DataflowRunner.adoc[]
-*** xref:DataflowPipelineOptions.adoc[]
-*** xref:DataflowPipelineJob.adoc[]
+*** xref:dataflow/DataflowRunner.adoc[]
+*** xref:dataflow/DataflowPipelineOptions.adoc[]
+*** xref:dataflow/DataflowPipelineJob.adoc[]
+
+** Direct Runner
+*** xref:direct/DirectRunner.adoc[]
+*** xref:direct/DirectPipelineResult.adoc[]
+*** xref:direct/PipelineExecutor.adoc[]
+*** xref:direct/EvaluationContext.adoc[]
+
+** Spark Runner
+*** xref:spark/SparkStructuredStreamingRunner.adoc[]
+*** xref:spark/SparkStructuredStreamingPipelineOptions.adoc[]

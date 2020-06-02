@@ -1,12 +1,12 @@
 = DataflowRunner
 
-`DataflowRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces a xref:DataflowPipelineJob.adoc[].
+`DataflowRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces a xref:dataflow/DataflowPipelineJob.adoc[].
 
 DataflowRunner requires that *appName* option is defined.
 
 == [[creating-instance]][[options]] Creating Instance
 
-DataflowRunner takes a single xref:DataflowPipelineOptions.adoc[] to be created.
+DataflowRunner takes a single xref:dataflow/DataflowPipelineOptions.adoc[] to be created.
 
 DataflowRunner is created using <<fromOptions, fromOptions>> utility.
 

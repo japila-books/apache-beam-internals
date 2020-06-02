@@ -2,9 +2,10 @@
 
 `SparkStructuredStreamingRunner` is a xref:ROOT:PipelineRunner.adoc[] that produces a SparkStructuredStreamingPipelineResult.
 
-SparkStructuredStreamingRunner can be configured using xref:SparkStructuredStreamingPipelineOptions.adoc[].
+SparkStructuredStreamingRunner can be configured using xref:spark/SparkStructuredStreamingPipelineOptions.adoc[].
 
-```scala
+[source,scala]
+----
 import org.apache.beam.sdk.options.PipelineOptionsFactory
 import org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingPipelineOptions
 val opts = PipelineOptionsFactory.as(classOf[SparkStructuredStreamingPipelineOptions])
@@ -27,23 +28,24 @@ r.waitUntilFinish
 
 import org.apache.beam.sdk.PipelineResult
 assert(r.getState == PipelineResult.State.DONE)
-```
+----
 
 TODO How to configure SparkStructuredStreamingRunner logger?
 
-SparkStructuredStreamingRunner uses xref:SparkStructuredStreamingPipelineOptions.adoc[].
+SparkStructuredStreamingRunner uses xref:spark/SparkStructuredStreamingPipelineOptions.adoc[].
 
-```scala
+[source,scala]
+----
 import org.apache.beam.runners.spark.structuredstreaming.SparkStructuredStreamingRunner
 val runner = SparkStructuredStreamingRunner.create
-```
+----
 
 SparkStructuredStreamingRunner supports two modes of execution:
 
 * *batch* (default)
 * *streaming*
 
-Unbounded xref:PCollection.adoc[PCollections] in a xref:ROOT:Pipeline.adoc[] will automatically switch execution from the default batch mode to streaming. You can turn it on using `streaming` option (part of `StreamingOptions` options).
+Unbounded xref:ROOT:PCollection.adoc[PCollections] in a xref:ROOT:Pipeline.adoc[] will automatically switch execution from the default batch mode to streaming. You can turn it on using `streaming` option (part of `StreamingOptions` options).
 
 `PipelineTranslatorStreaming` is used for streaming mode while `PipelineTranslatorBatch` for batch mode.
 
