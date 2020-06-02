@@ -1,3 +1,9 @@
 = TransformHierarchy
 
 `TransformHierarchy` is...FIXME
+
+== [[creating-instance]] Creating Instance
+
+TransformHierarchy takes no arguments to be created.
+
+TransformHierarchy is created for xref:Pipeline.adoc#transforms[Pipeline].

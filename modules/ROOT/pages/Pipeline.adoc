@@ -58,10 +58,20 @@ validate...FIXME
 
 Pipeline takes the following to be created:
 
-* [[transforms]] xref:TransformHierarchy.adoc[]
+* <<transforms, TransformHierarchy>>
 * [[options]][[defaultOptions]] xref:PipelineOptions.adoc[]
 
 Pipeline cannot be created directly and can only be created using <<create, Pipeline.create>> utility.
+
+== [[transforms]] TransformHierarchy
+
+Pipeline is given a xref:TransformHierarchy.adoc[] when created.
+
+Pipeline uses the TransformHierarchy for the following:
+
+* <<traverseTopologically, traverseTopologically>>
+* <<applyInternal, applyInternal>>
+* <<applyReplacement, applyReplacement>>
 
 == [[applyTransform]] applyTransform Utility
 
@@ -85,9 +95,13 @@ OutputT applyTransform(
 
 applyTransform...FIXME
 
-applyTransform is used when Pipeline is requested to <<applyTransform, applyTransform>>.
+applyTransform is used when:
 
-== [[applyInternal]] applyInternal Method
+* Create.TimestampedValues (PTransform) is requested to expand
+
+* PInputs are requested to apply a PTransform
+
+== [[applyInternal]] applyInternal Internal Method
 
 [source,java]
 ----
@@ -118,3 +132,63 @@ void applyReplacement(
 ----
 
 applyReplacement...FIXME
+
+== [[traverseTopologically]] traverseTopologically Method
+
+[source,java]
+----
+void traverseTopologically(
+  PipelineVisitor visitor)
+----
+
+traverseTopologically...FIXME
+
+traverseTopologically is used (mainly but not exclusively) when Pipeline is requested to <<checkNoMoreMatches, checkNoMoreMatches>>, <<replace, replace>>, <<validate, validate>>.
+
+== [[validate]] validate Internal Method
+
+[source,java]
+----
+void validate(
+  PipelineOptions options)
+----
+
+validate...FIXME
+
+validate is used when Pipeline is requested to <<run, run>>.
+
+== [[replaceAll]] replaceAll Method
+
+[source,java]
+----
+void replaceAll(
+  List<PTransformOverride> overrides)
+----
+
+replaceAll...FIXME
+
+replaceAll is used in tests only.
+
+=== [[replace]] replace Internal Method
+
+[source,java]
+----
+void replace(
+  PTransformOverride override)
+----
+
+replace...FIXME
+
+replace is used Pipeline is requested to <<replaceAll, replaceAll>>
+
+=== [[checkNoMoreMatches]] checkNoMoreMatches Internal Method
+
+[source,java]
+----
+void checkNoMoreMatches(
+  List<PTransformOverride> overrides)
+----
+
+checkNoMoreMatches...FIXME
+
+checkNoMoreMatches is used Pipeline is requested to <<replaceAll, replaceAll>>.
