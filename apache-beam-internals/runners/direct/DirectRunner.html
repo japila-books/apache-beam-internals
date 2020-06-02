@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>GroupByKey :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/GroupByKey.html">
+    <title>DirectRunner :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/runners/direct/DirectRunner.html">
     <meta name="generator" content="Antora 2.3.1">
-    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
     <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','UA-151208281-2')</script>
   </head>
@@ -63,38 +63,38 @@
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Apache Beam</a></h3>
+    <h3 class="title"><a href="../../index.html">Apache Beam</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="intro.html">Introduction</a>
+    <a class="nav-link" href="../../intro.html">Introduction</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PCollection.html">PCollection</a>
+    <a class="nav-link" href="../../PCollection.html">PCollection</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PTransform.html">PTransform</a>
+    <a class="nav-link" href="../../PTransform.html">PTransform</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="GroupByKey.html">GroupByKey</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../GroupByKey.html">GroupByKey</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="MapElements.html">MapElements</a>
+    <a class="nav-link" href="../../MapElements.html">MapElements</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="ParDo.html">ParDo</a>
+    <a class="nav-link" href="../../ParDo.html">ParDo</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="DoFn.html">DoFn</a>
+    <a class="nav-link" href="../../DoFn.html">DoFn</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="DoFn-WindowedContext.html">WindowedContext</a>
+    <a class="nav-link" href="../../DoFn-WindowedContext.html">WindowedContext</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="DoFn-ProcessContext.html">ProcessContext</a>
+    <a class="nav-link" href="../../DoFn-ProcessContext.html">ProcessContext</a>
   </li>
 </ul>
   </li>
@@ -102,34 +102,34 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="Pipeline.html">Pipeline</a>
+    <a class="nav-link" href="../../Pipeline.html">Pipeline</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="TransformHierarchy.html">TransformHierarchy</a>
+    <a class="nav-link" href="../../TransformHierarchy.html">TransformHierarchy</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="PipelineResult.html">PipelineResult</a>
+    <a class="nav-link" href="../../PipelineResult.html">PipelineResult</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PipelineOptions.html">PipelineOptions</a>
+    <a class="nav-link" href="../../PipelineOptions.html">PipelineOptions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineOptionsFactory.html">PipelineOptionsFactory</a>
+    <a class="nav-link" href="../../PipelineOptionsFactory.html">PipelineOptionsFactory</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
+    <a class="nav-link" href="../../PipelineOptionsRegistrar.html">PipelineOptionsRegistrar</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PipelineRunner.html">PipelineRunner</a>
+    <a class="nav-link" href="../../PipelineRunner.html">PipelineRunner</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
+    <a class="nav-link" href="../../PipelineRunnerRegistrar.html">PipelineRunnerRegistrar</a>
   </li>
 </ul>
   </li>
@@ -139,70 +139,70 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="PInput.html">PInput</a>
+    <a class="nav-link" href="../../PInput.html">PInput</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="PBegin.html">PBegin</a>
+    <a class="nav-link" href="../../PBegin.html">PBegin</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="POutput.html">POutput</a>
+    <a class="nav-link" href="../../POutput.html">POutput</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="PDone.html">PDone</a>
+    <a class="nav-link" href="../../PDone.html">PDone</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="KV.html">KV</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="DisplayData.html">DisplayData</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="HasDisplayData.html">HasDisplayData</a>
+    <a class="nav-link" href="../../KV.html">KV</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="Read.html">Read</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../DisplayData.html">DisplayData</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../HasDisplayData.html">HasDisplayData</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../Read.html">Read</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="Source.html">Source</a>
+    <a class="nav-link" href="../../Source.html">Source</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="BoundedSource.html">BoundedSource</a>
+    <a class="nav-link" href="../../BoundedSource.html">BoundedSource</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="OffsetBasedSource.html">OffsetBasedSource</a>
+    <a class="nav-link" href="../../OffsetBasedSource.html">OffsetBasedSource</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="FileBasedSource.html">FileBasedSource</a>
+    <a class="nav-link" href="../../FileBasedSource.html">FileBasedSource</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="BlockBasedSource.html">BlockBasedSource</a>
+    <a class="nav-link" href="../../BlockBasedSource.html">BlockBasedSource</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="CompressedSource.html">CompressedSource</a>
+    <a class="nav-link" href="../../CompressedSource.html">CompressedSource</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="TextSource.html">TextSource</a>
+    <a class="nav-link" href="../../TextSource.html">TextSource</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="UnboundedSource.html">UnboundedSource</a>
+    <a class="nav-link" href="../../UnboundedSource.html">UnboundedSource</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="CheckpointMark.html">CheckpointMark</a>
+    <a class="nav-link" href="../../CheckpointMark.html">CheckpointMark</a>
   </li>
 </ul>
   </li>
@@ -213,30 +213,30 @@
     <span class="nav-text">I/O Utilities</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="Create.html">Create</a>
+    <a class="nav-link" href="../../Create.html">Create</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="AvroIO.html">AvroIO</a>
+    <a class="nav-link" href="../../AvroIO.html">AvroIO</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="KafkaIO.html">KafkaIO</a>
+    <a class="nav-link" href="../../KafkaIO.html">KafkaIO</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="KafkaIO-Read.html">Read</a>
+    <a class="nav-link" href="../../KafkaIO-Read.html">Read</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="KafkaIO-Write.html">Write</a>
+    <a class="nav-link" href="../../KafkaIO-Write.html">Write</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="TextIO.html">TextIO</a>
+    <a class="nav-link" href="../../TextIO.html">TextIO</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="Metrics.html">Metrics</a>
+    <a class="nav-link" href="../../Metrics.html">Metrics</a>
   </li>
 </ul>
   </li>
@@ -248,16 +248,16 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="runners/dataflow/index.html">Google Cloud Dataflow</a>
+    <a class="nav-link" href="../dataflow/index.html">Google Cloud Dataflow</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/dataflow/DataflowRunner.html">DataflowRunner</a>
+    <a class="nav-link" href="../dataflow/DataflowRunner.html">DataflowRunner</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/dataflow/DataflowPipelineOptions.html">DataflowPipelineOptions</a>
+    <a class="nav-link" href="../dataflow/DataflowPipelineOptions.html">DataflowPipelineOptions</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/dataflow/DataflowPipelineJob.html">DataflowPipelineJob</a>
+    <a class="nav-link" href="../dataflow/DataflowPipelineJob.html">DataflowPipelineJob</a>
   </li>
 </ul>
   </li>
@@ -265,17 +265,17 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Direct Runner</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/direct/DirectRunner.html">DirectRunner</a>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="DirectRunner.html">DirectRunner</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/direct/DirectPipelineResult.html">DirectPipelineResult</a>
+    <a class="nav-link" href="DirectPipelineResult.html">DirectPipelineResult</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/direct/PipelineExecutor.html">PipelineExecutor</a>
+    <a class="nav-link" href="PipelineExecutor.html">PipelineExecutor</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/direct/EvaluationContext.html">EvaluationContext</a>
+    <a class="nav-link" href="EvaluationContext.html">EvaluationContext</a>
   </li>
 </ul>
   </li>
@@ -284,10 +284,10 @@
     <span class="nav-text">Spark Runner</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/spark/SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
+    <a class="nav-link" href="../spark/SparkStructuredStreamingRunner.html">SparkStructuredStreamingRunner</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="runners/spark/SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
+    <a class="nav-link" href="../spark/SparkStructuredStreamingPipelineOptions.html">SparkStructuredStreamingPipelineOptions</a>
   </li>
 </ul>
   </li>
@@ -299,25 +299,25 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="coders/index.html">Coders</a>
+    <a class="nav-link" href="../../coders/index.html">Coders</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/Coder.html">Coder</a>
+    <a class="nav-link" href="../../coders/Coder.html">Coder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProvider.html">CoderProvider</a>
+    <a class="nav-link" href="../../coders/CoderProvider.html">CoderProvider</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProviders.html">CoderProviders</a>
+    <a class="nav-link" href="../../coders/CoderProviders.html">CoderProviders</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/DefaultCoder.html">DefaultCoder</a>
+    <a class="nav-link" href="../../coders/DefaultCoder.html">DefaultCoder</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderRegistry.html">CoderRegistry</a>
+    <a class="nav-link" href="../../coders/CoderRegistry.html">CoderRegistry</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
+    <a class="nav-link" href="../../coders/CoderProviderRegistrar.html">CoderProviderRegistrar</a>
   </li>
 </ul>
   </li>
@@ -330,10 +330,10 @@
     <span class="nav-text">Demo</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="demo/demo-Pipeline.html">Running Pipeline</a>
+    <a class="nav-link" href="../../demo/demo-Pipeline.html">Running Pipeline</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="demo/custom-PTransform.html">Custom PTransform</a>
+    <a class="nav-link" href="../../demo/custom-PTransform.html">Custom PTransform</a>
   </li>
 </ul>
   </li>
@@ -346,10 +346,10 @@
     <span class="nav-text">Misc</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="misc/PipelineDotRenderer.html">PipelineDotRenderer</a>
+    <a class="nav-link" href="../../misc/PipelineDotRenderer.html">PipelineDotRenderer</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="misc/Building-Beam.html">Building Beam</a>
+    <a class="nav-link" href="../../misc/Building-Beam.html">Building Beam</a>
   </li>
 </ul>
   </li>
@@ -368,7 +368,7 @@
       <span class="title">Apache Beam</span>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="index.html">2.21.0</a>
+          <a href="../../index.html">2.21.0</a>
         </li>
       </ul>
     </li>
@@ -380,107 +380,38 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link"></a>
+  <a href="../../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="PTransform.html">PTransform</a></li>
-    <li><a href="GroupByKey.html">GroupByKey</a></li>
+    <li><a href="../../index.html">Apache Beam</a></li>
+    <li>Runners</li>
+    <li>Direct Runner</li>
+    <li><a href="DirectRunner.html">DirectRunner</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/GroupByKey.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/runners/pages/direct/DirectRunner.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">GroupByKey</h1>
+<h1 class="page">DirectRunner</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>GroupByKey&lt;K, V&gt;</code> is a <a href="PTransform.html" class="page">PTransform</a> of key-value pairs to produce pairs of the input keys and the associated values.</p>
-</div>
-<div class="paragraph">
-<p>In other words, GroupByKey&lt;K, V&gt; is the following:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PCollection&lt;KV&lt;K, V&gt;&gt;, PCollection&lt;KV&lt;K, Iterable&lt;V&gt;&gt;&gt;&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>that could be <em>translated</em> to the following function-oriented notation:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">PCollection&lt;KV&lt;K, V&gt;&gt; ~~[GroupByKey&lt;K, V&gt;]~~&gt; PCollection&lt;KV&lt;K, Iterable&lt;V&gt;&gt;&gt;</code></pre>
-</div>
+<p><code>DirectRunner</code> is a <a href="../../PipelineRunner.html" class="page">PipelineRunner</a> that produces a <a href="DirectPipelineResult.html" class="page">DirectPipelineResult</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="groupbykey-create-utility"><a class="anchor" href="#groupbykey-create-utility"></a><a class="link" href="#groupbykey-create-utility"><a id="create"></a> GroupByKey.create Utility</a></h2>
+<h2 id="running-pipeline"><a class="anchor" href="#running-pipeline"></a><a class="link" href="#running-pipeline"><a id="run"></a> Running Pipeline</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">GroupByKey&lt;K, V&gt; create()</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">DirectPipelineResult run(
+  Pipeline pipeline)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>create creates a GroupByKey with the <a href="#fewKeys">fewKeys</a> flag disabled (<code>false</code>).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="groupbykey-createwithfewkeys-utility"><a class="anchor" href="#groupbykey-createwithfewkeys-utility"></a><a class="link" href="#groupbykey-createwithfewkeys-utility"><a id="createWithFewKeys"></a> GroupByKey.createWithFewKeys Utility</a></h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">GroupByKey&lt;K, V&gt; createWithFewKeys()</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>createWithFewKeys creates a GroupByKey with the <a href="#fewKeys">fewKeys</a> flag enabled (<code>true</code>).</p>
-</div>
-<div class="paragraph">
-<p>createWithFewKeys is used when Combine.PerKey is requested to expand.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a><a id="fewKeys"></a> Creating Instance</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>GroupByKey takes a single <code>fewKeys</code> flag to be created.</p>
-</div>
-<div class="paragraph">
-<p>GroupByKey is created using <a href="#create">create</a> or <a href="#createWithFewKeys">createWithFewKeys</a> utilities.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.Pipeline
-val p = Pipeline.create()
-
-import org.apache.beam.sdk.transforms.Create
-import org.apache.beam.sdk.values.KV
-val kvs = Create.of(
-  KV.of(0,0),
-  KV.of(0,1),
-  KV.of(1,1))
-
-val root = p.apply("Input Key-Value Pairs", kvs)
-
-import org.apache.beam.sdk.transforms.GroupByKey
-val groupByKey = GroupByKey.create[Int, Int]
-
-scala&gt; :type groupByKey
-org.apache.beam.sdk.transforms.GroupByKey[Int,Int]
-
-val groupped = root.apply("Group Numbers", groupByKey)</code></pre>
-</div>
+<p>run is part of the <a href="../../PipelineRunner.html#run" class="page">PipelineRunner</a> abstraction.</p>
 </div>
 </div>
 </div>
@@ -495,7 +426,7 @@ val groupped = root.apply("Group Numbers", groupByKey)</code></pre>
   <p>This page was built using the Antora default UI.</p>
   <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
 </footer>
-<script src="../_/js/site.js"></script>
-<script async src="../_/js/vendor/highlight.js"></script>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
   </body>
 </html>
