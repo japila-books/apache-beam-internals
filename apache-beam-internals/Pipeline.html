@@ -490,7 +490,7 @@ PipelineResult run(
 <div class="ulist">
 <ul>
 <li>
-<p><a id="transforms"></a> <a href="TransformHierarchy.html" class="page">TransformHierarchy</a></p>
+<p><a href="#transforms">TransformHierarchy</a></p>
 </li>
 <li>
 <p><a id="options"></a><a id="defaultOptions"></a> <a href="PipelineOptions.html" class="page">PipelineOptions</a></p>
@@ -499,6 +499,30 @@ PipelineResult run(
 </div>
 <div class="paragraph">
 <p>Pipeline cannot be created directly and can only be created using <a href="#create">Pipeline.create</a> utility.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="transformhierarchy"><a class="anchor" href="#transformhierarchy"></a><a class="link" href="#transformhierarchy"><a id="transforms"></a> TransformHierarchy</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pipeline is given a <a href="TransformHierarchy.html" class="page">TransformHierarchy</a> when created.</p>
+</div>
+<div class="paragraph">
+<p>Pipeline uses the TransformHierarchy for the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#traverseTopologically">traverseTopologically</a></p>
+</li>
+<li>
+<p><a href="#applyInternal">applyInternal</a></p>
+</li>
+<li>
+<p><a href="#applyReplacement">applyReplacement</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -534,12 +558,22 @@ OutputT applyTransform(
 <p>applyTransform&#8230;&#8203;FIXME</p>
 </div>
 <div class="paragraph">
-<p>applyTransform is used when Pipeline is requested to <a href="#applyTransform">applyTransform</a>.</p>
+<p>applyTransform is used when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create.TimestampedValues (PTransform) is requested to expand</p>
+</li>
+<li>
+<p>PInputs are requested to apply a PTransform</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="applyinternal-method"><a class="anchor" href="#applyinternal-method"></a><a class="link" href="#applyinternal-method"><a id="applyInternal"></a> applyInternal Method</a></h2>
+<h2 id="applyinternal-internal-method"><a class="anchor" href="#applyinternal-internal-method"></a><a class="link" href="#applyinternal-internal-method"><a id="applyInternal"></a> applyInternal Internal Method</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -576,6 +610,87 @@ void applyReplacement(
 </div>
 <div class="paragraph">
 <p>applyReplacement&#8230;&#8203;FIXME</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="traversetopologically-method"><a class="anchor" href="#traversetopologically-method"></a><a class="link" href="#traversetopologically-method"><a id="traverseTopologically"></a> traverseTopologically Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void traverseTopologically(
+  PipelineVisitor visitor)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>traverseTopologically&#8230;&#8203;FIXME</p>
+</div>
+<div class="paragraph">
+<p>traverseTopologically is used (mainly but not exclusively) when Pipeline is requested to <a href="#checkNoMoreMatches">checkNoMoreMatches</a>, <a href="#replace">replace</a>, <a href="#validate">validate</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="validate-internal-method"><a class="anchor" href="#validate-internal-method"></a><a class="link" href="#validate-internal-method"><a id="validate"></a> validate Internal Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void validate(
+  PipelineOptions options)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>validate&#8230;&#8203;FIXME</p>
+</div>
+<div class="paragraph">
+<p>validate is used when Pipeline is requested to <a href="#run">run</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="replaceall-method"><a class="anchor" href="#replaceall-method"></a><a class="link" href="#replaceall-method"><a id="replaceAll"></a> replaceAll Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void replaceAll(
+  List&lt;PTransformOverride&gt; overrides)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>replaceAll&#8230;&#8203;FIXME</p>
+</div>
+<div class="paragraph">
+<p>replaceAll is used in tests only.</p>
+</div>
+<div class="sect2">
+<h3 id="replace-internal-method"><a class="anchor" href="#replace-internal-method"></a><a class="link" href="#replace-internal-method"><a id="replace"></a> replace Internal Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void replace(
+  PTransformOverride override)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>replace&#8230;&#8203;FIXME</p>
+</div>
+<div class="paragraph">
+<p>replace is used Pipeline is requested to <a href="#replaceAll">replaceAll</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checknomorematches-internal-method"><a class="anchor" href="#checknomorematches-internal-method"></a><a class="link" href="#checknomorematches-internal-method"><a id="checkNoMoreMatches"></a> checkNoMoreMatches Internal Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void checkNoMoreMatches(
+  List&lt;PTransformOverride&gt; overrides)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>checkNoMoreMatches&#8230;&#8203;FIXME</p>
+</div>
+<div class="paragraph">
+<p>checkNoMoreMatches is used Pipeline is requested to <a href="#replaceAll">replaceAll</a>.</p>
+</div>
 </div>
 </div>
 </div>
