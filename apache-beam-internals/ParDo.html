@@ -340,6 +340,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="demo/demo-Pipeline.html">Running Pipeline</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="demo/custom-PTransform.html">Custom PTransform</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -423,7 +426,7 @@
 <h2 id="pardo-singleoutput-ptransform"><a class="anchor" href="#pardo-singleoutput-ptransform"></a><a class="link" href="#pardo-singleoutput-ptransform"><a id="SingleOutput"></a> ParDo.SingleOutput PTransform</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>SingleOutput&lt;InputT, OutputT&gt;</code> is a <a href="PTransform.html" class="page">PTransform</a> that is created using <a href="#do">ParDo.of</a> utility.</p>
+<p><code>SingleOutput&lt;InputT, OutputT&gt;</code> is a <a href="PTransform.html" class="page">PTransform</a> that is created using <a href="#do">ParDo.of</a> utility (for the user-defined <a href="DoFn.html" class="page">DoFn&lt;InputT, OutputT&gt;</a> to be executed on all of the input elements of type <code>InputT</code> to produce values of type <code>OutputT</code>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
