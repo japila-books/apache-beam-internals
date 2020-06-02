@@ -1,0 +1,49 @@
+= Demo: Custom PTransform
+:navtitle: Custom PTransform
+
+[source,plaintext]
+----
+//
+// The demo DOES NOT work
+//
+
+import org.apache.beam.sdk.transforms.DoFn
+import org.apache.beam.sdk.transforms.DoFn._
+/**
+ * Displays elements to the standard output (console)
+ */
+// The following does not seem to work in Scala REPL
+// https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8057919
+// class PrintlnFn extends DoFn[Int, Unit] {
+val printlnFn = new DoFn[Int, Unit]() {
+  @Setup
+  def setup(): Unit = {
+    println(">>> PrintlnFn.setup")
+  }
+
+  @ProcessElement
+  def processElement(@Element e: Int): Unit = {
+    println(s">>> PrintlnFn.processElement($e)")
+  }
+}
+
+import org.apache.beam.sdk.transforms.PTransform
+import org.apache.beam.sdk.values.{PCollection, PDone}
+class ConsoleWrite extends PTransform[PCollection[Int], PDone] {
+  @Override
+  def expand(input: PCollection[Int]): PDone = {
+    import org.apache.beam.sdk.transforms.ParDo
+    // input.apply(ParDo.of(new PrintlnFn))
+    input.apply(ParDo.of(printlnFn))
+    PDone.in(input.getPipeline)
+  }
+}
+
+import org.apache.beam.sdk.Pipeline
+import org.apache.beam.sdk.transforms.Create
+val pipeline = Pipeline.create()
+pipeline
+  .apply("Input Numbers", Create.of(0, 1, 2, 3, 4))
+  .apply("Println Elements to Console", new ConsoleWrite)
+pipeline.run().waitUntilFinish()
+----

@@ -14,7 +14,7 @@ SingleOutput<InputT, OutputT> of(
 
 == [[SingleOutput]] ParDo.SingleOutput PTransform
 
-`SingleOutput<InputT, OutputT>` is a xref:PTransform.adoc[] that is created using <<do, ParDo.of>> utility.
+`SingleOutput<InputT, OutputT>` is a xref:PTransform.adoc[] that is created using <<do, ParDo.of>> utility (for the user-defined xref:DoFn.adoc[DoFn<InputT, OutputT>] to be executed on all of the input elements of type `InputT` to produce values of type `OutputT`).
 
 [source,java]
 ----

@@ -1,7 +1,7 @@
 = PTransform
 
 [[OutputT]][[InputT]]
-`PTransform<PInput, POutput>` is an <<contract, abstraction>> of *operations* (_transformations_ or simply _functions_) with xref:PInput.adoc[] input and xref:POutput.adoc[] output.
+`PTransform<PInput, POutput>` is an <<contract, abstraction>> of *transformations* (_operations_ or simply _functions_) with xref:PInput.adoc[] input and xref:POutput.adoc[] output.
 
 [source,plaintext]
 ----
@@ -39,6 +39,9 @@ Used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInterna
 
 | xref:MapElements.adoc[]
 | [[MapElements]]
+
+| xref:ParDo.adoc#SingleOutput[ParDo.SingleOutput]
+| [[SingleOutput]]
 
 | _others_
 |
