@@ -4,31 +4,32 @@
 
 == [[demo-Element]] Demo: @Element
 
-[source,plaintext]
+[source,scala]
 ----
 import org.apache.beam.sdk.transforms.DoFn
 import org.apache.beam.sdk.transforms.DoFn._
+// Int in, Int out
 val multiplyBy2 = new DoFn[Int, Int]() {
-  // Must return void or ProcessContinuation
   @ProcessElement
-  def processElement(@Element element: Int): Unit = {
-    element * 2
+  def process(@Element e: Int, ctx: ProcessContext): Unit = {
+    ctx.output(e * 2)
   }
 }
 ----
 
-== [[demo-ProcessContext]] Demo ProcessContext
+== [[demo-ProcessContext]] Demo: ProcessContext
 
 [source,scala]
 ----
 import org.apache.beam.sdk.transforms.DoFn
 import org.apache.beam.sdk.transforms.DoFn._
+// String in, String out
 val printlnDoFn = new DoFn[String, String]() {
   @ProcessElement
-  def processElement(ctx: ProcessContext): Unit = {
-    val element = ctx.element()
-    println(s"[printlnDoFn] >>> $element")
-    ctx.output(element)
+  def process(ctx: ProcessContext): Unit = {
+    val e = ctx.element()
+    println(s"[printlnDoFn] >>> $e")
+    ctx.output(e)
   }
 }
 ----

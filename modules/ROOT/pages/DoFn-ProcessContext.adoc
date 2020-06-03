@@ -1,5 +1,44 @@
 = ProcessContext
 
-`ProcessContext` is a xref:DoFn-WindowedContext.adoc[].
+`ProcessContext` is a xref:DoFn-WindowedContext.adoc[] that is available in a `@ProcessElement` method.
 
 ProcessContext is an inner class of xref:DoFn.adoc[].
+
+== [[contract]] Contract
+
+=== [[element]] element Method
+
+[source,java]
+----
+InputT element()
+----
+
+Used when...FIXME
+
+=== [[pane]] pane Method
+
+[source,java]
+----
+PaneInfo pane()
+----
+
+Used when...FIXME
+
+=== [[sideInput]] sideInput Method
+
+[source,java]
+----
+T sideInput(
+  PCollectionView<T> view)
+----
+
+Used when...FIXME
+
+=== [[timestamp]] timestamp Method
+
+[source,java]
+----
+Instant timestamp()
+----
+
+Used when...FIXME
