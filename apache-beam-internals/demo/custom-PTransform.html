@@ -406,16 +406,15 @@ import org.apache.beam.sdk.transforms.DoFn._
  */
 // The following does not seem to work in Scala REPL
 // https://bugs.java.com/bugdatabase/view_bug.do?bug_id=JDK-8057919
-// class PrintlnFn extends DoFn[Int, Unit] {
-val printlnFn = new DoFn[Int, Unit]() {
+class PrintlnFn extends DoFn[Int, Unit] {
   @Setup
   def setup(): Unit = {
     println("&gt;&gt;&gt; PrintlnFn.setup")
   }
 
   @ProcessElement
-  def processElement(@Element e: Int): Unit = {
-    println(s"&gt;&gt;&gt; PrintlnFn.processElement($e)")
+  def process(@Element e: Int): Unit = {
+    println(s"&gt;&gt;&gt; PrintlnFn.process($e)")
   }
 }
 
@@ -425,8 +424,7 @@ class ConsoleWrite extends PTransform[PCollection[Int], PDone] {
   @Override
   def expand(input: PCollection[Int]): PDone = {
     import org.apache.beam.sdk.transforms.ParDo
-    // input.apply(ParDo.of(new PrintlnFn))
-    input.apply(ParDo.of(printlnFn))
+    input.apply(ParDo.of(new PrintlnFn))
     PDone.in(input.getPipeline)
   }
 }

@@ -394,11 +394,65 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">ProcessContext</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p><code>ProcessContext</code> is a <a href="DoFn-WindowedContext.html" class="page">WindowedContext</a>.</p>
+<p><code>ProcessContext</code> is a <a href="DoFn-WindowedContext.html" class="page">WindowedContext</a> that is available in a <code>@ProcessElement</code> method.</p>
 </div>
 <div class="paragraph">
 <p>ProcessContext is an inner class of <a href="DoFn.html" class="page">DoFn</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contract"><a class="anchor" href="#contract"></a><a class="link" href="#contract"><a id="contract"></a> Contract</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="element-method"><a class="anchor" href="#element-method"></a><a class="link" href="#element-method"><a id="element"></a> element Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">InputT element()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Used when&#8230;&#8203;FIXME</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="pane-method"><a class="anchor" href="#pane-method"></a><a class="link" href="#pane-method"><a id="pane"></a> pane Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PaneInfo pane()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Used when&#8230;&#8203;FIXME</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sideinput-method"><a class="anchor" href="#sideinput-method"></a><a class="link" href="#sideinput-method"><a id="sideInput"></a> sideInput Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">T sideInput(
+  PCollectionView&lt;T&gt; view)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Used when&#8230;&#8203;FIXME</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="timestamp-method"><a class="anchor" href="#timestamp-method"></a><a class="link" href="#timestamp-method"><a id="timestamp"></a> timestamp Method</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Instant timestamp()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Used when&#8230;&#8203;FIXME</p>
+</div>
+</div>
+</div>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

@@ -406,13 +406,13 @@
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.transforms.DoFn
+<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.transforms.DoFn
 import org.apache.beam.sdk.transforms.DoFn._
+// Int in, Int out
 val multiplyBy2 = new DoFn[Int, Int]() {
-  // Must return void or ProcessContinuation
   @ProcessElement
-  def processElement(@Element element: Int): Unit = {
-    element * 2
+  def process(@Element e: Int, ctx: ProcessContext): Unit = {
+    ctx.output(e * 2)
   }
 }</code></pre>
 </div>
@@ -420,18 +420,19 @@ val multiplyBy2 = new DoFn[Int, Int]() {
 </div>
 </div>
 <div class="sect1">
-<h2 id="demo-processcontext"><a class="anchor" href="#demo-processcontext"></a><a class="link" href="#demo-processcontext"><a id="demo-ProcessContext"></a> Demo ProcessContext</a></h2>
+<h2 id="demo-processcontext"><a class="anchor" href="#demo-processcontext"></a><a class="link" href="#demo-processcontext"><a id="demo-ProcessContext"></a> Demo: ProcessContext</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.transforms.DoFn
 import org.apache.beam.sdk.transforms.DoFn._
+// String in, String out
 val printlnDoFn = new DoFn[String, String]() {
   @ProcessElement
-  def processElement(ctx: ProcessContext): Unit = {
-    val element = ctx.element()
-    println(s"[printlnDoFn] &gt;&gt;&gt; $element")
-    ctx.output(element)
+  def process(ctx: ProcessContext): Unit = {
+    val e = ctx.element()
+    println(s"[printlnDoFn] &gt;&gt;&gt; $e")
+    ctx.output(e)
   }
 }</code></pre>
 </div>
