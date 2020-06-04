@@ -93,15 +93,15 @@ OutputT applyTransform(
 ----
 <1> Uses the xref:PTransform.adoc#name[name] of the PTransform
 
-applyTransform...FIXME
+applyTransform requests the given xref:PInput.adoc[] for the xref:PInput.adoc#getPipeline[Pipeline] that is then requested to <<applyInternal, applyInternal>>.
 
 applyTransform is used when:
 
 * Create.TimestampedValues (PTransform) is requested to expand
 
-* PInputs are requested to apply a PTransform
+* xref:PInput.adoc[]s are requested to apply a given PTransform to themselves
 
-== [[applyInternal]] applyInternal Internal Method
+=== [[applyInternal]] applyInternal Internal Method
 
 [source,java]
 ----
@@ -114,7 +114,22 @@ OutputT applyInternal(
   PTransform<? super InputT, OutputT> transform)
 ----
 
-applyInternal...FIXME
+applyInternal requests the <<transforms, TransformHierarchy>> for the xref:TransformHierarchy.adoc#getCurrent[current node] that is then requested for the fully-qualified name of the transform.
+
+applyInternal prints out the following DEBUG message to the logs:
+
+[source,plaintext]
+----
+Adding [transform] to [pipeline]
+----
+
+applyInternal requests the <<transforms, TransformHierarchy>> to xref:TransformHierarchy.adoc#pushNode[push the node].
+
+applyInternal requests the <<transforms, TransformHierarchy>> to xref:TransformHierarchy.adoc#finishSpecifyingInput[finishSpecifyingInput].
+
+applyInternal requests the given xref:PTransform.adoc[] to xref:PTransform.adoc#expand[expand] (with the given xref:PInput.adoc[]). This gives a xref:POutput.adoc[] that is xref:TransformHierarchy.adoc#setOutput[registered] with the <<transforms, TransformHierarchy>>.
+
+applyInternal returns the POutput (and requests the <<transforms, TransformHierarchy>> to xref:TransformHierarchy.adoc#popNode[pop the node]).
 
 applyInternal is used when Pipeline is requested to <<applyTransform, applyTransform>>.
 
@@ -192,3 +207,14 @@ void checkNoMoreMatches(
 checkNoMoreMatches...FIXME
 
 checkNoMoreMatches is used Pipeline is requested to <<replaceAll, replaceAll>>.
+
+== [[logging]] Logging
+
+Enable `ALL` logging level for `org.apache.beam.sdk.Pipeline` logger to see what happens inside.
+
+Add the following line to `log4j.properties`:
+
+[source]
+----
+log4j.logger.org.apache.beam.sdk.Pipeline=ALL
+----
