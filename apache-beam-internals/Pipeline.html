@@ -555,7 +555,7 @@ OutputT applyTransform(
 </table>
 </div>
 <div class="paragraph">
-<p>applyTransform&#8230;&#8203;FIXME</p>
+<p>applyTransform requests the given <a href="PInput.html" class="page">PInput</a> for the <a href="PInput.html#getPipeline" class="page">Pipeline</a> that is then requested to <a href="#applyInternal">applyInternal</a>.</p>
 </div>
 <div class="paragraph">
 <p>applyTransform is used when:</p>
@@ -566,15 +566,12 @@ OutputT applyTransform(
 <p>Create.TimestampedValues (PTransform) is requested to expand</p>
 </li>
 <li>
-<p>PInputs are requested to apply a PTransform</p>
+<p><a href="PInput.html" class="page">PInput</a>s are requested to apply a given PTransform to themselves</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="applyinternal-internal-method"><a class="anchor" href="#applyinternal-internal-method"></a><a class="link" href="#applyinternal-internal-method"><a id="applyInternal"></a> applyInternal Internal Method</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="applyinternal-internal-method"><a class="anchor" href="#applyinternal-internal-method"></a><a class="link" href="#applyinternal-internal-method"><a id="applyInternal"></a> applyInternal Internal Method</a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">&lt;
@@ -587,10 +584,31 @@ OutputT applyInternal(
 </div>
 </div>
 <div class="paragraph">
-<p>applyInternal&#8230;&#8203;FIXME</p>
+<p>applyInternal requests the <a href="#transforms">TransformHierarchy</a> for the <a href="TransformHierarchy.html#getCurrent" class="page">current node</a> that is then requested for the fully-qualified name of the transform.</p>
+</div>
+<div class="paragraph">
+<p>applyInternal prints out the following DEBUG message to the logs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">Adding [transform] to [pipeline]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>applyInternal requests the <a href="#transforms">TransformHierarchy</a> to <a href="TransformHierarchy.html#pushNode" class="page">push the node</a>.</p>
+</div>
+<div class="paragraph">
+<p>applyInternal requests the <a href="#transforms">TransformHierarchy</a> to <a href="TransformHierarchy.html#finishSpecifyingInput" class="page">finishSpecifyingInput</a>.</p>
+</div>
+<div class="paragraph">
+<p>applyInternal requests the given <a href="PTransform.html" class="page">PTransform</a> to <a href="PTransform.html#expand" class="page">expand</a> (with the given <a href="PInput.html" class="page">PInput</a>). This gives a <a href="POutput.html" class="page">POutput</a> that is <a href="TransformHierarchy.html#setOutput" class="page">registered</a> with the <a href="#transforms">TransformHierarchy</a>.</p>
+</div>
+<div class="paragraph">
+<p>applyInternal returns the POutput (and requests the <a href="#transforms">TransformHierarchy</a> to <a href="TransformHierarchy.html#popNode" class="page">pop the node</a>).</p>
 </div>
 <div class="paragraph">
 <p>applyInternal is used when Pipeline is requested to <a href="#applyTransform">applyTransform</a>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -690,6 +708,22 @@ void applyReplacement(
 </div>
 <div class="paragraph">
 <p>checkNoMoreMatches is used Pipeline is requested to <a href="#replaceAll">replaceAll</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="logging"><a class="anchor" href="#logging"></a><a class="link" href="#logging"><a id="logging"></a> Logging</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enable <code>ALL</code> logging level for <code>org.apache.beam.sdk.Pipeline</code> logger to see what happens inside.</p>
+</div>
+<div class="paragraph">
+<p>Add the following line to <code>log4j.properties</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>log4j.logger.org.apache.beam.sdk.Pipeline=ALL</code></pre>
 </div>
 </div>
 </div>
