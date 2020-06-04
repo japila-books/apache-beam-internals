@@ -6,4 +6,91 @@
 
 TransformHierarchy takes no arguments to be created.
 
+TransformHierarchy creates empty <<producers, producers>>, <<producerInput, producerInput>> and <<unexpandedInputs, unexpandedInputs>> internal registries. TransformHierarchy creates the <<root, root node>> and makes it <<current, current>>.
+
 TransformHierarchy is created for xref:Pipeline.adoc#transforms[Pipeline].
+
+== [[getCurrent]][[current]] Current Node
+
+The current node is available using `getCurrent` method.
+
+[source,java]
+----
+Node getCurrent()
+----
+
+== [[pushNode]] pushNode Method
+
+[source,java]
+----
+Node pushNode(
+  String name,
+  PInput input,
+  PTransform<?, ?> transform)
+----
+
+pushNode is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal].
+
+== [[finishSpecifyingInput]] finishSpecifyingInput Method
+
+[source,java]
+----
+void finishSpecifyingInput()
+----
+
+finishSpecifyingInput is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal].
+
+== [[setOutput]] setOutput Method
+
+[source,java]
+----
+void setOutput(
+  POutput output)
+----
+
+setOutput is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal] and xref:Pipeline.adoc#applyReplacement[applyReplacement].
+
+== [[popNode]] popNode Method
+
+[source,java]
+----
+void popNode()
+----
+
+popNode requests the <<current, current node>> to finishSpecifying.
+
+popNode removes the <<current, current node>> from <<unexpandedInputs, unexpandedInputs>> internal registry.
+
+popNode requests the <<current, current node>> to getEnclosingNode and makes it the <<current, current node>>.
+
+popNode throws an IllegalStateException when the enclosing node is not available (`null`):
+
+[source,plaintext]
+----
+Can't pop the root node of a TransformHierarchy
+----
+
+popNode is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal] and xref:Pipeline.adoc#applyReplacement[applyReplacement].
+
+== Internal Registries
+
+=== [[unexpandedInputs]] unexpandedInputs
+
+[source,java]
+----
+Map<Node, PInput> unexpandedInputs
+----
+
+=== [[producers]] producers
+
+[source,java]
+----
+Map<POutput, Node> producers
+----
+
+=== [[producerInput]] producerInput
+
+[source,java]
+----
+Map<PValue, PInput> producerInput
+----

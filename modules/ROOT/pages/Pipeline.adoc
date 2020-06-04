@@ -99,7 +99,7 @@ applyTransform is used when:
 
 * Create.TimestampedValues (PTransform) is requested to expand
 
-* xref:PInput.adoc[]s are requested to apply a given PTransform to themselves
+* xref:PInput.adoc[]s are requested to apply a given PTransform
 
 === [[applyInternal]] applyInternal Internal Method
 
