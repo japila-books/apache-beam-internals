@@ -407,7 +407,125 @@
 <p>TransformHierarchy takes no arguments to be created.</p>
 </div>
 <div class="paragraph">
+<p>TransformHierarchy creates empty <a href="#producers">producers</a>, <a href="#producerInput">producerInput</a> and <a href="#unexpandedInputs">unexpandedInputs</a> internal registries. TransformHierarchy creates the <a href="#root">root node</a> and makes it <a href="#current">current</a>.</p>
+</div>
+<div class="paragraph">
 <p>TransformHierarchy is created for <a href="Pipeline.html#transforms" class="page">Pipeline</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="current-node"><a class="anchor" href="#current-node"></a><a class="link" href="#current-node"><a id="getCurrent"></a><a id="current"></a> Current Node</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The current node is available using <code>getCurrent</code> method.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Node getCurrent()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pushnode-method"><a class="anchor" href="#pushnode-method"></a><a class="link" href="#pushnode-method"><a id="pushNode"></a> pushNode Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Node pushNode(
+  String name,
+  PInput input,
+  PTransform&lt;?, ?&gt; transform)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>pushNode is used when Pipeline is requested to <a href="Pipeline.html#applyInternal" class="page">applyInternal</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="finishspecifyinginput-method"><a class="anchor" href="#finishspecifyinginput-method"></a><a class="link" href="#finishspecifyinginput-method"><a id="finishSpecifyingInput"></a> finishSpecifyingInput Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void finishSpecifyingInput()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>finishSpecifyingInput is used when Pipeline is requested to <a href="Pipeline.html#applyInternal" class="page">applyInternal</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setoutput-method"><a class="anchor" href="#setoutput-method"></a><a class="link" href="#setoutput-method"><a id="setOutput"></a> setOutput Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void setOutput(
+  POutput output)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>setOutput is used when Pipeline is requested to <a href="Pipeline.html#applyInternal" class="page">applyInternal</a> and <a href="Pipeline.html#applyReplacement" class="page">applyReplacement</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="popnode-method"><a class="anchor" href="#popnode-method"></a><a class="link" href="#popnode-method"><a id="popNode"></a> popNode Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void popNode()</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>popNode requests the <a href="#current">current node</a> to finishSpecifying.</p>
+</div>
+<div class="paragraph">
+<p>popNode removes the <a href="#current">current node</a> from <a href="#unexpandedInputs">unexpandedInputs</a> internal registry.</p>
+</div>
+<div class="paragraph">
+<p>popNode requests the <a href="#current">current node</a> to getEnclosingNode and makes it the <a href="#current">current node</a>.</p>
+</div>
+<div class="paragraph">
+<p>popNode throws an IllegalStateException when the enclosing node is not available (<code>null</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">Can't pop the root node of a TransformHierarchy</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>popNode is used when Pipeline is requested to <a href="Pipeline.html#applyInternal" class="page">applyInternal</a> and <a href="Pipeline.html#applyReplacement" class="page">applyReplacement</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-registries"><a class="anchor" href="#internal-registries"></a><a class="link" href="#internal-registries">Internal Registries</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="unexpandedinputs"><a class="anchor" href="#unexpandedinputs"></a><a class="link" href="#unexpandedinputs"><a id="unexpandedInputs"></a> unexpandedInputs</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;Node, PInput&gt; unexpandedInputs</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="producers"><a class="anchor" href="#producers"></a><a class="link" href="#producers"><a id="producers"></a> producers</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;POutput, Node&gt; producers</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="producerinput"><a class="anchor" href="#producerinput"></a><a class="link" href="#producerinput"><a id="producerInput"></a> producerInput</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;PValue, PInput&gt; producerInput</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
