@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>PDone :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/PDone.html">
+    <title>TransformHierarchy.Node :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/TransformHierarchy-Node.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -108,7 +108,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="TransformHierarchy.html">TransformHierarchy</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="TransformHierarchy-Node.html">Node</a>
   </li>
 </ul>
@@ -159,7 +159,7 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="POutput.html">POutput</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="PDone.html">PDone</a>
   </li>
 </ul>
@@ -396,59 +396,86 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li>Values</li>
-    <li><a href="POutput.html">POutput</a></li>
-    <li><a href="PDone.html">PDone</a></li>
+    <li><a href="Pipeline.html">Pipeline</a></li>
+    <li><a href="TransformHierarchy.html">TransformHierarchy</a></li>
+    <li><a href="TransformHierarchy-Node.html">Node</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/PDone.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/TransformHierarchy-Node.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">PDone</h1>
+<h1 class="page">TransformHierarchy.Node</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>PDone</code> is a <a href="POutput.html" class="page">POutput</a> (of <a href="PTransform.html#output" class="page">output PTransforms</a>).</p>
+<p>Node is used by <a href="TransformHierarchy.html" class="page">TransformHierarchy</a> for tracking relationships of <a href="PTransform.html" class="page">PTransform</a>s.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a><a id="pipeline"></a> Creating Instance</a></h2>
+<h2 id="creating-instance"><a class="anchor" href="#creating-instance"></a><a class="link" href="#creating-instance"><a id="creating-instance"></a> Creating Instance</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>PDone takes a <a href="Pipeline.html" class="page">Pipeline</a> to be created.</p>
+<p>Node takes the following to be created:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="enclosingNode"></a> Enclosing Node (<em>parent node</em>)</p>
+</li>
+<li>
+<p><a id="transform"></a> <a href="PTransform.html" class="page">PTransform</a></p>
+</li>
+<li>
+<p><a id="fullName"></a> Full Name</p>
+</li>
+<li>
+<p><a id="inputs"></a> Expanded <a href="PInput.html" class="page">PInput</a> (i.e. input <a href="PValue.html" class="page">PValue</a>s)</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>PDone is created using <a href="#in">PDone.in</a> utility.</p>
+<p>Node is created for <a href="TransformHierarchy.html" class="page">TransformHierarchy</a> (for the <a href="TransformHierarchy.html#root" class="page">root node</a> and later requested to <a href="TransformHierarchy.html#pushNode" class="page">pushNode</a> and <a href="TransformHierarchy.html#replaceNode" class="page">replaceNode</a>).</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="in-utility"><a class="anchor" href="#in-utility"></a><a class="link" href="#in-utility"><a id="in"></a> in Utility</a></h2>
+<h2 id="root-node"><a class="anchor" href="#root-node"></a><a class="link" href="#root-node"><a id="isRootNode"></a> Root Node</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Node is a <strong>root node</strong> when has no <a href="#transform">PTransform</a> associated.</p>
+</div>
+<div class="paragraph">
+<p>A root node is a <a href="#isCompositeNode">composite node</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="composite-node"><a class="anchor" href="#composite-node"></a><a class="link" href="#composite-node"><a id="isCompositeNode"></a> Composite Node</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Node is a <strong>composite node</strong> when contains sub-nodes or returnsOthersOutput.</p>
+</div>
+<div class="paragraph">
+<p>A <a href="#isRootNode">root node</a> is a composite node.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="visit-internal-method"><a class="anchor" href="#visit-internal-method"></a><a class="link" href="#visit-internal-method"><a id="visit"></a> visit Internal Method</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PDone in(
-  Pipeline pipeline)</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void visit(
+  PipelineVisitor visitor,
+  Set&lt;PValue&gt; visitedValues,
+  Set&lt;Node&gt; visitedNodes,
+  Set&lt;Node&gt; skippedComposites)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>in creates a PDone for the given <a href="Pipeline.html" class="page">Pipeline</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-scala hljs" data-lang="scala">import org.apache.beam.sdk.Pipeline
-val p = Pipeline.create()
-
-import org.apache.beam.sdk.values.PDone
-val done = PDone.in(p)</code></pre>
-</div>
+<p>visit is used when is requested to <a href="TransformHierarchy.html#visit" class="page">visit</a>.</p>
 </div>
 </div>
 </div>
