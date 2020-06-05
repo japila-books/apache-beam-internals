@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ParDo :: The Internals of Apache Beam</title>
-    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/ParDo.html">
+    <title>PValue :: The Internals of Apache Beam</title>
+    <link rel="canonical" href="https://books.japila.pl/apache-beam-internals/apache-beam-internals/PValue.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151208281-2"></script>
@@ -83,7 +83,7 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="MapElements.html">MapElements</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="ParDo.html">ParDo</a>
 <ul class="nav-list">
@@ -158,7 +158,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="PValue.html">PValue</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -390,83 +390,20 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Apache Beam</a></li>
-    <li><a href="PTransform.html">PTransform</a></li>
-    <li><a href="ParDo.html">ParDo</a></li>
+    <li>Values</li>
+    <li><a href="PValue.html">PValue</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/ParDo.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/japila-books/apache-beam-internals/edit/master/modules/ROOT/pages/PValue.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">ParDo</h1>
-<div id="preamble">
-<div class="sectionbody">
+<h1 class="page">PValue</h1>
 <div class="paragraph">
-<p><code>ParDo</code> is a utility to <a href="#of">create ParDo.SingleOutput transformations</a> (to execute <a href="DoFn.html" class="page">DoFn</a> element-wise functions).</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="pardo-of-utility"><a class="anchor" href="#pardo-of-utility"></a><a class="link" href="#pardo-of-utility"><a id="of"></a> ParDo.of Utility</a></h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">SingleOutput&lt;InputT, OutputT&gt; of(
-  DoFn&lt;InputT, OutputT&gt; fn)</code></pre>
-</div>
+<p><code>PValue</code> represents a primitive value.</p>
 </div>
 <div class="paragraph">
-<p><code>ParDo.of</code> creates a <a href="#SingleOutput">ParDo.SingleOutput</a> transformation.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="pardo-singleoutput-ptransform"><a class="anchor" href="#pardo-singleoutput-ptransform"></a><a class="link" href="#pardo-singleoutput-ptransform"><a id="SingleOutput"></a> ParDo.SingleOutput PTransform</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><code>SingleOutput&lt;InputT, OutputT&gt;</code> is a <a href="PTransform.html" class="page">PTransform</a> that is created using <a href="#do">ParDo.of</a> utility (for the user-defined <a href="DoFn.html" class="page">DoFn&lt;InputT, OutputT&gt;</a> to be executed on all of the input elements of type <code>InputT</code> to produce values of type <code>OutputT</code>).</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">PTransform&lt;PCollection&lt;? extends InputT&gt;, PCollection&lt;OutputT&gt;&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.Pipeline
-val p = Pipeline.create()
-
-import org.apache.beam.sdk.transforms.Create
-val nums = p.apply("Input Numbers", Create.of(0, 1, 2, 3, 4, 5))
-
-import org.apache.beam.sdk.transforms.DoFn
-import org.apache.beam.sdk.transforms.DoFn._
-val multiplyBy2 = new DoFn[Int, Int]() {
-  // Must return void or ProcessContinuation
-  @ProcessElement
-  def processElement(@Element element: Int): Unit = {
-    element * 2
-  }
-}
-
-import org.apache.beam.sdk.transforms.ParDo
-val singleOutput = ParDo.of(multiplyBy2)
-
-scala&gt; :type singleOutput
-org.apache.beam.sdk.transforms.ParDo.SingleOutput[Int,Int]
-
-val multipliedByTwo = nums.apply("Multiply By Two", singleOutput)
-
-scala&gt; :type multipliedByTwo
-org.apache.beam.sdk.values.PCollection[Int]</code></pre>
-</div>
-</div>
-</div>
+<p>PValue is a <a href="PInput.html" class="page">PInput</a> and <a href="POutput.html" class="page">POutput</a>.</p>
 </div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

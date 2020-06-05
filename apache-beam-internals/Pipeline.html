@@ -107,6 +107,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="TransformHierarchy.html">TransformHierarchy</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="PipelineVisitor.html">PipelineVisitor</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -154,6 +157,9 @@
     <a class="nav-link" href="PDone.html">PDone</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="PValue.html">PValue</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="KV.html">KV</a>
@@ -641,10 +647,16 @@ void applyReplacement(
 </div>
 </div>
 <div class="paragraph">
-<p>traverseTopologically&#8230;&#8203;FIXME</p>
+<p>traverseTopologically requests the given <a href="PipelineVisitor.html" class="page">PipelineVisitor</a> to <a href="PipelineVisitor.html#enterPipeline" class="page">enterPipeline</a>.</p>
 </div>
 <div class="paragraph">
-<p>traverseTopologically is used (mainly but not exclusively) when Pipeline is requested to <a href="#checkNoMoreMatches">checkNoMoreMatches</a>, <a href="#replace">replace</a>, <a href="#validate">validate</a>.</p>
+<p>traverseTopologically then requests the <a href="#transforms">TransformHierarchy</a> to <a href="TransformHierarchy.html#visit" class="page">visit</a> (all nodes with the PipelineVisitor).</p>
+</div>
+<div class="paragraph">
+<p>In the end, traverseTopologically requests the given <a href="PipelineVisitor.html" class="page">PipelineVisitor</a> to <a href="PipelineVisitor.html#leavePipeline" class="page">leavePipeline</a>.</p>
+</div>
+<div class="paragraph">
+<p>traverseTopologically is used when Pipeline is requested to <a href="#checkNoMoreMatches">checkNoMoreMatches</a>, <a href="#replace">replace</a> and <a href="#validate">validate</a>.</p>
 </div>
 </div>
 </div>

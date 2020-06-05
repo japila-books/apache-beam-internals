@@ -107,6 +107,9 @@
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="TransformHierarchy.html">TransformHierarchy</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="PipelineVisitor.html">PipelineVisitor</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -154,6 +157,9 @@
     <a class="nav-link" href="PDone.html">PDone</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="PValue.html">PValue</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="KV.html">KV</a>
@@ -396,7 +402,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>TransformHierarchy</code> is&#8230;&#8203;FIXME</p>
+<p><code>TransformHierarchy</code> is a graph of named <a href="#Node">nodes</a> (with <a href="#transform">PTransforms</a>).</p>
 </div>
 </div>
 </div>
@@ -411,6 +417,17 @@
 </div>
 <div class="paragraph">
 <p>TransformHierarchy is created for <a href="Pipeline.html#transforms" class="page">Pipeline</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="root-node"><a class="anchor" href="#root-node"></a><a class="link" href="#root-node"><a id="root"></a> Root Node</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TransformHierarchy creates a root-level <a href="#Node">node</a> when created. The root-level node has no <a href="#transform">transform</a> (and no <a href="#enclosingNode">enclosing node</a>, no <a href="#inputs">inputs and outputs</a>, and the <a href="#fullName">name</a> as the empty string).</p>
+</div>
+<div class="paragraph">
+<p>The root-level node is the <a href="#current">current node</a> right after TransformHierarchy is created.</p>
 </div>
 </div>
 </div>
@@ -437,6 +454,15 @@
   PInput input,
   PTransform&lt;?, ?&gt; transform)</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>pushNode creates a new <a href="#Node">Node</a> with the <a href="#current">current</a> node as the enclosing node (and the given name, the <a href="PInput.html" class="page">PInput</a> and <a href="PTransform.html" class="page">PTransform</a>).</p>
+</div>
+<div class="paragraph">
+<p>pushNode adds the new Node to the <a href="#unexpandedInputs">unexpandedInputs</a> registry.</p>
+</div>
+<div class="paragraph">
+<p>pushNode requests the <a href="#current">current</a> node to addComposite (with the new Node) and makes the new Node the <a href="#current">current</a> node.</p>
 </div>
 <div class="paragraph">
 <p>pushNode is used when Pipeline is requested to <a href="Pipeline.html#applyInternal" class="page">applyInternal</a>.</p>
@@ -471,6 +497,22 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="replacenode-method"><a class="anchor" href="#replacenode-method"></a><a class="link" href="#replacenode-method"><a id="replaceNode"></a> replaceNode Method</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Node replaceNode(
+  Node existing,
+  PInput input,
+  PTransform&lt;?, ?&gt; transform)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>replaceNode is used when Pipeline is requested to <a href="Pipeline.html#applyReplacement" class="page">applyReplacement</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="popnode-method"><a class="anchor" href="#popnode-method"></a><a class="link" href="#popnode-method"><a id="popNode"></a> popNode Method</a></h2>
 <div class="sectionbody">
 <div class="listingblock">
@@ -501,7 +543,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="internal-registries"><a class="anchor" href="#internal-registries"></a><a class="link" href="#internal-registries">Internal Registries</a></h2>
+<h2 id="internal-properties"><a class="anchor" href="#internal-properties"></a><a class="link" href="#internal-properties"><a id="internal-properties"></a> Internal Properties</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="unexpandedinputs"><a class="anchor" href="#unexpandedinputs"></a><a class="link" href="#unexpandedinputs"><a id="unexpandedInputs"></a> unexpandedInputs</a></h3>
@@ -509,6 +551,18 @@
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;Node, PInput&gt; unexpandedInputs</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>unexpandedInputs are Nodes with the <a href="PInput.html" class="page">PInput</a> "unexpanded" (i.e. <a href="PInput.html" class="page">PInput</a>s before <a href="PInput.html#expand" class="page">expand</a>).</p>
+</div>
+<div class="paragraph">
+<p>unexpandedInputs is added a new pair when <a href="#pushNode">pushNode</a> and <a href="#replaceNode">replaceNode</a>.</p>
+</div>
+<div class="paragraph">
+<p>unexpandedInputs is removed a pair when <a href="#popNode">popNode</a> and <a href="#replaceNode">replaceNode</a>.</p>
+</div>
+<div class="paragraph">
+<p>unexpandedInputs is used when <a href="#setOutput">setOutput</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -525,6 +579,68 @@
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;PValue, PInput&gt; producerInput</code></pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ptransform-node"><a class="anchor" href="#ptransform-node"></a><a class="link" href="#ptransform-node"><a id="Node"></a> PTransform Node</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TransformHierarchy uses Nodes for tracking relationships of <a href="PTransform.html" class="page">PTransform</a>s.</p>
+</div>
+<div class="paragraph">
+<p>A Node is made up of the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a id="enclosingNode"></a> Enclosing Node (<em>parent node</em>)</p>
+</li>
+<li>
+<p><a id="transform"></a> <a href="PTransform.html" class="page">PTransform</a></p>
+</li>
+<li>
+<p><a id="fullName"></a> Full Name</p>
+</li>
+<li>
+<p><a id="inputs"></a> Expanded <a href="PInput.html" class="page">PInput</a> (i.e. input <a href="PValue.html" class="page">PValue</a>s)</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="root-node-2"><a class="anchor" href="#root-node-2"></a><a class="link" href="#root-node-2"><a id="isRootNode"></a> Root Node</a></h3>
+<div class="paragraph">
+<p>A <a href="#Node">Node</a> is a <strong>root node</strong> when no <a href="#transform">PTransform</a> associated.</p>
+</div>
+<div class="paragraph">
+<p>Root node is a <a href="#isCompositeNode">composite node</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="composite-node"><a class="anchor" href="#composite-node"></a><a class="link" href="#composite-node"><a id="isCompositeNode"></a> Composite Node</a></h3>
+<div class="paragraph">
+<p>A <a href="#Node">Node</a> is a <strong>composite node</strong> when contains sub-nodes or returnsOthersOutput.</p>
+</div>
+<div class="paragraph">
+<p><a href="#isRootNode">Root node</a> is a composite node.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="demo"><a class="anchor" href="#demo"></a><a class="link" href="#demo"><a id="demo"></a> Demo</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-plaintext hljs" data-lang="plaintext">import org.apache.beam.sdk.runners.TransformHierarchy
+val th = new TransformHierarchy
+
+scala&gt; println(th.getCurrent)
+RootNode
+
+scala&gt; println(th.getCurrent.getClass.getName)
+org.apache.beam.sdk.runners.TransformHierarchy$Node</code></pre>
 </div>
 </div>
 </div>
