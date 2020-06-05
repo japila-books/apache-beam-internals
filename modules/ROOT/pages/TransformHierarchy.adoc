@@ -1,6 +1,6 @@
 = TransformHierarchy
 
-`TransformHierarchy` is a graph of named <<Node, nodes>> (with <<transform, PTransforms>>).
+`TransformHierarchy` is a relationship graph of named xref:TransformHierarchy-Node.adoc[]s (of xref:PTransform.adoc[]s).
 
 == [[creating-instance]] Creating Instance
 
@@ -12,18 +12,18 @@ TransformHierarchy is created for xref:Pipeline.adoc#transforms[Pipeline].
 
 == [[root]] Root Node
 
-TransformHierarchy creates a root-level <<Node, node>> when created. The root-level node has no <<transform, transform>> (and no <<enclosingNode, enclosing node>>, no <<inputs, inputs and outputs>>, and the <<fullName, name>> as the empty string).
+TransformHierarchy creates a root-level xref:TransformHierarchy-Node.adoc[] when created.
 
-The root-level node is the <<current, current node>> right after TransformHierarchy is created.
+Immediately after being created the root-level node becomes the <<current, current node>>.
 
 == [[getCurrent]][[current]] Current Node
-
-The current node is available using `getCurrent` method.
 
 [source,java]
 ----
 Node getCurrent()
 ----
+
+getCurrent returns the xref:TransformHierarchy-Node.adoc[] currently being worked on.
 
 == [[pushNode]] pushNode Method
 
@@ -35,7 +35,7 @@ Node pushNode(
   PTransform<?, ?> transform)
 ----
 
-pushNode creates a new <<Node, Node>> with the <<current, current>> node as the enclosing node (and the given name, the xref:PInput.adoc[] and xref:PTransform.adoc[]).
+pushNode creates a new xref:TransformHierarchy-Node.adoc[] with the <<current, current>> node as the enclosing node (and the given name, the xref:PInput.adoc[] and xref:PTransform.adoc[]).
 
 pushNode adds the new Node to the <<unexpandedInputs, unexpandedInputs>> registry.
 
@@ -96,6 +96,29 @@ Can't pop the root node of a TransformHierarchy
 
 popNode is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal] and xref:Pipeline.adoc#applyReplacement[applyReplacement].
 
+== [[visit]] visit Method
+
+[source,java]
+----
+Set<PValue> visit(
+  PipelineVisitor visitor)
+----
+
+visit <<finishSpecifying, finishSpecifying>> and requests the <<root, root node>> to xref:TransformHierarchy-Node.adoc#visit[visit] (using the given xref:PipelineVisitor.adoc[]). In the end, visit returns the xref:PValue.adoc[]s (that were collected during visit).
+
+visit is used when Pipeline is requested to xref:Pipeline.adoc#traverseTopologically[traverseTopologically].
+
+=== [[finishSpecifying]] finishSpecifying Internal Method
+
+[source,java]
+----
+void finishSpecifying()
+----
+
+finishSpecifying...FIXME
+
+finishSpecifying is used when TransformHierarchy is requested to <<visit, visit>>.
+
 == [[internal-properties]] Internal Properties
 
 === [[unexpandedInputs]] unexpandedInputs
@@ -126,29 +149,6 @@ Map<POutput, Node> producers
 ----
 Map<PValue, PInput> producerInput
 ----
-
-== [[Node]] PTransform Node
-
-TransformHierarchy uses Nodes for tracking relationships of xref:PTransform.adoc[]s.
-
-A Node is made up of the following:
-
-* [[enclosingNode]] Enclosing Node (_parent node_)
-* [[transform]] xref:PTransform.adoc[]
-* [[fullName]] Full Name
-* [[inputs]] Expanded xref:PInput.adoc[] (i.e. input xref:PValue.adoc[]s)
-
-=== [[isRootNode]] Root Node
-
-A <<Node, Node>> is a *root node* when no <<transform, PTransform>> associated.
-
-Root node is a <<isCompositeNode, composite node>>.
-
-=== [[isCompositeNode]] Composite Node
-
-A <<Node, Node>> is a *composite node* when contains sub-nodes or returnsOthersOutput.
-
-<<isRootNode, Root node>> is a composite node.
 
 == [[demo]] Demo
 

@@ -1,0 +1,40 @@
+= TransformHierarchy.Node
+:navtitle: Node
+
+Node is used by xref:TransformHierarchy.adoc[] for tracking relationships of xref:PTransform.adoc[]s.
+
+== [[creating-instance]] Creating Instance
+
+Node takes the following to be created:
+
+* [[enclosingNode]] Enclosing Node (_parent node_)
+* [[transform]] xref:PTransform.adoc[]
+* [[fullName]] Full Name
+* [[inputs]] Expanded xref:PInput.adoc[] (i.e. input xref:PValue.adoc[]s)
+
+Node is created for xref:TransformHierarchy.adoc[] (for the xref:TransformHierarchy.adoc#root[root node] and later requested to xref:TransformHierarchy.adoc#pushNode[pushNode] and xref:TransformHierarchy.adoc#replaceNode[replaceNode]).
+
+== [[isRootNode]] Root Node
+
+A Node is a *root node* when has no <<transform, PTransform>> associated.
+
+A root node is a <<isCompositeNode, composite node>>.
+
+== [[isCompositeNode]] Composite Node
+
+A Node is a *composite node* when contains sub-nodes or returnsOthersOutput.
+
+A <<isRootNode, root node>> is a composite node.
+
+== [[visit]] visit Internal Method
+
+[source,java]
+----
+void visit(
+  PipelineVisitor visitor,
+  Set<PValue> visitedValues,
+  Set<Node> visitedNodes,
+  Set<Node> skippedComposites)
+----
+
+visit is used when is requested to xref:TransformHierarchy.adoc#visit[visit].

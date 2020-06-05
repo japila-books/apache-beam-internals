@@ -65,7 +65,7 @@ Pipeline cannot be created directly and can only be created using <<create, Pipe
 
 == [[transforms]] TransformHierarchy
 
-Pipeline is given a xref:TransformHierarchy.adoc[] when created.
+Pipeline is given a xref:TransformHierarchy.adoc[] when <<creating-instance, created>>.
 
 Pipeline uses the TransformHierarchy for the following:
 

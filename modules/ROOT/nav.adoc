@@ -12,6 +12,7 @@
 
 * xref:Pipeline.adoc[]
 ** xref:TransformHierarchy.adoc[]
+*** xref:TransformHierarchy-Node.adoc[]
 ** xref:PipelineVisitor.adoc[]
 * xref:PipelineResult.adoc[]
 
