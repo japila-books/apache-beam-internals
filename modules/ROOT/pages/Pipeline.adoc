@@ -156,9 +156,13 @@ void traverseTopologically(
   PipelineVisitor visitor)
 ----
 
-traverseTopologically...FIXME
+traverseTopologically requests the given xref:PipelineVisitor.adoc[] to xref:PipelineVisitor.adoc#enterPipeline[enterPipeline].
 
-traverseTopologically is used (mainly but not exclusively) when Pipeline is requested to <<checkNoMoreMatches, checkNoMoreMatches>>, <<replace, replace>>, <<validate, validate>>.
+traverseTopologically then requests the <<transforms, TransformHierarchy>> to xref:TransformHierarchy.adoc#visit[visit] (all nodes with the PipelineVisitor).
+
+In the end, traverseTopologically requests the given xref:PipelineVisitor.adoc[] to xref:PipelineVisitor.adoc#leavePipeline[leavePipeline].
+
+traverseTopologically is used when Pipeline is requested to <<checkNoMoreMatches, checkNoMoreMatches>>, <<replace, replace>> and <<validate, validate>>.
 
 == [[validate]] validate Internal Method
 

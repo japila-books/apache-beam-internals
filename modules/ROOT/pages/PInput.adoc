@@ -20,6 +20,10 @@ The owning xref:Pipeline.adoc[] of the PInput
 Map<TupleTag<?>, PValue> expand()
 ----
 
+A <<PValue, PValue>> always expands into itself.
+
+Used when xref:TransformHierarchy.adoc#Node[TransformHierarchy.Node] is created (for a xref:PTransform.adoc[]).
+
 == [[implementations]] Available PInputs
 
 .PInputs (Direct Implementations and Extensions Only)
@@ -40,7 +44,7 @@ Map<TupleTag<?>, PValue> expand()
 | PCollectionTuple
 | [[PCollectionTuple]]
 
-| PValue
+| xref:PValue.adoc[]
 | [[PValue]]
 
 | Result

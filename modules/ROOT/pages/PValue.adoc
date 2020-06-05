@@ -1,0 +1,5 @@
+= PValue
+
+`PValue` represents a primitive value.
+
+PValue is a xref:PInput.adoc[] and xref:POutput.adoc[].

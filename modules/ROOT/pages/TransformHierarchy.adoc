@@ -1,6 +1,6 @@
 = TransformHierarchy
 
-`TransformHierarchy` is...FIXME
+`TransformHierarchy` is a graph of named <<Node, nodes>> (with <<transform, PTransforms>>).
 
 == [[creating-instance]] Creating Instance
 
@@ -9,6 +9,12 @@ TransformHierarchy takes no arguments to be created.
 TransformHierarchy creates empty <<producers, producers>>, <<producerInput, producerInput>> and <<unexpandedInputs, unexpandedInputs>> internal registries. TransformHierarchy creates the <<root, root node>> and makes it <<current, current>>.
 
 TransformHierarchy is created for xref:Pipeline.adoc#transforms[Pipeline].
+
+== [[root]] Root Node
+
+TransformHierarchy creates a root-level <<Node, node>> when created. The root-level node has no <<transform, transform>> (and no <<enclosingNode, enclosing node>>, no <<inputs, inputs and outputs>>, and the <<fullName, name>> as the empty string).
+
+The root-level node is the <<current, current node>> right after TransformHierarchy is created.
 
 == [[getCurrent]][[current]] Current Node
 
@@ -28,6 +34,12 @@ Node pushNode(
   PInput input,
   PTransform<?, ?> transform)
 ----
+
+pushNode creates a new <<Node, Node>> with the <<current, current>> node as the enclosing node (and the given name, the xref:PInput.adoc[] and xref:PTransform.adoc[]).
+
+pushNode adds the new Node to the <<unexpandedInputs, unexpandedInputs>> registry.
+
+pushNode requests the <<current, current>> node to addComposite (with the new Node) and makes the new Node the <<current, current>> node.
 
 pushNode is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal].
 
@@ -49,6 +61,18 @@ void setOutput(
 ----
 
 setOutput is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal] and xref:Pipeline.adoc#applyReplacement[applyReplacement].
+
+== [[replaceNode]] replaceNode Method
+
+[source,java]
+----
+Node replaceNode(
+  Node existing,
+  PInput input,
+  PTransform<?, ?> transform)
+----
+
+replaceNode is used when Pipeline is requested to xref:Pipeline.adoc#applyReplacement[applyReplacement].
 
 == [[popNode]] popNode Method
 
@@ -72,7 +96,7 @@ Can't pop the root node of a TransformHierarchy
 
 popNode is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[applyInternal] and xref:Pipeline.adoc#applyReplacement[applyReplacement].
 
-== Internal Registries
+== [[internal-properties]] Internal Properties
 
 === [[unexpandedInputs]] unexpandedInputs
 
@@ -80,6 +104,14 @@ popNode is used when Pipeline is requested to xref:Pipeline.adoc#applyInternal[a
 ----
 Map<Node, PInput> unexpandedInputs
 ----
+
+unexpandedInputs are Nodes with the xref:PInput.adoc[] "unexpanded" (i.e. xref:PInput.adoc[]s before xref:PInput.adoc#expand[expand]).
+
+unexpandedInputs is added a new pair when <<pushNode, pushNode>> and <<replaceNode, replaceNode>>.
+
+unexpandedInputs is removed a pair when <<popNode, popNode>> and <<replaceNode, replaceNode>>.
+
+unexpandedInputs is used when <<setOutput, setOutput>>.
 
 === [[producers]] producers
 
@@ -93,4 +125,41 @@ Map<POutput, Node> producers
 [source,java]
 ----
 Map<PValue, PInput> producerInput
+----
+
+== [[Node]] PTransform Node
+
+TransformHierarchy uses Nodes for tracking relationships of xref:PTransform.adoc[]s.
+
+A Node is made up of the following:
+
+* [[enclosingNode]] Enclosing Node (_parent node_)
+* [[transform]] xref:PTransform.adoc[]
+* [[fullName]] Full Name
+* [[inputs]] Expanded xref:PInput.adoc[] (i.e. input xref:PValue.adoc[]s)
+
+=== [[isRootNode]] Root Node
+
+A <<Node, Node>> is a *root node* when no <<transform, PTransform>> associated.
+
+Root node is a <<isCompositeNode, composite node>>.
+
+=== [[isCompositeNode]] Composite Node
+
+A <<Node, Node>> is a *composite node* when contains sub-nodes or returnsOthersOutput.
+
+<<isRootNode, Root node>> is a composite node.
+
+== [[demo]] Demo
+
+[source,plaintext]
+----
+import org.apache.beam.sdk.runners.TransformHierarchy
+val th = new TransformHierarchy
+
+scala> println(th.getCurrent)
+RootNode
+
+scala> println(th.getCurrent.getClass.getName)
+org.apache.beam.sdk.runners.TransformHierarchy$Node
 ----

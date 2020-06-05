@@ -12,6 +12,7 @@
 
 * xref:Pipeline.adoc[]
 ** xref:TransformHierarchy.adoc[]
+** xref:PipelineVisitor.adoc[]
 * xref:PipelineResult.adoc[]
 
 * xref:PipelineOptions.adoc[]
@@ -26,6 +27,7 @@
 *** xref:PBegin.adoc[]
 ** xref:POutput.adoc[]
 *** xref:PDone.adoc[]
+** xref:PValue.adoc[]
 ** xref:KV.adoc[]
 
 * xref:DisplayData.adoc[]

@@ -1,0 +1,3 @@
+= PipelineVisitor
+
+`PipelineVisitor` is used for xref:Pipeline.adoc#traverseTopologically[traversing a Pipeline topologically].
